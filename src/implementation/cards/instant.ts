@@ -63,7 +63,7 @@ export const CLEANSE: RealCardType = defineCardType({
   tag: CardTag.Instant,
   rarity: Rarity.Common,
   topAbility: {
-    text: 'Destroy a pylon in 3x3 of yourself and gain 3 random resources.',
+    text: 'Destroy a pylon in 3x3 of yourself and gain 3 random resources. If the pylon does not belong to you, the owner of the pylon obtains this card.',
   },
   bottomAbilityOverride: movementOverrideGenerator,
 });
