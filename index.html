@@ -17,6 +17,24 @@
   </header>
 
   <main class="content">
+    <section class="time-panel" aria-label="Time multiplier settings">
+      <h2 class="time-panel__title">Set time mult</h2>
+      <label class="time-panel__field" for="time-mult-input">
+        <span>Multiplier</span>
+        <input
+          type="number"
+          id="time-mult-input"
+          class="count-input"
+          min="0.01"
+          step="any"
+          value="1"
+          required
+        />
+      </label>
+      <button type="button" id="time-mult-apply" class="button button--primary">Apply &amp; reload</button>
+      <span class="time-panel__current" id="time-mult-current">Current: ×1</span>
+    </section>
+
     <section id="decks-view" class="decks" aria-label="Card decks"></section>
   </main>
 

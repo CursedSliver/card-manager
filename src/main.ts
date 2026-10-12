@@ -10,6 +10,7 @@ import { el, formatAbilityForSheet, renderCard } from './core/ui';
 import { DECKS } from './implementation/decks';
 import { cardTagRank } from './implementation/tags';
 import { RARITY_COLORS, Rarity, rarityRank } from './implementation/rarity';
+import { TIME_MULTIPLIER, TIME_MULTIPLIER_PARAM } from './implementation/time';
 
 const DRAW_COOLDOWN_MS = 2000;
 const COPY_FEEDBACK_MS = 1200;
@@ -39,6 +40,33 @@ function init(): void {
     deckStates.push(createDeckState(decksView, deck));
   }
   wireCopyActions();
+  wireTimePanel();
+}
+
+/** Wires the "Set time mult" panel: shows the current multiplier and reloads with a new one. */
+function wireTimePanel(): void {
+  const input = document.querySelector<HTMLInputElement>('#time-mult-input');
+  const applyButton = document.querySelector<HTMLButtonElement>('#time-mult-apply');
+  const currentLabel = document.querySelector<HTMLElement>('#time-mult-current');
+  if (!input || !applyButton || !currentLabel) {
+    return;
+  }
+
+  input.value = String(TIME_MULTIPLIER);
+  currentLabel.textContent = `Current: ×${TIME_MULTIPLIER}`;
+
+  applyButton.addEventListener('click', () => {
+    if (!input.reportValidity()) {
+      return;
+    }
+    const multiplier = Number.parseFloat(input.value);
+    if (!Number.isFinite(multiplier) || multiplier <= 0) {
+      return;
+    }
+    const url = new URL(window.location.href);
+    url.searchParams.set(TIME_MULTIPLIER_PARAM, String(multiplier));
+    window.location.assign(url.toString());
+  });
 }
 
 function createDeckState(parent: HTMLElement, deck: Deck): DeckState {

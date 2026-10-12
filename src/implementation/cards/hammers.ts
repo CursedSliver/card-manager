@@ -7,6 +7,7 @@ import type { RealCardType } from './types';
 import { CardTag } from '../tags';
 import { Rarity } from '../rarity';
 import { movementOverrideGenerator } from '../generators';
+import { scaledHours } from '../time';
 
 const DISCARD_TWO_TEXT = 'Discard any two cards, then draw two cards and choose one to add to inventory.';
 
@@ -73,7 +74,7 @@ export const INDESTRUCTIUM_MAUL: RealCardType = defineCardType({
   tag: CardTag.Hammer,
   rarity: Rarity.Common,
   topAbility: {
-    text: '+1 build range. Modifies this hammer’s top ability to choosing one out of three drawn cards with a 12-hour cooldown.',
+    text: `+1 build range. Modifies this hammer’s top ability to choosing one out of three drawn cards with a ${scaledHours(12)}-hour cooldown.`,
   },
   bottomAbility: { text: DISCARD_TWO_TEXT },
 });

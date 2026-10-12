@@ -106,6 +106,39 @@ body {
   gap: 1.25rem;
 }
 
+// --- Time multiplier panel ----------------------------------------------------
+.time-panel {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding: 0.9rem 1.25rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+
+  &__title {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  &__field {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+
+  &__current {
+    margin-left: auto;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+}
+
 // --- Deck container ----------------------------------------------------------
 .deck {
   background: var(--color-surface);

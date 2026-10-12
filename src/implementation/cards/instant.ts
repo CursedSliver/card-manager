@@ -7,6 +7,7 @@ import type { RealCardType } from './types';
 import { CardTag } from '../tags';
 import { Rarity } from '../rarity';
 import { hastenTopOverrideGenerator, movementOverrideGenerator } from '../generators';
+import { hoursLabel } from '../time';
 
 export const RED_HARVEST: RealCardType = defineCardType({
   name: 'Red harvest',
@@ -113,7 +114,7 @@ export const SEED_OF_MYTHS: RealCardType = defineCardType({
   tag: CardTag.Instant,
   rarity: Rarity.Uncommon,
   topAbility: {
-    text: 'Give this card alongside any other card to another player’s inventory. If this card is used twice in 12 hours, or if its current holder teleports using their pylon network, it is destroyed.',
+    text: `Give this card alongside any other card to another player’s inventory. If this card is used twice in ${hoursLabel(12)}, or if its current holder teleports using their pylon network, it is destroyed.`,
   },
   bottomAbilityOverride: movementOverrideGenerator,
 });

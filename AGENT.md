@@ -38,12 +38,16 @@ Code is strictly split into two layers:
 | `generators.ts` | `movementOverrideGenerator`: 8 equally weighted Movement abilities, one per compass direction (⬆️↗️➡️↘️⬇️↙️⬅️↖️), text `Move {dir} or {dir}{dir}.` `hastenTopOverrideGenerator`: 56 equally weighted pairs of distinct directions A/B, text `Move {A}, {A}{A}, or {B}.` |
 | `cards/` | All real cards, grouped by tag: `immortal.ts` (6, incl. 2 Heavenly), `hammers.ts` (7), `instant.ts` (16, incl. Hasten with the top override), `timed.ts` (18). `types.ts` defines `RealCardType = CardType<CardTag, AbilityTag, Rarity>`. `index.ts` re-exports everything and aggregates `CARD_TYPES`. |
 | `decks.ts` | `STANDARD_DECK`: all non-immortal cards via three nested sub-generators (hammers ×0.05, instant ×1, timed ×0.6); within each sub-generator cards are weighted by `RARITY_DRAW_WEIGHT_MULTIPLIER`. |
+| `time.ts` | `TIME_MULTIPLIER`: global scale for time-based effects, read once from the `timeMultiplier` URL query parameter (default 1, e.g. `?timeMultiplier=0.5`). Card definitions bake the scaled value into hour-based durations via `scaledHours` (bare number) / `hoursLabel` (number + pluralized unit), so changing the multiplier requires a page reload. |
 
 **Rule:** card types, decks, generators, and tags are **fixed after initialization**. Never add UI or runtime mechanisms to modify them. Adding new content means adding entries to the fixed lists in `implementation/`.
 
 ### `src/main.ts` — app wiring
 
-Builds the "Draw cards" view from `DECKS`: collapsible deck containers, draw-count input
+Builds the "Draw cards" view from `DECKS`. At the top sits a "Set time mult" panel: a number
+input, an "Apply & reload" button that reloads the page with the `timeMultiplier` URL parameter
+(see `implementation/time.ts`), and a readout of the current multiplier. Below are collapsible
+deck containers, draw-count input
 (disabled and grayed when `perDrawAmount` is set), draw button with a **2 s cooldown**,
 sort-by-tag button, click-to-select cards (blue outline, multi-select, cleared on redraw),
 and two bottom buttons: "Copy to sheets" (selected cards, display order) and
