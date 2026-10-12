@@ -117,7 +117,7 @@ export const SPRINT: RealCardType = defineCardType({
   tag: CardTag.Timed,
   rarity: Rarity.Common,
   topAbility: {
-    text: 'Destroy any pylon that you own.',
+    text: 'Destroy any building that you own.',
   },
   bottomAbility: {
     text: 'After 1 hour, expend 🌾 to move twice in different directions.',
