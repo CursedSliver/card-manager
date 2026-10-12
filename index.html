@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RtA Helper</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%83%8F%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./main.css" />
+</head>
+<body>
+  <header class="top-bar">
+    <h1 class="app-name">RtA Helper</h1>
+    <nav class="tabs" aria-label="Main navigation">
+      <button type="button" class="tab" disabled aria-disabled="true">Catalogue</button>
+      <button type="button" class="tab tab--active" aria-current="page">Draw cards</button>
+    </nav>
+  </header>
+
+  <main class="content">
+    <section id="decks-view" class="decks" aria-label="Card decks"></section>
+  </main>
+
+  <footer class="actions">
+    <button type="button" id="copy-selected" class="button button--primary button--wide">Copy to sheets</button>
+    <button type="button" id="copy-all" class="button button--primary button--wide">Select all and copy</button>
+  </footer>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

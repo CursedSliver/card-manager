@@ -1,0 +1,68 @@
+# AGENT.md
+
+Guidance for AI agents working in this repository. Read this before making changes.
+
+## Purpose
+
+**RtA Helper** is a card display and random draw helper for a custom card game ("RtA").
+It is **not the game itself**: no game logic, timers, inventories, resource tracking, or
+tag powers are implemented. Cards exist purely as data used for rolling, displaying,
+sorting, selecting, and copying to spreadsheets.
+
+## Tech Stack & Constraints
+
+- **TypeScript** (strict mode) with **no framework** — vanilla DOM only. Small libraries are fine; do not introduce React/Vue/etc.
+- **SASS (Dart Sass)** for styling, compiled by the `sass` package.
+- **esbuild** for bundling, orchestrated by `build.mjs` (also compiles SASS and copies `index.html`).
+- Commands: `npm run build`, `npm run build:dev`, `npm run typecheck`, `npm run serve` (serves `dist/` at `http://localhost:8123`).
+
+## Architecture
+
+Code is strictly split into two layers:
+
+### `src/core/` — generic, data-free logic
+
+| File | Contents |
+| --- | --- |
+| `generator.ts` | `Generator<R>`: weighted RNG. Items carry a nonnegative weight and an arbitrary reward. `roll()` propagates through nested `Generator` rewards until a non-generator reward is returned. Throws on empty item lists, negative weights, or zero total weight. |
+| `card.ts` | `Ability` (text + optional ability tag), `CardType` (name, tag, rarity, optional top/bottom ability **or** override), `CardInstance` (type + rolled override results). `defineCardType()` enforces that an ability and its override are mutually exclusive. `createCardInstance()` rolls applicable overrides. `resolveTopAbility`/`resolveBottomAbility` return the effective ability. |
+| `deck.ts` | `Deck` (name, optional description, pool `Generator`, optional `perDrawAmount`). `drawFromDeck()` rolls the pool, then instantiates each card type. |
+| `ui.ts` | `el()` DOM factory, `renderCard()` (centered card layout), `formatAbilityForSheet()` (`[Tag] text` TSV formatting). |
+
+### `src/implementation/` — fixed, immutable definitions
+
+| File | Contents |
+| --- | --- |
+| `tags.ts` | `CardTag` enum: **Immortal, Instant, Timed, Hammer**. `AbilityTag` enum: **Unique, Limited, Movement**. `CARD_TAG_SORT_ORDER` (Immortal → Instant → Timed → Hammer) and `cardTagRank()`. |
+| `rarity.ts` | `Rarity` enum: **Plentiful, Common, Uncommon, Rare, Legendary, Mythical, Heavenly**. `RARITY_COLORS` (white, gray, green, purple, orange, red [Mythical, currently unused by any card], cyan). `RARITY_DRAW_WEIGHT_MULTIPLIER` (Plentiful 2.5, Common 1, Uncommon 0.5, Rare 0.2, Legendary 0.05; Mythical/Heavenly unused). `RARITY_SORT_ORDER` + `rarityRank()` for rarest-first sorting (Heavenly > Mythical > Legendary > Rare > Uncommon > Common > Plentiful). |
+| `generators.ts` | `movementOverrideGenerator`: 8 equally weighted Movement abilities, one per compass direction (⬆️↗️➡️↘️⬇️↙️⬅️↖️), text `Move {dir} or {dir}{dir}.` `hastenTopOverrideGenerator`: 56 equally weighted pairs of distinct directions A/B, text `Move {A}, {A}{A}, or {B}.` |
+| `cards/` | All real cards, grouped by tag: `immortal.ts` (6, incl. 2 Heavenly), `hammers.ts` (7), `instant.ts` (16, incl. Hasten with the top override), `timed.ts` (18). `types.ts` defines `RealCardType = CardType<CardTag, AbilityTag, Rarity>`. `index.ts` re-exports everything and aggregates `CARD_TYPES`. |
+| `decks.ts` | `STANDARD_DECK`: all non-immortal cards via three nested sub-generators (hammers ×0.05, instant ×1, timed ×0.6); within each sub-generator cards are weighted by `RARITY_DRAW_WEIGHT_MULTIPLIER`. |
+
+**Rule:** card types, decks, generators, and tags are **fixed after initialization**. Never add UI or runtime mechanisms to modify them. Adding new content means adding entries to the fixed lists in `implementation/`.
+
+### `src/main.ts` — app wiring
+
+Builds the "Draw cards" view from `DECKS`: collapsible deck containers, draw-count input
+(disabled and grayed when `perDrawAmount` is set), draw button with a **2 s cooldown**,
+sort-by-tag button, click-to-select cards (blue outline, multi-select, cleared on redraw),
+and two bottom buttons: "Copy to sheets" (selected cards, display order) and
+"Select all and copy". TSV output is 4 tab-separated columns: name, top ability, bottom
+ability, card tag; ability tags formatted as `[Tag] text`.
+
+## UI Invariants
+
+- Dark theme via CSS custom properties in `src/styles/main.scss`; follow the BEM-ish naming already in use.
+- Card layout, top to bottom: bold title → thin inset divider → top ability (tag bolded and prefixed) → large "OR" → bottom ability → divider → **rarity** (colored by rarity) → card tag (small-caps, muted).
+- Copy-to-sheets TSV has 5 columns per row: name, top ability, bottom ability, card tag, rarity (rarity is the rightmost column).
+- After drawing, cards are **sorted by rarity by default** (rarest first). The deck footer offers two sort buttons: "Sort by tag" (Immortal → Instant → Timed → Hammer) and "Sort by rarity" (Heavenly → Mythical → Legendary → Rare → Uncommon → Common → Plentiful). Both sorts are stable.
+- Card texts are transcribed from the game design with only minimal grammar fixes; do not reword them.
+- "Catalogue" tab is intentionally disabled and grayed out (unimplemented). Do not enable it.
+- All card text is centered.
+
+## Conventions
+
+- 2-space indent, single quotes, semicolons, trailing newline.
+- No `any`; explicit types on function signatures.
+- Class names kebab-case/BEM; TS identifiers camelCase; constants SCREAMING_SNAKE_CASE.
+- After changes, run `npm run typecheck && npm run build` and verify in the browser (e.g. with Playwright) that draw/sort/select/copy still behave as specified.
