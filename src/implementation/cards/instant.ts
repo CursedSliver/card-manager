@@ -141,12 +141,12 @@ export const BOUNDLESS_BOONS: RealCardType = defineCardType({
 export const PHONE_CALL_TO_GOD: RealCardType = defineCardType({
   name: 'Phone call to God',
   tag: CardTag.Instant,
-  rarity: Rarity.Common,
+  rarity: Rarity.Plentiful,
   topAbility: {
     text: 'Once per game, if you own at least 3 pylons, expend ⚰️🪙🧤🌾 and gain “Heavenly sacrifice” and “Pillars of worship”, and increase hand size by 2 permanently.',
   },
   bottomAbility: {
-    text: 'Gain 25 prestige points and heavenly chips.',
+    text: 'Gain 12 prestige points and heavenly chips.',
   },
 });
 
@@ -161,7 +161,7 @@ export const HASTEN: RealCardType = defineCardType({
 export const FREE_MOVE: RealCardType = defineCardType({
   name: 'Free move',
   tag: CardTag.Instant,
-  rarity: Rarity.Common,
+  rarity: Rarity.Rare,
   topAbility: {
     text: 'Move one in any cardinal direction.',
   },
