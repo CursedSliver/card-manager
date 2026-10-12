@@ -10,7 +10,7 @@ import { el, formatAbilityForSheet, renderCard } from './core/ui';
 import { DECKS } from './implementation/decks';
 import { cardTagRank } from './implementation/tags';
 import { RARITY_COLORS, Rarity, rarityRank } from './implementation/rarity';
-import { TIME_MULTIPLIER, TIME_MULTIPLIER_PARAM } from './implementation/time';
+import { saveTimeMultiplier, TIME_MULTIPLIER, TIME_MULTIPLIER_PARAM } from './implementation/time';
 
 const DRAW_COOLDOWN_MS = 2000;
 const COPY_FEEDBACK_MS = 1200;
@@ -63,6 +63,7 @@ function wireTimePanel(): void {
     if (!Number.isFinite(multiplier) || multiplier <= 0) {
       return;
     }
+    saveTimeMultiplier(multiplier);
     const url = new URL(window.location.href);
     url.searchParams.set(TIME_MULTIPLIER_PARAM, String(multiplier));
     window.location.assign(url.toString());
