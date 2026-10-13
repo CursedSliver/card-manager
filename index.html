@@ -11,34 +11,38 @@
   <header class="top-bar">
     <h1 class="app-name">RtA Helper</h1>
     <nav class="tabs" aria-label="Main navigation">
-      <button type="button" class="tab" disabled aria-disabled="true">Catalogue</button>
-      <button type="button" class="tab tab--active" aria-current="page">Draw cards</button>
+      <button type="button" id="tab-catalogue" class="tab">Catalogue</button>
+      <button type="button" id="tab-draw" class="tab tab--active" aria-current="page">Draw cards</button>
     </nav>
   </header>
 
   <main class="content">
-    <section class="time-panel" aria-label="Time multiplier settings">
-      <h2 class="time-panel__title">Set time mult</h2>
-      <label class="time-panel__field" for="time-mult-input">
-        <span>Multiplier</span>
-        <input
-          type="number"
-          id="time-mult-input"
-          class="count-input"
-          min="0.01"
-          step="any"
-          value="1"
-          required
-        />
-      </label>
-      <button type="button" id="time-mult-apply" class="button button--primary">Apply &amp; reload</button>
-      <span class="time-panel__current" id="time-mult-current">Current: ×1</span>
-    </section>
+    <section id="catalogue-view" class="catalogue" aria-label="Card catalogue" hidden></section>
 
-    <section id="decks-view" class="decks" aria-label="Card decks"></section>
+    <div id="draw-view">
+      <section class="time-panel" aria-label="Time multiplier settings">
+        <h2 class="time-panel__title">Set time mult</h2>
+        <label class="time-panel__field" for="time-mult-input">
+          <span>Multiplier</span>
+          <input
+            type="number"
+            id="time-mult-input"
+            class="count-input"
+            min="0.01"
+            step="any"
+            value="1"
+            required
+          />
+        </label>
+        <button type="button" id="time-mult-apply" class="button button--primary">Apply &amp; reload</button>
+        <span class="time-panel__current" id="time-mult-current">Current: ×1</span>
+      </section>
+
+      <section id="decks-view" class="decks" aria-label="Card decks"></section>
+    </div>
   </main>
 
-  <footer class="actions">
+  <footer class="actions" id="draw-actions">
     <button type="button" id="copy-selected" class="button button--primary button--wide">Copy to sheets</button>
     <button type="button" id="copy-all" class="button button--primary button--wide">Select all and copy</button>
   </footer>

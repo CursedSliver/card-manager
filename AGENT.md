@@ -11,7 +11,7 @@ sorting, selecting, and copying to spreadsheets.
 
 ## Tech Stack & Constraints
 
-- **TypeScript** (strict mode) with **no framework** — vanilla DOM only. Small libraries are fine; do not introduce React/Vue/etc.
+- **TypeScript** (strict mode) with **no framework** — vanilla DOM only. Small libraries are fine (`fuse.js` is used for fuzzy search); do not introduce React/Vue/etc.
 - **SASS (Dart Sass)** for styling, compiled by the `sass` package.
 - **esbuild** for bundling, orchestrated by `build.mjs` (also compiles SASS and copies `index.html`).
 - Commands: `npm run build`, `npm run build:dev`, `npm run typecheck`, `npm run serve` (serves `dist/` at `http://localhost:8123`).
@@ -25,17 +25,17 @@ Code is strictly split into two layers:
 | File | Contents |
 | --- | --- |
 | `generator.ts` | `Generator<R>`: weighted RNG. Items carry a nonnegative weight and an arbitrary reward. `roll()` propagates through nested `Generator` rewards until a non-generator reward is returned. Throws on empty item lists, negative weights, or zero total weight. |
-| `card.ts` | `Ability` (text + optional ability tag), `CardType` (name, tag, rarity, optional top/bottom ability **or** override), `CardInstance` (type + rolled override results). `defineCardType()` enforces that an ability and its override are mutually exclusive. `createCardInstance()` rolls applicable overrides. `resolveTopAbility`/`resolveBottomAbility` return the effective ability. |
+| `card.ts` | `Ability` (text + optional ability tag), `AbilityOverride` (a `Generator` of abilities plus a unique `description` of what the override rolls), `CardType` (name, tag, rarity, optional top/bottom ability **or** override), `CardInstance` (type + rolled override results). `defineCardType()` enforces that an ability and its override are mutually exclusive. `createCardInstance()` rolls applicable overrides. `resolveTopAbility`/`resolveBottomAbility` return the effective ability. |
 | `deck.ts` | `Deck` (name, optional description, pool `Generator`, optional `perDrawAmount`). `drawFromDeck()` rolls the pool, then instantiates each card type. |
-| `ui.ts` | `el()` DOM factory, `renderCard()` (centered card layout), `formatAbilityForSheet()` (`[Tag] text` TSV formatting). |
+| `ui.ts` | `el()` DOM factory, `renderCard(instance, rarityColor?, options?)` (centered card layout; `options.overrideDescriptions` renders overrides as their bracketed description text marked `card__ability--override`, `options.interactive: false` drops the button role/focus), `formatAbilityForSheet()` (`[Tag] text` TSV formatting). |
 
 ### `src/implementation/` — fixed, immutable definitions
 
 | File | Contents |
 | --- | --- |
 | `tags.ts` | `CardTag` enum: **Immortal, Instant, Timed, Hammer**. `AbilityTag` enum: **Unique, Limited, Movement**. `CARD_TAG_SORT_ORDER` (Immortal → Instant → Timed → Hammer) and `cardTagRank()`. |
-| `rarity.ts` | `Rarity` enum: **Plentiful, Common, Uncommon, Rare, Legendary, Mythical, Heavenly**. `RARITY_COLORS` (white, gray, green, purple, orange, red [Mythical, currently unused by any card], cyan). `RARITY_DRAW_WEIGHT_MULTIPLIER` (Plentiful 2.5, Common 1, Uncommon 0.5, Rare 0.2, Legendary 0.05; Mythical/Heavenly unused). `RARITY_SORT_ORDER` + `rarityRank()` for rarest-first sorting (Heavenly > Mythical > Legendary > Rare > Uncommon > Common > Plentiful). |
-| `generators.ts` | `movementOverrideGenerator`: 8 equally weighted Movement abilities, one per compass direction (⬆️↗️➡️↘️⬇️↙️⬅️↖️), text `Move {dir} or {dir}{dir}.` `hastenTopOverrideGenerator`: 56 equally weighted pairs of distinct directions A/B, text `Move {A}, {A}{A}, or {B}.` |
+| `rarity.ts` | `Rarity` enum: **Plentiful, Common, Uncommon, Rare, Legendary, Mythical, Heavenly**. `RARITY_COLORS` (white, gray, green, purple, orange, red [Mythical, currently unused by any card], cyan) + `rarityColor()`. `RARITY_DRAW_WEIGHT_MULTIPLIER` (Plentiful 2.5, Common 1, Uncommon 0.5, Rare 0.2, Legendary 0.05; Mythical/Heavenly unused). `RARITY_SORT_ORDER` + `rarityRank()` for rarest-first sorting (Heavenly > Mythical > Legendary > Rare > Uncommon > Common > Plentiful). |
+| `generators.ts` | `movementOverride`: `AbilityOverride` over 8 equally weighted Movement abilities, one per compass direction (⬆️↗️➡️↘️⬇️↙️⬅️↖️), text `Move {dir} or {dir}{dir}.` `hastenTopOverride`: `AbilityOverride` over 56 equally weighted pairs of distinct directions A/B, text `Move {A}, {A}{A}, or {B}.` Each carries its own `description` shown by the Catalogue. |
 | `cards/` | All real cards, grouped by tag: `immortal.ts` (6, incl. 2 Heavenly), `hammers.ts` (7), `instant.ts` (16, incl. Hasten with the top override), `timed.ts` (18). `types.ts` defines `RealCardType = CardType<CardTag, AbilityTag, Rarity>`. `index.ts` re-exports everything and aggregates `CARD_TYPES`. |
 | `decks.ts` | `STANDARD_DECK`: all non-immortal cards via three nested sub-generators (hammers ×0.05, instant ×1, timed ×0.6); within each sub-generator cards are weighted by `RARITY_DRAW_WEIGHT_MULTIPLIER`. |
 | `time.ts` | `TIME_MULTIPLIER`: global scale for time-based effects, read once at initialization from the `timeMultiplier` URL query parameter, else the `timeMultiplier` localStorage entry, else 1 (URL parameter wins on conflict). `saveTimeMultiplier()` persists a value to localStorage. Card definitions bake the scaled value into hour-based durations via `scaledHours` (bare number) / `hoursLabel` (number + pluralized unit), so changing the multiplier requires a page reload. |
@@ -44,7 +44,17 @@ Code is strictly split into two layers:
 
 ### `src/main.ts` — app wiring
 
-Builds the "Draw cards" view from `DECKS`. At the top sits a "Set time mult" panel: a number
+Owns the two top-level view tabs ("Catalogue" / "Draw cards"), which toggle the `hidden`
+attribute of `#catalogue-view` and `#draw-view` (and hide the bottom action bar while the
+catalogue is shown). The active tab is driven by the `tab` URL query parameter — `?tab=roll`
+is the "Draw cards" tab and `?tab=catalogue` the catalogue; a missing or unknown value falls
+back to `roll`. The `VIEW_TABS` list maps each parameter value to its tab button and view ids;
+clicking a tab mirrors it into the parameter with `history.pushState` (keeping other parameters
+like `timeMultiplier`), and a `popstate` listener reapplies the parameter so back/forward move
+between tabs. It also measures the top bar into the `--top-bar-height` CSS variable so
+the catalogue toolbar sticks below it.
+
+The "Draw cards" view is built from `DECKS`. At the top sits a "Set time mult" panel: a number
 input, an "Apply & reload" button that saves the value to localStorage and reloads the page with
 the `timeMultiplier` URL parameter (see `implementation/time.ts`), and a readout of the current
 multiplier. Below are collapsible
@@ -55,14 +65,39 @@ and two bottom buttons: "Copy to sheets" (selected cards, display order) and
 "Select all and copy". TSV output is 4 tab-separated columns: name, top ability, bottom
 ability, card tag; ability tags formatted as `[Tag] text`.
 
+### `src/catalogue.ts` — catalogue view
+
+Builds the "Catalogue" view into `#catalogue-view`: a sticky toolbar (Fuse.js search input over
+card names and descriptions, then a tag tab-selector that scrolls the window to a section) over
+one section per card tag, each with a header and a 4-column table of cards. Sections follow
+`CARD_TAG_SORT_ORDER`; within a section cards are sorted by rarity from least to most rare. Rows
+are filled top-to-bottom, and cards are rendered with `renderCard(..., { overrideDescriptions:
+true })` so overrides show their `description` instead of a rolled ability.
+Searching hides non-matching sections (disabling their tab) and shows a "no matches" message when
+nothing matches.
+
+Catalogue cards are fixed at 540 px tall and clip their text (`.catalogue-table .card` in the
+SCSS); clicking or pressing Enter/Space on one opens the side panel. The panel is a dimmed
+backdrop plus a right-hand drawer (`.card-panel-layer`) that re-renders the same card without
+clamping, so the full ability text is readable; it closes on the close button, Escape, a backdrop
+click, or a search keystroke, and returns focus to the triggering card. `initCatalogue()` returns
+a `CatalogueView` handle whose `closePanel()` the app wiring calls when leaving the view.
+
 ## UI Invariants
 
 - Dark theme via CSS custom properties in `src/styles/main.scss`; follow the BEM-ish naming already in use.
-- Card layout, top to bottom: bold title → thin inset divider → top ability (tag bolded and prefixed) → large "OR" → bottom ability → divider → **rarity** (colored by rarity) → card tag (small-caps, muted).
+- Card layout, top to bottom: bold title → thin inset divider → top ability (tag bolded and prefixed) → large "OR" → bottom ability → divider → **rarity** (colored by rarity) → card tag (small-caps, muted). The bottom divider carries `margin-top: auto`, so whenever a card is taller than its text (stretched within a draw row, or the fixed height in the Catalogue) the divider, rarity and tag sit on the card's bottom edge instead of trailing the text.
 - Copy-to-sheets TSV has 5 columns per row: name, top ability, bottom ability, card tag, rarity (rarity is the rightmost column).
 - After drawing, cards are **sorted by rarity by default** (rarest first). The deck footer offers two sort buttons: "Sort by tag" (Immortal → Instant → Timed → Hammer) and "Sort by rarity" (Heavenly → Mythical → Legendary → Rare → Uncommon → Common → Plentiful). Both sorts are stable.
 - Card texts are transcribed from the game design with only minimal grammar fixes; do not reword them.
-- "Catalogue" tab is intentionally disabled and grayed out (unimplemented). Do not enable it.
+- The "Catalogue" view shows every card type (immortals included) and is read-only: its cards open
+  a detail side panel instead of being selected, and copy-to-sheets only ever applies to drawn
+  cards in the "Draw cards" view.
+- Catalogue cards have a **fixed 360 px height** and truncate overflowing text with an ellipsis;
+  never let a catalogue card grow to fit its text (the side panel is what shows the full card).
+- Overrides are always shown in the catalogue as their `description` string, wrapped in square
+  brackets and faded (`card__ability--override`); a rolled ability is never displayed outside a
+  draw.
 - All card text is centered.
 
 ## Conventions

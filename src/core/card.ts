@@ -13,6 +13,19 @@ export interface Ability<TAbilityTag extends string = string> {
   readonly tag?: TAbilityTag;
 }
 
+/**
+ * An ability override: a generator that rolls a concrete ability in place of a
+ * missing static ability, plus a unique description of what that override does.
+ * The description is used when the override is displayed without being rolled
+ * (e.g. in the Catalogue).
+ */
+export interface AbilityOverride<TAbilityTag extends string = string> {
+  /** Unique, human-readable description of what this override rolls. */
+  readonly description: string;
+  /** Rolls a concrete ability to use in place of the absent ability. */
+  readonly generator: Generator<Ability<TAbilityTag>>;
+}
+
 /** A card type: name, tag, rarity, optional abilities or ability overrides. */
 export interface CardType<
   TCardTag extends string = string,
@@ -24,10 +37,10 @@ export interface CardType<
   readonly rarity: TRarity;
   readonly topAbility?: Ability<TAbilityTag>;
   /** Only valid when `topAbility` is absent. */
-  readonly topAbilityOverride?: Generator<Ability<TAbilityTag>>;
+  readonly topAbilityOverride?: AbilityOverride<TAbilityTag>;
   readonly bottomAbility?: Ability<TAbilityTag>;
   /** Only valid when `bottomAbility` is absent. */
-  readonly bottomAbilityOverride?: Generator<Ability<TAbilityTag>>;
+  readonly bottomAbilityOverride?: AbilityOverride<TAbilityTag>;
 }
 
 /** A concrete card: its type plus any rolled override results. */
@@ -69,8 +82,8 @@ export function createCardInstance<
 >(type: CardType<TCardTag, TAbilityTag, TRarity>): CardInstance<TCardTag, TAbilityTag, TRarity> {
   return {
     type,
-    topAbilityResult: type.topAbilityOverride ? type.topAbilityOverride.roll() : undefined,
-    bottomAbilityResult: type.bottomAbilityOverride ? type.bottomAbilityOverride.roll() : undefined,
+    topAbilityResult: type.topAbilityOverride?.generator.roll(),
+    bottomAbilityResult: type.bottomAbilityOverride?.generator.roll(),
   };
 }
 

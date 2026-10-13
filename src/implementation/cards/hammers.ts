@@ -6,7 +6,7 @@ import { defineCardType } from '../../core/card';
 import type { RealCardType } from './types';
 import { CardTag } from '../tags';
 import { Rarity } from '../rarity';
-import { movementOverrideGenerator } from '../generators';
+import { movementOverride } from '../generators';
 import { scaledHours } from '../time';
 
 const DISCARD_TWO_TEXT = 'Discard any two cards, then draw two cards and choose one to add to inventory.';
@@ -16,7 +16,7 @@ export const HAMMER: RealCardType = defineCardType({
   tag: CardTag.Hammer,
   rarity: Rarity.Common,
   topAbility: { text: DISCARD_TWO_TEXT },
-  bottomAbilityOverride: movementOverrideGenerator,
+  bottomAbilityOverride: movementOverride,
 });
 
 export const BLUDGEON: RealCardType = defineCardType({

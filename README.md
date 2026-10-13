@@ -12,6 +12,7 @@ purely for rolling, displaying, sorting, selecting and copying cards.
 - TypeScript (strict), no framework
 - SASS (Dart Sass) for styling
 - esbuild for bundling
+- Fuse.js for fuzzy card search in the Catalogue
 
 ## Structure
 
@@ -29,7 +30,8 @@ src/
 │   ├── cards/          # All real cards (immortal / hammers / instant / timed)
 │   └── decks.ts        # "Standard Deck"
 ├── styles/main.scss
-└── main.ts             # App wiring (draw UI, selection, copy)
+├── catalogue.ts        # Catalogue view (tag sections, 4-column tables, search, detail panel)
+└── main.ts             # App wiring (view tabs, draw UI, selection, copy)
 ```
 
 ## Commands

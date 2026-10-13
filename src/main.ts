@@ -2,6 +2,7 @@
  * App entry point: wires the fixed decks into the "Draw cards" view.
  * Handles drawing (with 2s cooldown), sorting, selection and TSV copying.
  */
+import { initCatalogue, type CatalogueView } from './catalogue';
 import type { CardInstance } from './core/card';
 import { resolveBottomAbility, resolveTopAbility } from './core/card';
 import type { Deck } from './core/deck';
@@ -9,13 +10,37 @@ import { drawFromDeck } from './core/deck';
 import { el, formatAbilityForSheet, renderCard } from './core/ui';
 import { DECKS } from './implementation/decks';
 import { cardTagRank } from './implementation/tags';
-import { RARITY_COLORS, Rarity, rarityRank } from './implementation/rarity';
+import { rarityColor, rarityRank } from './implementation/rarity';
 import { saveTimeMultiplier, TIME_MULTIPLIER, TIME_MULTIPLIER_PARAM } from './implementation/time';
 
 const DRAW_COOLDOWN_MS = 2000;
 const COPY_FEEDBACK_MS = 1200;
 const DEFAULT_DRAW_COUNT = 1;
 const MAX_DRAW_COUNT = 100;
+
+/** URL query parameter selecting which view tab the app lands on. */
+const TAB_PARAM = 'tab';
+
+/**
+ * The top-level view tabs, in display order. `tab` is the value the
+ * {@link TAB_PARAM} URL parameter accepts (e.g. `?tab=catalogue`); the id
+ * fields locate the matching button and view in `index.html`.
+ */
+const VIEW_TABS = [
+  { tab: 'catalogue', buttonId: 'tab-catalogue', viewId: 'catalogue-view' },
+  { tab: 'roll', buttonId: 'tab-draw', viewId: 'draw-view' },
+] as const;
+
+type ViewTab = (typeof VIEW_TABS)[number]['tab'];
+
+/** Tab shown when the URL parameter is absent or names an unknown tab. */
+const DEFAULT_VIEW_TAB: ViewTab = 'roll';
+
+interface ViewTabControls {
+  readonly tab: ViewTab;
+  readonly button: HTMLButtonElement;
+  readonly view: HTMLElement;
+}
 
 interface DeckState {
   readonly deck: Deck;
@@ -36,11 +61,94 @@ function init(): void {
   if (!decksView) {
     throw new Error('#decks-view element not found.');
   }
+  const catalogue = initCatalogue();
   for (const deck of DECKS) {
     deckStates.push(createDeckState(decksView, deck));
   }
+  wireViewTabs(catalogue);
   wireCopyActions();
   wireTimePanel();
+  syncTopBarHeight();
+  window.addEventListener('resize', syncTopBarHeight);
+}
+
+/** Exposes the top bar's height so the catalogue toolbar can stick below it. */
+function syncTopBarHeight(): void {
+  const topBar = document.querySelector<HTMLElement>('.top-bar');
+  if (!topBar) {
+    return;
+  }
+  document.documentElement.style.setProperty('--top-bar-height', `${topBar.offsetHeight}px`);
+}
+
+/** Wires the top-level view tabs ("Catalogue" / "Draw cards") to the `tab` URL parameter. */
+function wireViewTabs(catalogue: CatalogueView): void {
+  const actions = document.querySelector<HTMLElement>('#draw-actions');
+  const controls: ViewTabControls[] = [];
+  for (const entry of VIEW_TABS) {
+    const button = document.querySelector<HTMLButtonElement>(`#${entry.buttonId}`);
+    const view = document.querySelector<HTMLElement>(`#${entry.viewId}`);
+    if (button && view) {
+      controls.push({ tab: entry.tab, button, view });
+    }
+  }
+
+  let currentTab: ViewTab | undefined;
+
+  const activate = (tab: ViewTab, syncUrl: boolean): void => {
+    const active = controls.find((entry) => entry.tab === tab);
+    if (!active) {
+      return;
+    }
+    for (const entry of controls) {
+      const isActive = entry === active;
+      entry.view.hidden = !isActive;
+      entry.button.classList.toggle('tab--active', isActive);
+      if (isActive) {
+        entry.button.setAttribute('aria-current', 'page');
+      } else {
+        entry.button.removeAttribute('aria-current');
+      }
+    }
+    if (actions) {
+      actions.hidden = active.tab === 'catalogue';
+    }
+    if (active.tab !== 'catalogue') {
+      catalogue.closePanel();
+    }
+    const changed = currentTab !== active.tab;
+    currentTab = active.tab;
+    if (syncUrl && changed) {
+      writeTabParam(active.tab);
+    }
+  };
+
+  for (const entry of controls) {
+    entry.button.addEventListener('click', () => {
+      activate(entry.tab, true);
+      window.scrollTo({ top: 0 });
+    });
+  }
+  window.addEventListener('popstate', () => activate(readTabParam(), false));
+  activate(readTabParam(), false);
+}
+
+/** Reads the `tab` URL parameter, falling back to {@link DEFAULT_VIEW_TAB}. */
+function readTabParam(): ViewTab {
+  const raw = new URLSearchParams(window.location.search).get(TAB_PARAM);
+  const match = VIEW_TABS.find((entry) => entry.tab === raw);
+  return match ? match.tab : DEFAULT_VIEW_TAB;
+}
+
+/**
+ * Mirrors the active tab into the `tab` URL parameter without reloading, preserving
+ * any other parameters (e.g. `timeMultiplier`). Pushing history keeps back/forward
+ * navigating between tabs.
+ */
+function writeTabParam(tab: ViewTab): void {
+  const url = new URL(window.location.href);
+  url.searchParams.set(TAB_PARAM, tab);
+  window.history.pushState(null, '', `${url.pathname}${url.search}${url.hash}`);
 }
 
 /** Wires the "Set time mult" panel: shows the current multiplier and reloads with a new one. */
@@ -181,10 +289,6 @@ function handleSortByRarity(state: DeckState): void {
   renderCards(state);
 }
 
-function getRarityColor(rarity: string): string | undefined {
-  return RARITY_COLORS[rarity as Rarity];
-}
-
 function renderCards(state: DeckState): void {
   state.cardsContainer.replaceChildren();
   if (state.cards.length === 0) {
@@ -193,7 +297,7 @@ function renderCards(state: DeckState): void {
     return;
   }
   for (const card of state.cards) {
-    const element = renderCard(card, getRarityColor);
+    const element = renderCard(card, rarityColor);
     if (state.selected.has(card)) {
       element.classList.add('card--selected');
     }

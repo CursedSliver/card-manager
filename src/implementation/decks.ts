@@ -11,7 +11,7 @@ import {
   TIMED_CARDS,
   type RealCardType,
 } from './cards';
-import { movementOverrideGenerator } from './generators';
+import { movementOverride } from './generators';
 import { AbilityTag, CardTag } from './tags';
 import { RARITY_DRAW_WEIGHT_MULTIPLIER, Rarity } from './rarity';
 
@@ -61,7 +61,7 @@ const PHONE_CALL_TO_GOD_MOVEMENT: RealCardType = defineCardType({
   topAbility: {
     text: 'Gain 12 prestige points and heavenly chips.',
   },
-  bottomAbilityOverride: movementOverrideGenerator,
+  bottomAbilityOverride: movementOverride,
 });
 
 const MOVEMENT_INSTANT_CARDS: readonly RealCardType[] = INSTANT_CARDS.map((card) =>

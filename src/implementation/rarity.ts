@@ -40,6 +40,11 @@ export const RARITY_DRAW_WEIGHT_MULTIPLIER: Record<Rarity, number> = {
   [Rarity.Heavenly]: 0,
 };
 
+/** Display color of a rarity name; unknown rarities have no color. */
+export function rarityColor(rarity: string): string | undefined {
+  return RARITY_COLORS[rarity as Rarity];
+}
+
 /** Sort order from rarest to least rare. */
 export const RARITY_SORT_ORDER: readonly Rarity[] = [
   Rarity.Heavenly,
