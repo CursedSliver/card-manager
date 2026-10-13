@@ -50,7 +50,7 @@ export const STANDARD_DECK: ProofDeck = {
   pool: createPool(INSTANT_CARDS),
 };
 
-// --- Standard Deck (Movement) ------------------------------------------------
+// --- Alternate Deck ------------------------------------------------
 // Identical to the Standard Deck, except Phone call to God: its bottom ability
 // (12 prestige points and heavenly chips) is now its top ability, and its
 // bottom ability is a movement override instead.
@@ -69,9 +69,9 @@ const MOVEMENT_INSTANT_CARDS: readonly RealCardType[] = INSTANT_CARDS.map((card)
 );
 
 export const STANDARD_DECK_MOVEMENT: ProofDeck = {
-  name: 'Standard Deck (Movement)',
+  name: 'Alternate deck',
   description:
-    'Identical to the Standard Deck, except Phone call to God has its bottom ability as its top ability and a movement override as its bottom ability.',
+    'Identical to the Standard Deck, except Phone call to God has its bottom ability as its top ability and a movement override as its bottom ability. Used for the alt version.',
   pool: createPool(MOVEMENT_INSTANT_CARDS),
 };
 
