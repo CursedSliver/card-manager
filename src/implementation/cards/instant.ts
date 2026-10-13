@@ -106,7 +106,9 @@ export const DILATED_CAPSULE: RealCardType = defineCardType({
   topAbility: {
     text: 'Send a player any 2 cards that you have. Must send exactly 2 cards.',
   },
-  bottomAbilityOverride: movementOverride,
+  bottomAbility: {
+    text: 'Send this card to a player, or move 1 in any direction.',
+  },
 });
 
 export const SEED_OF_MYTHS: RealCardType = defineCardType({
