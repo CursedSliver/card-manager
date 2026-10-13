@@ -177,16 +177,6 @@ export const EXTENDED_DRAW: RealCardType = defineCardType({
   bottomAbilityOverride: movementOverride,
 });
 
-export const BALL_LIGHTNING: RealCardType = defineCardType({
-  name: 'Ball lightning',
-  tag: CardTag.Timed,
-  rarity: Rarity.Legendary,
-  topAbility: {
-    text: `After ${hoursLabel(12)}, unleash ball lightning, which moves 2 tiles in a random direction every ${hoursLabel(6)}. It destroys all adjacent wires and will destroy any pylon it lands on.`,
-  },
-  bottomAbilityOverride: movementOverride,
-});
-
 export const SHIFT_IN_PERSPECTIVE: RealCardType = defineCardType({
   name: 'Shift in perspective',
   tag: CardTag.Timed,
@@ -209,6 +199,16 @@ export const INVERT: RealCardType = defineCardType({
   },
 });
 
+export const BALL_LIGHTNING: RealCardType = defineCardType({
+  name: 'Ball lightning',
+  tag: CardTag.Timed,
+  rarity: Rarity.Mythical,
+  topAbility: {
+    text: `After ${hoursLabel(24)}, unleash ball lightning, which moves 2 tiles in a random direction every ${hoursLabel(6)}. It destroys all adjacent wires and will destroy any pylon it lands on.`,
+  },
+  bottomAbilityOverride: movementOverride,
+});
+
 export const TIMED_CARDS: readonly RealCardType[] = [
   RED_CULTURE,
   YELLOW_CULTURE,
@@ -225,6 +225,7 @@ export const TIMED_CARDS: readonly RealCardType[] = [
   PHANTOM_TRAPS,
   RAIDS_FROM_HELL,
   EXTENDED_DRAW,
-  BALL_LIGHTNING,
   SHIFT_IN_PERSPECTIVE,
+  INVERT,
+  BALL_LIGHTNING
 ];

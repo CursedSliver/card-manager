@@ -74,7 +74,7 @@ export const INDESTRUCTIUM_MAUL: RealCardType = defineCardType({
   tag: CardTag.Hammer,
   rarity: Rarity.Common,
   topAbility: {
-    text: `+1 build range. Modifies this hammer’s top ability to choosing one out of three drawn cards with a ${scaledHours(12)}-hour cooldown.`,
+    text: `+1 build range. Modifies this hammer’s bottom ability to choosing one out of three drawn cards with a ${scaledHours(12)}-hour cooldown.`,
   },
   bottomAbility: { text: DISCARD_TWO_TEXT },
 });
