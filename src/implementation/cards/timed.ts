@@ -205,7 +205,7 @@ export const INVERT: RealCardType = defineCardType({
     text: `After ${hoursLabel(6)}, select any mortal card that belongs to a player. If it is a hammer, replace it with "Hammer". If it is a card in inventory, replace it with a random "Adapt" card. If it is an ongoing action, replace it with "Strangle".`,
   },
   bottomAbility: {
-    text: `Select one card in your inventory excluding Invert, and draw cards until you get a card with a higher rarity than the selected card. Discard the selected card and add the new card to inventory.`
+    text: `Select one non-mythical card in your inventory excluding Invert, and draw cards until you get a card with a higher rarity than the selected card. Discard the selected card and add the new card to inventory.`
   },
 });
 
