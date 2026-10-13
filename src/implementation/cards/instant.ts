@@ -154,7 +154,7 @@ export const PHONE_CALL_TO_GOD: RealCardType = defineCardType({
 export const HASTEN: RealCardType = defineCardType({
   name: 'Hasten',
   tag: CardTag.Instant,
-  rarity: Rarity.Common,
+  rarity: Rarity.Uncommon,
   topAbilityOverride: hastenTopOverrideGenerator,
   bottomAbilityOverride: movementOverrideGenerator,
 });
