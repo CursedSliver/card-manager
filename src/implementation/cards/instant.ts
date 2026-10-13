@@ -154,9 +154,16 @@ export const PHONE_CALL_TO_GOD: RealCardType = defineCardType({
 export const HASTEN: RealCardType = defineCardType({
   name: 'Hasten',
   tag: CardTag.Instant,
-  rarity: Rarity.Plentiful,
+  rarity: Rarity.Common,
   topAbilityOverride: hastenTopOverrideGenerator,
   bottomAbilityOverride: movementOverrideGenerator,
+});
+
+export const ADAPT: RealCardType = defineCardType({
+  name: 'Adapt',
+  tag: CardTag.Instant,
+  rarity: Rarity.Plentiful,
+  topAbilityOverride: movementOverrideGenerator
 });
 
 export const FREE_MOVE: RealCardType = defineCardType({
@@ -207,6 +214,7 @@ export const INSTANT_CARDS: readonly RealCardType[] = [
   BOUNDLESS_BOONS,
   PHONE_CALL_TO_GOD,
   HASTEN,
+  ADAPT,
   FREE_MOVE,
   PLAY_GOM,
   COOK
