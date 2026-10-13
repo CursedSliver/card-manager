@@ -2,15 +2,18 @@
  * Fixed list of decks.
  */
 import type { Deck } from '../core/deck';
+import { defineCardType } from '../core/card';
 import { Generator } from '../core/generator';
 import {
   HAMMER_CARDS,
   INSTANT_CARDS,
+  PHONE_CALL_TO_GOD,
   TIMED_CARDS,
   type RealCardType,
 } from './cards';
+import { movementOverrideGenerator } from './generators';
 import { AbilityTag, CardTag } from './tags';
-import { RARITY_DRAW_WEIGHT_MULTIPLIER } from './rarity';
+import { RARITY_DRAW_WEIGHT_MULTIPLIER, Rarity } from './rarity';
 
 export type ProofDeck = Deck<CardTag, AbilityTag>;
 
@@ -31,16 +34,46 @@ function createCardSubGenerator(cards: readonly RealCardType[]): Generator<RealC
   );
 }
 
+/** Builds the standard-deck pool around a given list of instant cards. */
+function createPool(instantCards: readonly RealCardType[]): Generator<RealCardType> {
+  return new Generator<RealCardType>([
+    { weight: HAMMER_SUBGENERATOR_WEIGHT, reward: createCardSubGenerator(HAMMER_CARDS) },
+    { weight: INSTANT_SUBGENERATOR_WEIGHT, reward: createCardSubGenerator(instantCards) },
+    { weight: TIMED_SUBGENERATOR_WEIGHT, reward: createCardSubGenerator(TIMED_CARDS) },
+  ]);
+}
+
 export const STANDARD_DECK: ProofDeck = {
   name: 'Standard Deck',
   description:
     'All non-immortal cards, drawn through three sub-generators: hammers ×0.05, instant ×1, timed ×0.6.',
-  pool: new Generator<RealCardType>([
-    { weight: HAMMER_SUBGENERATOR_WEIGHT, reward: createCardSubGenerator(HAMMER_CARDS) },
-    { weight: INSTANT_SUBGENERATOR_WEIGHT, reward: createCardSubGenerator(INSTANT_CARDS) },
-    { weight: TIMED_SUBGENERATOR_WEIGHT, reward: createCardSubGenerator(TIMED_CARDS) },
-  ]),
+  pool: createPool(INSTANT_CARDS),
+};
+
+// --- Standard Deck (Movement) ------------------------------------------------
+// Identical to the Standard Deck, except Phone call to God: its bottom ability
+// (12 prestige points and heavenly chips) is now its top ability, and its
+// bottom ability is a movement override instead.
+const PHONE_CALL_TO_GOD_MOVEMENT: RealCardType = defineCardType({
+  name: 'Phone call to God',
+  tag: CardTag.Instant,
+  rarity: Rarity.Plentiful,
+  topAbility: {
+    text: 'Gain 12 prestige points and heavenly chips.',
+  },
+  bottomAbilityOverride: movementOverrideGenerator,
+});
+
+const MOVEMENT_INSTANT_CARDS: readonly RealCardType[] = INSTANT_CARDS.map((card) =>
+  card === PHONE_CALL_TO_GOD ? PHONE_CALL_TO_GOD_MOVEMENT : card,
+);
+
+export const STANDARD_DECK_MOVEMENT: ProofDeck = {
+  name: 'Standard Deck (Movement)',
+  description:
+    'Identical to the Standard Deck, except Phone call to God has its bottom ability as its top ability and a movement override as its bottom ability.',
+  pool: createPool(MOVEMENT_INSTANT_CARDS),
 };
 
 /** The fixed list of all decks. */
-export const DECKS: readonly ProofDeck[] = [STANDARD_DECK];
+export const DECKS: readonly ProofDeck[] = [STANDARD_DECK, STANDARD_DECK_MOVEMENT];
