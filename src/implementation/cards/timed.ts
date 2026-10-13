@@ -62,7 +62,7 @@ export const RAINBOW_CULTURE: RealCardType = defineCardType({
 export const FOGS_OF_WAR: RealCardType = defineCardType({
   name: 'Fogs of war',
   tag: CardTag.Timed,
-  rarity: Rarity.Common,
+  rarity: Rarity.Uncommon,
   topAbility: {
     text: `For the next ${scaledHours(6)} to ${hoursLabel(12)} (you specify), ALL cards directed at you lose their effects (including ones from yourself).`,
   },
@@ -89,14 +89,26 @@ export const COSMOGENESIS: RealCardType = defineCardType({
     text: `After ${hoursLabel(12)}, gain one resource of choice.`,
   },
   bottomAbility: {
-    text: `After ${hoursLabel(6)}, gain two random resources.`,
+    text: `After ${hoursLabel(6)}, for each resource you have 25% chance to gain one (except for wires).`,
+  },
+});
+
+export const STRANGLE: RealCardType = defineCardType({
+  name: 'Strangle',
+  tag: CardTag.Timed,
+  rarity: Rarity.Rare,
+  topAbility: {
+    text: `Add this card to the action slots of any player for ${hoursLabel(6)}.`,
+  },
+  bottomAbility: {
+    text: `Clear one action slot of a willing player.`,
   },
 });
 
 export const CHARGE: RealCardType = defineCardType({
   name: 'Charge',
   tag: CardTag.Timed,
-  rarity: Rarity.Common,
+  rarity: Rarity.Rare,
   topAbility: {
     text: `After ${hoursLabel(6)}, move 5 steps in any cardinal direction.`,
   },
@@ -123,16 +135,6 @@ export const SPRINT: RealCardType = defineCardType({
   bottomAbility: {
     text: `After ${hoursLabel(1)}, expend 🌾 to move twice in different directions.`,
   },
-});
-
-export const SABOTEUR: RealCardType = defineCardType({
-  name: 'Saboteur',
-  tag: CardTag.Timed,
-  rarity: Rarity.Common,
-  topAbility: {
-    text: `After ${hoursLabel(6)}, select one player and they must show 3 mortal cards. You choose one to discard.`,
-  },
-  bottomAbilityOverride: movementOverrideGenerator,
 });
 
 export const PHANTOM_TRAPS: RealCardType = defineCardType({
@@ -194,10 +196,10 @@ export const TIMED_CARDS: readonly RealCardType[] = [
   FOGS_OF_WAR,
   NEUROGENESIS,
   COSMOGENESIS,
+  STRANGLE,
   CHARGE,
   MAGICAL_CONDUITS,
   SPRINT,
-  SABOTEUR,
   PHANTOM_TRAPS,
   RAIDS_FROM_HELL,
   EXTENDED_DRAW,
