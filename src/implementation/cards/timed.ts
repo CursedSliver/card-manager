@@ -192,7 +192,7 @@ export const SHIFT_IN_PERSPECTIVE: RealCardType = defineCardType({
   tag: CardTag.Timed,
   rarity: Rarity.Legendary,
   topAbility: {
-    text: `Specify a direction and expend 🧤🧤🧤, and after ${hoursLabel(3)}, all neighboring pylons will move one step in that direction, if possible.`,
+    text: `Specify a direction and expend 🧤🧤🧤, and after ${hoursLabel(12)}, all neighboring pylons will move one step in that direction, if possible.`,
   },
   bottomAbilityOverride: movementOverride,
 });
