@@ -3,7 +3,7 @@
  * concrete ability with a unique description used when the override is shown
  * without being rolled (e.g. in the Catalogue).
  */
-import type { Ability, AbilityOverride } from '../core/card';
+import type { AbilityOverride } from '../core/card';
 import { Generator } from '../core/generator';
 import { AbilityTag } from './tags';
 
