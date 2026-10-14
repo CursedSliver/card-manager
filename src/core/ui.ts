@@ -34,6 +34,40 @@ export function formatAbilityForSheet(ability: Ability | undefined): string {
   return ability.tag ? `[${ability.tag}] ${ability.text}` : ability.text;
 }
 
+/** Default duration of the feedback shown by {@link flashButton}. */
+const FLASH_FEEDBACK_MS = 1200;
+
+/** Copies text to the clipboard, falling back to a hidden textarea. */
+export async function copyText(text: string): Promise<void> {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.append(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    textarea.remove();
+  }
+}
+
+/** Temporarily replaces a button's label with a message (e.g. "Copied!"). */
+export function flashButton(
+  button: HTMLButtonElement,
+  message: string,
+  durationMs: number = FLASH_FEEDBACK_MS,
+): void {
+  if (!button.dataset.label) {
+    button.dataset.label = button.textContent ?? '';
+  }
+  button.textContent = message;
+  button.classList.add('button--copied');
+  window.setTimeout(() => {
+    button.textContent = button.dataset.label ?? '';
+    button.classList.remove('button--copied');
+  }, durationMs);
+}
+
 /** Optional resolver mapping a rarity name to a CSS color for display. */
 export type RarityColorResolver = (rarity: string) => string | undefined;
 
@@ -81,6 +115,69 @@ export function renderCard<
   }
   card.append(rarity);
   card.append(el('span', 'card__tag', instance.type.tag));
+  return card;
+}
+
+/**
+ * Data needed to render a spirit card: a name with an optional title shown
+ * below it, a classification shown at the bottom, and 1 to 3 named abilities.
+ * Contains no game logic.
+ */
+export interface SpiritCardData {
+  readonly name: string;
+  readonly title?: string;
+  readonly classification: string;
+  readonly abilities: readonly SpiritCardAbility[];
+}
+
+/** One named ability of a spirit card. */
+export interface SpiritCardAbility {
+  readonly name: string;
+  readonly text: string;
+}
+
+/** Display options for {@link renderSpirit}. */
+export interface SpiritRenderOptions {
+  /**
+   * When false, the spirit is rendered as a non-interactive element (no
+   * button role and no focus). Defaults to true, so a spirit can be selected.
+   */
+  readonly interactive?: boolean;
+}
+
+/**
+ * Renders a spirit as a centered card element. Unlike a card, a spirit has no
+ * rarity; each ability is shown as its name (subtitle) plus text, abilities are
+ * separated by dividers, and a final divider separates them from the
+ * classification pinned to the card's bottom edge.
+ */
+export function renderSpirit(
+  spirit: SpiritCardData,
+  options: SpiritRenderOptions = {},
+): HTMLElement {
+  const card = el('article', 'card card--spirit');
+  if (options.interactive ?? true) {
+    card.tabIndex = 0;
+    card.setAttribute('role', 'button');
+  }
+  card.setAttribute('aria-label', spirit.title ? `${spirit.name}, ${spirit.title}` : spirit.name);
+  card.append(el('h3', 'card__title', spirit.name));
+  if (spirit.title) {
+    card.append(el('p', 'card__spirit-title', spirit.title));
+  }
+  card.append(el('hr', 'card__divider'));
+  for (const ability of spirit.abilities) {
+    card.append(
+      el(
+        'div',
+        'card__spirit-ability',
+        el('h4', 'card__ability-name', ability.name),
+        el('p', 'card__ability', ability.text),
+      ),
+      el('hr', 'card__divider'),
+    );
+  }
+  card.append(el('span', 'card__tag', spirit.classification));
   return card;
 }
 

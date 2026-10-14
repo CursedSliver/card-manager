@@ -67,7 +67,7 @@ export const CLEANSE: RealCardType = defineCardType({
     text: 'Destroy a pylon in 3x3 of yourself and gain 3 random resources. If the pylon does not belong to you, the owner of the pylon obtains this card.',
   },
   bottomAbility: {
-    text: 'Convert a pylon or Greater pylon to a stake of Greater stake. A stake has all abilities of pylons but are not pylons.'
+    text: 'Convert a pylon or Greater pylon to a stake or Greater stake. A stake has all abilities of pylons but are not pylons.'
   },
 });
 
@@ -161,7 +161,7 @@ export const PHONE_CALL_TO_GOD: RealCardType = defineCardType({
     text: 'Once per game, if you own at least 3 pylons, expend ⚰️🪙🧤🌾 and gain “Heavenly sacrifice” and “Pillars of worship”, and increase hand size by 2 permanently.',
   },
   bottomAbility: {
-    text: 'Gain 15 prestige points and heavenly chips.',
+    text: 'Roll D20, then gain that many prestige points and heavenly chips.',
   },
 });
 
@@ -177,8 +177,7 @@ export const ADAPT: RealCardType = defineCardType({
   name: 'Adapt',
   tag: CardTag.Instant,
   rarity: Rarity.Plentiful,
-  topAbilityOverride: movementOverride,
-  bottomAbilityOverride: movementOverride
+  topAbilityOverride: movementOverride
 });
 
 export const FREE_MOVE: RealCardType = defineCardType({

@@ -21,7 +21,7 @@ export type ProofDeck = Deck<CardTag, AbilityTag>;
 // All non-immortal cards, drawn through three nested sub-generators, one per
 // card tag. Within each sub-generator, each card is weighted by the draw
 // multiplier of its rarity.
-const HAMMER_SUBGENERATOR_WEIGHT = 0.05;
+const HAMMER_SUBGENERATOR_WEIGHT = 0.04;
 const INSTANT_SUBGENERATOR_WEIGHT = 1;
 const TIMED_SUBGENERATOR_WEIGHT = 0.6;
 
@@ -59,7 +59,7 @@ const PHONE_CALL_TO_GOD_MOVEMENT: RealCardType = defineCardType({
   tag: CardTag.Instant,
   rarity: Rarity.Plentiful,
   topAbility: {
-    text: 'Gain 12 prestige points and heavenly chips.',
+    text: 'Roll D20, then gain that many prestige points and heavenly chips.',
   },
   bottomAbilityOverride: movementOverride,
 });

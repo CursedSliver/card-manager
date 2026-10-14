@@ -3,18 +3,18 @@
  * Handles drawing (with 2s cooldown), sorting, selection and TSV copying.
  */
 import { initCatalogue, type CatalogueView } from './catalogue';
+import { initSpirits } from './spirits';
 import type { CardInstance } from './core/card';
 import { resolveBottomAbility, resolveTopAbility } from './core/card';
 import type { Deck } from './core/deck';
 import { drawFromDeck } from './core/deck';
-import { el, formatAbilityForSheet, renderCard } from './core/ui';
+import { copyText, el, flashButton, formatAbilityForSheet, renderCard } from './core/ui';
 import { DECKS } from './implementation/decks';
 import { cardTagRank } from './implementation/tags';
 import { rarityColor, rarityRank } from './implementation/rarity';
 import { saveTimeMultiplier, TIME_MULTIPLIER, TIME_MULTIPLIER_PARAM } from './implementation/time';
 
 const DRAW_COOLDOWN_MS = 2000;
-const COPY_FEEDBACK_MS = 1200;
 const DEFAULT_DRAW_COUNT = 1;
 const MAX_DRAW_COUNT = 100;
 
@@ -27,6 +27,7 @@ const TAB_PARAM = 'tab';
  * fields locate the matching button and view in `index.html`.
  */
 const VIEW_TABS = [
+  { tab: 'spirits', buttonId: 'tab-spirits', viewId: 'spirits-view' },
   { tab: 'catalogue', buttonId: 'tab-catalogue', viewId: 'catalogue-view' },
   { tab: 'roll', buttonId: 'tab-draw', viewId: 'draw-view' },
 ] as const;
@@ -35,6 +36,13 @@ type ViewTab = (typeof VIEW_TABS)[number]['tab'];
 
 /** Tab shown when the URL parameter is absent or names an unknown tab. */
 const DEFAULT_VIEW_TAB: ViewTab = 'roll';
+
+declare global {
+  interface Window {
+    /** Secret developer-console command that unlocks the Spirits tab. */
+    ENABLE_SPIRITS?: () => string;
+  }
+}
 
 interface ViewTabControls {
   readonly tab: ViewTab;
@@ -56,16 +64,24 @@ interface DeckState {
 
 const deckStates: DeckState[] = [];
 
+/** Whether the (initially disabled) Spirits tab has been unlocked yet. */
+let spiritsEnabled = false;
+
+/** Activates a view tab, once {@link wireViewTabs} has run. */
+let activateViewTab: ((tab: ViewTab, syncUrl: boolean) => void) | undefined;
+
 function init(): void {
   const decksView = document.querySelector<HTMLElement>('#decks-view');
   if (!decksView) {
     throw new Error('#decks-view element not found.');
   }
+  initSpirits();
   const catalogue = initCatalogue();
   for (const deck of DECKS) {
     deckStates.push(createDeckState(decksView, deck));
   }
   wireViewTabs(catalogue);
+  wireSpiritsCommand();
   wireCopyActions();
   wireTimePanel();
   syncTopBarHeight();
@@ -81,9 +97,10 @@ function syncTopBarHeight(): void {
   document.documentElement.style.setProperty('--top-bar-height', `${topBar.offsetHeight}px`);
 }
 
-/** Wires the top-level view tabs ("Catalogue" / "Draw cards") to the `tab` URL parameter. */
+/** Wires the top-level view tabs ("Spirits" / "Catalogue" / "Draw cards") to the `tab` URL parameter. */
 function wireViewTabs(catalogue: CatalogueView): void {
-  const actions = document.querySelector<HTMLElement>('#draw-actions');
+  const drawActions = document.querySelector<HTMLElement>('#draw-actions');
+  const spiritsActions = document.querySelector<HTMLElement>('#spirits-actions');
   const controls: ViewTabControls[] = [];
   for (const entry of VIEW_TABS) {
     const button = document.querySelector<HTMLButtonElement>(`#${entry.buttonId}`);
@@ -110,8 +127,12 @@ function wireViewTabs(catalogue: CatalogueView): void {
         entry.button.removeAttribute('aria-current');
       }
     }
-    if (actions) {
-      actions.hidden = active.tab === 'catalogue';
+    // Each view owns its own bottom action bar; the catalogue has none.
+    if (drawActions) {
+      drawActions.hidden = active.tab !== 'roll';
+    }
+    if (spiritsActions) {
+      spiritsActions.hidden = active.tab !== 'spirits';
     }
     if (active.tab !== 'catalogue') {
       catalogue.closePanel();
@@ -131,13 +152,40 @@ function wireViewTabs(catalogue: CatalogueView): void {
   }
   window.addEventListener('popstate', () => activate(readTabParam(), false));
   activate(readTabParam(), false);
+  activateViewTab = activate;
 }
 
-/** Reads the `tab` URL parameter, falling back to {@link DEFAULT_VIEW_TAB}. */
+/**
+ * Reads the `tab` URL parameter, falling back to {@link DEFAULT_VIEW_TAB}.
+ * The spirits tab is only reachable while it is enabled.
+ */
 function readTabParam(): ViewTab {
   const raw = new URLSearchParams(window.location.search).get(TAB_PARAM);
   const match = VIEW_TABS.find((entry) => entry.tab === raw);
-  return match ? match.tab : DEFAULT_VIEW_TAB;
+  if (!match || (match.tab === 'spirits' && !spiritsEnabled)) {
+    return DEFAULT_VIEW_TAB;
+  }
+  return match.tab;
+}
+
+/**
+ * Registers the secret `ENABLE_SPIRITS()` developer-console command that
+ * unlocks and opens the initially disabled Spirits tab.
+ */
+function wireSpiritsCommand(): void {
+  window.ENABLE_SPIRITS = (): string => {
+    if (spiritsEnabled) {
+      return 'The Spirits tab is already enabled.';
+    }
+    spiritsEnabled = true;
+    const button = document.querySelector<HTMLButtonElement>('#tab-spirits');
+    if (button) {
+      button.disabled = false;
+    }
+    activateViewTab?.('spirits', true);
+    window.scrollTo({ top: 0 });
+    return 'Spirits tab enabled.';
+  };
 }
 
 /**
@@ -390,31 +438,6 @@ async function copyCards(cards: readonly CardInstance[], button: HTMLButtonEleme
   }
   await copyText(toTsv(cards));
   flashButton(button, 'Copied!');
-}
-
-function flashButton(button: HTMLButtonElement, message: string): void {
-  if (!button.dataset.label) {
-    button.dataset.label = button.textContent ?? '';
-  }
-  button.textContent = message;
-  button.classList.add('button--copied');
-  window.setTimeout(() => {
-    button.textContent = button.dataset.label ?? '';
-    button.classList.remove('button--copied');
-  }, COPY_FEEDBACK_MS);
-}
-
-async function copyText(text: string): Promise<void> {
-  try {
-    await navigator.clipboard.writeText(text);
-  } catch {
-    const textarea = document.createElement('textarea');
-    textarea.value = text;
-    document.body.append(textarea);
-    textarea.select();
-    document.execCommand('copy');
-    textarea.remove();
-  }
 }
 
 init();

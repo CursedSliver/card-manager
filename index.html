@@ -11,12 +11,15 @@
   <header class="top-bar">
     <h1 class="app-name">RtA Helper</h1>
     <nav class="tabs" aria-label="Main navigation">
+      <button type="button" id="tab-spirits" class="tab" disabled>Spirits</button>
       <button type="button" id="tab-catalogue" class="tab">Catalogue</button>
       <button type="button" id="tab-draw" class="tab tab--active" aria-current="page">Draw cards</button>
     </nav>
   </header>
 
   <main class="content">
+    <section id="spirits-view" class="spirits" aria-label="Spirits" hidden></section>
+
     <section id="catalogue-view" class="catalogue" aria-label="Card catalogue" hidden></section>
 
     <div id="draw-view">
@@ -45,6 +48,10 @@
   <footer class="actions" id="draw-actions">
     <button type="button" id="copy-selected" class="button button--primary button--wide">Copy to sheets</button>
     <button type="button" id="copy-all" class="button button--primary button--wide">Select all and copy</button>
+  </footer>
+
+  <footer class="actions" id="spirits-actions" hidden>
+    <button type="button" id="copy-spirit" class="button button--primary button--wide">Copy to sheets</button>
   </footer>
 
   <script type="module" src="./main.js"></script>

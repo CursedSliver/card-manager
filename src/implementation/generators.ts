@@ -10,15 +10,7 @@ import { AbilityTag } from './tags';
 /** The eight compass directions, as arrow emoji. */
 const COMPASS_DIRECTIONS: readonly string[] = ['⬆️', '↗️', '➡️', '↘️', '⬇️', '↙️', '⬅️', '↖️'];
 
-const MOVEMENT_ABILITY_WEIGHT = 1;
 const HASTEN_ABILITY_WEIGHT = 1;
-
-function createMovementAbility(direction: string): Ability<AbilityTag> {
-  return {
-    text: `Move ${direction} or ${direction}${direction}.`,
-    tag: AbilityTag.Movement,
-  };
-}
 
 /**
  * Movement override: eight equally weighted abilities, one per compass
@@ -27,10 +19,22 @@ function createMovementAbility(direction: string): Ability<AbilityTag> {
 export const movementOverride: AbilityOverride<AbilityTag> = {
   description: 'Move one tile in a random direction, or two tiles in that direction.',
   generator: new Generator(
-    COMPASS_DIRECTIONS.map((direction) => ({
-      weight: MOVEMENT_ABILITY_WEIGHT,
-      reward: createMovementAbility(direction),
-    })),
+    [
+      {
+        weight: 5,
+        reward: {
+          text: `Move 1 or 2 tiles in an orthogonal direction.`,
+          tag: AbilityTag.Movement,
+        },
+      },
+      {
+        weight: 2,
+        reward: {
+          text: `Move 1 or 2 tiles in a diagonal direction.`,
+          tag: AbilityTag.Movement,
+        },
+      },
+    ]
   ),
 };
 

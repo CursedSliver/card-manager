@@ -39,20 +39,23 @@ Code is strictly split into two layers:
 | `cards/` | All real cards, grouped by tag: `immortal.ts` (6, incl. 2 Heavenly), `hammers.ts` (7), `instant.ts` (16, incl. Hasten with the top override), `timed.ts` (18). `types.ts` defines `RealCardType = CardType<CardTag, AbilityTag, Rarity>`. `index.ts` re-exports everything and aggregates `CARD_TYPES`. |
 | `decks.ts` | `STANDARD_DECK`: all non-immortal cards via three nested sub-generators (hammers ×0.05, instant ×1, timed ×0.6); within each sub-generator cards are weighted by `RARITY_DRAW_WEIGHT_MULTIPLIER`. |
 | `time.ts` | `TIME_MULTIPLIER`: global scale for time-based effects, read once at initialization from the `timeMultiplier` URL query parameter, else the `timeMultiplier` localStorage entry, else 1 (URL parameter wins on conflict). `saveTimeMultiplier()` persists a value to localStorage. Card definitions bake the scaled value into hour-based durations via `scaledHours` (bare number) / `hoursLabel` (number + pluralized unit), so changing the multiplier requires a page reload. |
+| `spirits.ts` | `Spirit` (name, `SpiritClassification`, 1–3 named abilities — names may repeat, e.g. "Rice, Rice"), `splitSpiritName()` (display name vs. title: the text after the first comma), `SPIRITS` (all spirits, ordered by classification), `rollSpirits()` (pairwise distinct random selection). Classifications: Cookie, Heavenly, Toasted, Secret. Ability texts are transcribed VERBATIM and must not be reworded. |
 
 **Rule:** card types, decks, generators, and tags are **fixed after initialization**. Never add UI or runtime mechanisms to modify them. Adding new content means adding entries to the fixed lists in `implementation/`.
 
 ### `src/main.ts` — app wiring
 
-Owns the two top-level view tabs ("Catalogue" / "Draw cards"), which toggle the `hidden`
-attribute of `#catalogue-view` and `#draw-view` (and hide the bottom action bar while the
-catalogue is shown). The active tab is driven by the `tab` URL query parameter — `?tab=roll`
-is the "Draw cards" tab and `?tab=catalogue` the catalogue; a missing or unknown value falls
-back to `roll`. The `VIEW_TABS` list maps each parameter value to its tab button and view ids;
-clicking a tab mirrors it into the parameter with `history.pushState` (keeping other parameters
-like `timeMultiplier`), and a `popstate` listener reapplies the parameter so back/forward move
-between tabs. It also measures the top bar into the `--top-bar-height` CSS variable so
-the catalogue toolbar sticks below it.
+Owns the three top-level view tabs ("Spirits" / "Catalogue" / "Draw cards"), which toggle the
+`hidden` attribute of `#spirits-view`, `#catalogue-view` and `#draw-view` (the bottom action bar
+is shown only on "Draw cards"). The Spirits tab is disabled until the secret `ENABLE_SPIRITS()`
+developer-console command runs (session-only, not persisted), which unlocks the tab and opens it.
+The active tab is driven by the `tab` URL query parameter — `?tab=roll` is the "Draw cards" tab,
+`?tab=catalogue` the catalogue and `?tab=spirits` the spirits view (ignored while locked); a
+missing or unknown value falls back to `roll`. The `VIEW_TABS` list maps each parameter value to
+its tab button and view ids; clicking a tab mirrors it into the parameter with
+`history.pushState` (keeping other parameters like `timeMultiplier`), and a `popstate` listener
+reapplies the parameter so back/forward move between tabs. It also measures the top bar into the
+`--top-bar-height` CSS variable so the catalogue/spirits toolbars stick below it.
 
 The "Draw cards" view is built from `DECKS`. At the top sits a "Set time mult" panel: a number
 input, an "Apply & reload" button that saves the value to localStorage and reloads the page with
@@ -88,11 +91,28 @@ a `CatalogueView` handle whose `closePanel()` the app wiring calls when leaving 
 - Dark theme via CSS custom properties in `src/styles/main.scss`; follow the BEM-ish naming already in use.
 - Card layout, top to bottom: bold title → thin inset divider → top ability (tag bolded and prefixed) → large "OR" → bottom ability → divider → **rarity** (colored by rarity) → card tag (small-caps, muted). The bottom divider carries `margin-top: auto`, so whenever a card is taller than its text (stretched within a draw row, or the fixed height in the Catalogue) the divider, rarity and tag sit on the card's bottom edge instead of trailing the text.
 - Copy-to-sheets TSV has 5 columns per row: name, top ability, bottom ability, card tag, rarity (rarity is the rightmost column).
+- A spirit copies to sheets as a 3-column by 4-row TSV table: row 1 is name, title, classification;
+  rows 2-4 are one per ability (name, text, `OK` when the ability exists). Missing abilities leave
+  their row's cells empty.
 - After drawing, cards are **sorted by rarity by default** (rarest first). The deck footer offers two sort buttons: "Sort by tag" (Immortal → Instant → Timed → Hammer) and "Sort by rarity" (Heavenly → Mythical → Legendary → Rare → Uncommon → Common → Plentiful). Both sorts are stable.
 - Card texts are transcribed from the game design with only minimal grammar fixes; do not reword them.
 - The "Catalogue" view shows every card type (immortals included) and is read-only: its cards open
   a detail side panel instead of being selected, and copy-to-sheets only ever applies to drawn
   cards in the "Draw cards" view.
+
+### `src/spirits.ts` — spirits view
+
+Builds the "Spirits" view into `#spirits-view`: a sticky Fuse.js search toolbar over spirit
+names and ability names/texts above a single 3-column grid of all spirits (not grouped by
+classification; the classification sits at the bottom of each card). Each card shows the
+spirit's name with its title (the text after the first comma) as a smaller non-bold line below,
+then one divider, each ability as a bold subtitle plus text separated by dividers, and a final
+divider separating the abilities from the classification. The spirit selector at the bottom rolls
+a pairwise distinct set of spirits (input capped at the number of spirits) and shows the results
+in the same card form. The view is hidden until `ENABLE_SPIRITS()` enables its tab; cards in the
+grid stretch to their row height so adjacent cards share one height. At most one spirit is
+selected at a time (clicking it again deselects; rolling clears the selection), and the spirits
+view's own bottom action bar offers "Copy to sheets" for the selected spirit.
 - Catalogue cards have a **fixed 360 px height** and truncate overflowing text with an ellipsis;
   never let a catalogue card grow to fit its text (the side panel is what shows the full card).
 - Overrides are always shown in the catalogue as their `description` string, wrapped in square
