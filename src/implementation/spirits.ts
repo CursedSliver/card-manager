@@ -166,13 +166,13 @@ export const KASE_LU_PROPHET: Spirit = defineSpirit({
   classification: SpiritClassification.Heavenly,
   abilities: [
     {
-      name: 'Legendary legacy',
-      text: 'If you have at least 12 cards in inventory, you draw 3 more cards on refresh.',
+      name: 'Golden throne',
+      text: 'Up to once per refresh, you can choose one player, and after 12 hours, and they must give you cards until they no longer have more cards than you, giving up to 2 cards.',
     },
     {
-      name: 'Golden throne',
-      text: 'Up to once per refresh, you can choose one player with more cards in inventory than you, and they must give you cards until they no longer have more cards than you.',
-    },
+      name: 'Legendary legacy',
+      text: 'If you have at least 12 cards in inventory, you draw 3 more cards on refresh.',
+    }
   ],
 });
 

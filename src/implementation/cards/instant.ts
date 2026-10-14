@@ -52,7 +52,7 @@ export const BLUE_HARVEST: RealCardType = defineCardType({
 export const RAINBOW_HARVEST: RealCardType = defineCardType({
   name: 'Rainbow harvest',
   tag: CardTag.Instant,
-  rarity: Rarity.Common,
+  rarity: Rarity.Uncommon,
   topAbility: {
     text: 'Each charged pylon in 3x3 of player generates resources for each resource within its field.',
   },
@@ -62,12 +62,12 @@ export const RAINBOW_HARVEST: RealCardType = defineCardType({
 export const CLEANSE: RealCardType = defineCardType({
   name: 'Cleanse',
   tag: CardTag.Instant,
-  rarity: Rarity.Rare,
+  rarity: Rarity.Uncommon,
   topAbility: {
-    text: 'Destroy a pylon in 3x3 of yourself and gain 3 random resources. If the pylon does not belong to you, the owner of the pylon obtains this card.',
+    text: 'Destroy a pylon or sentry in 3x3 of yourself and gain 🧤. If it\'s a pylon and it does not belong to you, the owner of the pylon obtains this card; if not, you gain two more reosurces of choice.',
   },
   bottomAbility: {
-    text: 'Convert a pylon or Greater pylon to a stake or Greater stake. A stake has all abilities of pylons but are not pylons.'
+    text: 'Convert a pylon or Greater pylon you own to a stake or Greater stake. A stake has all abilities of pylons but are not pylons.'
   },
 });
 
@@ -76,7 +76,17 @@ export const INCEPTION: RealCardType = defineCardType({
   tag: CardTag.Instant,
   rarity: Rarity.Common,
   topAbility: {
-    text: 'Steal one random card from a player and give them one resource of your choice.',
+    text: 'Steal one random non-hammer mortal card from a player and give them one resource of your choice.',
+  },
+  bottomAbilityOverride: movementOverride,
+});
+
+export const MINDWORM: RealCardType = defineCardType({
+  name: 'Mindworm',
+  tag: CardTag.Instant,
+  rarity: Rarity.Common,
+  topAbility: {
+    text: 'A player of your choice lose two cards or two resources of their choice.',
   },
   bottomAbilityOverride: movementOverride,
 });
@@ -84,7 +94,7 @@ export const INCEPTION: RealCardType = defineCardType({
 export const THE_PSYCHIC: RealCardType = defineCardType({
   name: 'The Psychic',
   tag: CardTag.Instant,
-  rarity: Rarity.Common,
+  rarity: Rarity.Uncommon,
   topAbility: {
     text: 'The player(s) with the most amount of resources lose one of each resource that they have at least one of. If there is a tie, all players in the tie do the same.',
   },
@@ -118,7 +128,7 @@ export const SEED_OF_MYTHS: RealCardType = defineCardType({
   tag: CardTag.Instant,
   rarity: Rarity.Uncommon,
   topAbility: {
-    text: `Give this card alongside any other card to another player’s inventory. If this card is used twice in ${hoursLabel(12)}, or if its current holder teleports using their pylon network, it is destroyed.`,
+    text: `Give this card alongside any other card to another player’s inventory. If this card is used twice in ${hoursLabel(12)}, or if its current holder teleports using their pylon network, this card is destroyed.`,
   },
   bottomAbilityOverride: movementOverride,
 });
@@ -128,7 +138,7 @@ export const SPELL_OF_RETURN: RealCardType = defineCardType({
   tag: CardTag.Instant,
   rarity: Rarity.Rare,
   topAbility: {
-    text: 'Move in any direction any number of times until you reach a tile inside one of your pylons’ force fields.',
+    text: 'Teleport to a tile inside one of your pylons’ force fields.',
   },
   bottomAbilityOverride: movementOverride,
 });
@@ -220,6 +230,7 @@ export const INSTANT_CARDS: readonly RealCardType[] = [
   RAINBOW_HARVEST,
   CLEANSE,
   INCEPTION,
+  MINDWORM,
   THE_PSYCHIC,
   INVADE,
   DILATED_CAPSULE,

@@ -21,7 +21,7 @@ export type ProofDeck = Deck<CardTag, AbilityTag>;
 // All non-immortal cards, drawn through three nested sub-generators, one per
 // card tag. Within each sub-generator, each card is weighted by the draw
 // multiplier of its rarity.
-const HAMMER_SUBGENERATOR_WEIGHT = 0.04;
+const HAMMER_SUBGENERATOR_WEIGHT = 0.08;
 const INSTANT_SUBGENERATOR_WEIGHT = 1;
 const TIMED_SUBGENERATOR_WEIGHT = 0.6;
 
@@ -46,7 +46,7 @@ function createPool(instantCards: readonly RealCardType[]): Generator<RealCardTy
 export const STANDARD_DECK: ProofDeck = {
   name: 'Standard Deck',
   description:
-    'All non-immortal cards, drawn through three sub-generators: hammers ×0.05, instant ×1, timed ×0.6.',
+    'All non-immortal cards for the main world.',
   pool: createPool(INSTANT_CARDS),
 };
 
@@ -57,7 +57,7 @@ export const STANDARD_DECK: ProofDeck = {
 const PHONE_CALL_TO_GOD_MOVEMENT: RealCardType = defineCardType({
   name: 'Phone call to God',
   tag: CardTag.Instant,
-  rarity: Rarity.Plentiful,
+  rarity: Rarity.Common,
   topAbility: {
     text: 'Roll D20, then gain that many prestige points and heavenly chips.',
   },

@@ -23,14 +23,14 @@ export const movementOverride: AbilityOverride<AbilityTag> = {
       {
         weight: 5,
         reward: {
-          text: `Move 1 or 2 tiles in an orthogonal direction.`,
+          text: `Move 1 tile in an orthogonal direction of choice.`,
           tag: AbilityTag.Movement,
         },
       },
       {
         weight: 2,
         reward: {
-          text: `Move 1 or 2 tiles in a diagonal direction.`,
+          text: `Move 1 tile in a diagonal direction of choice.`,
           tag: AbilityTag.Movement,
         },
       },

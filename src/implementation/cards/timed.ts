@@ -52,7 +52,7 @@ export const BLUE_CULTURE: RealCardType = defineCardType({
 export const RAINBOW_CULTURE: RealCardType = defineCardType({
   name: 'Rainbow culture',
   tag: CardTag.Timed,
-  rarity: Rarity.Common,
+  rarity: Rarity.Uncommon,
   topAbility: {
     text: `After ${hoursLabel(10)}, each charged pylon in 3x3 of player generates resources for each resource within its field.`,
   },
@@ -74,7 +74,7 @@ export const FOGS_OF_WAR: RealCardType = defineCardType({
 export const NEUROGENESIS: RealCardType = defineCardType({
   name: 'Neurogenesis',
   tag: CardTag.Timed,
-  rarity: Rarity.Common,
+  rarity: Rarity.Uncommon,
   topAbility: {
     text: `After ${hoursLabel(12)}, draw two cards.`,
   },
@@ -84,7 +84,7 @@ export const NEUROGENESIS: RealCardType = defineCardType({
 export const COSMOGENESIS: RealCardType = defineCardType({
   name: 'Cosmogenesis',
   tag: CardTag.Timed,
-  rarity: Rarity.Common,
+  rarity: Rarity.Uncommon,
   topAbility: {
     text: `After ${hoursLabel(12)}, gain one resource of choice.`,
   },
@@ -98,10 +98,10 @@ export const STRANGLE: RealCardType = defineCardType({
   tag: CardTag.Timed,
   rarity: Rarity.Rare,
   topAbility: {
-    text: `Add this card to the action slots of any player for ${hoursLabel(6)}.`,
+    text: `Add this card to the action slots of any player for ${hoursLabel(8)}.`,
   },
   bottomAbility: {
-    text: `Clear one action slot of a willing player.`,
+    text: `Clear one action slot of a willing player, including yourself.`,
   },
 });
 
@@ -142,7 +142,7 @@ export const PHANTOM_TRAPS: RealCardType = defineCardType({
   tag: CardTag.Timed,
   rarity: Rarity.Rare,
   topAbility: {
-    text: `Forcibly add this card to their action slots. +1 action slot capacity while active. After ${hoursLabel(6)}, force that player to teleport to a tile neighboring one of their pylons.`,
+    text: `Choose another player and forcibly add this card to their action slots. +1 action slot capacity while active. After ${hoursLabel(6)}, force that player to teleport to a pylon not in 5x5 near you.`,
   },
   bottomAbilityOverride: movementOverride,
 });

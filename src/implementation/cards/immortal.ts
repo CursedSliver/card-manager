@@ -72,7 +72,7 @@ export const PILLARS_OF_WORSHIP: RealCardType = defineCardType({
   tag: CardTag.Immortal,
   rarity: Rarity.Heavenly,
   topAbility: {
-    text: 'All Greater pylons grant 10 prestige points and heavenly chips per refresh.',
+    text: 'All Greater pylons grant 12 prestige points and heavenly chips per refresh.',
   },
   bottomAbility: {
     text: 'You can expend 100 heavenly chips to upgrade one Greater pylon to a Master Pylon, which grants +2 hand size instead of -2 hand size, and allows for drawing of 2 additional cards per refresh. Only one Master Pylon can exist at one time on the board. There must not be any pylons or sentries from you within the force field of the Master Pylon.',
