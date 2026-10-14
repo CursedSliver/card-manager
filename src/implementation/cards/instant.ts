@@ -148,7 +148,7 @@ export const FORTIFY: RealCardType = defineCardType({
   tag: CardTag.Instant,
   rarity: Rarity.Rare,
   topAbility: {
-    text: 'Upgrade a sentry that you own in 3x3 of yourself to a Greater sentry using 🪙🪙🌾⚰️. A Greater sentry produces a force field in 5x5 instead of 3x3.',
+    text: 'Upgrade a sentry that you own in 3x3 of yourself to a Greater sentry using 🪙🧤⚰️ or 🌾🌾🌾🌾. A Greater sentry produces a force field in 5x5 instead of 3x3.',
   },
   bottomAbilityOverride: movementOverride,
 });
