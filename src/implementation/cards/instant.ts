@@ -66,7 +66,9 @@ export const CLEANSE: RealCardType = defineCardType({
   topAbility: {
     text: 'Destroy a pylon in 3x3 of yourself and gain 3 random resources. If the pylon does not belong to you, the owner of the pylon obtains this card.',
   },
-  bottomAbilityOverride: movementOverride,
+  bottomAbility: {
+    text: 'Convert a pylon or Greater pylon to a stake of Greater stake. A stake has all abilities of pylons but are not pylons.'
+  },
 });
 
 export const INCEPTION: RealCardType = defineCardType({
@@ -141,15 +143,25 @@ export const BOUNDLESS_BOONS: RealCardType = defineCardType({
   bottomAbilityOverride: movementOverride,
 });
 
+export const FORTIFY: RealCardType = defineCardType({
+  name: 'Fortify',
+  tag: CardTag.Instant,
+  rarity: Rarity.Rare,
+  topAbility: {
+    text: 'Upgrade a sentry that you own in 3x3 of yourself to a Greater sentry using 🪙🪙🌾⚰️. A Greater sentry produces a force field in 5x5 instead of 3x3.',
+  },
+  bottomAbilityOverride: movementOverride,
+});
+
 export const PHONE_CALL_TO_GOD: RealCardType = defineCardType({
   name: 'Phone call to God',
   tag: CardTag.Instant,
-  rarity: Rarity.Plentiful,
+  rarity: Rarity.Common,
   topAbility: {
     text: 'Once per game, if you own at least 3 pylons, expend ⚰️🪙🧤🌾 and gain “Heavenly sacrifice” and “Pillars of worship”, and increase hand size by 2 permanently.',
   },
   bottomAbility: {
-    text: 'Gain 12 prestige points and heavenly chips.',
+    text: 'Gain 15 prestige points and heavenly chips.',
   },
 });
 
@@ -215,6 +227,7 @@ export const INSTANT_CARDS: readonly RealCardType[] = [
   SEED_OF_MYTHS,
   SPELL_OF_RETURN,
   BOUNDLESS_BOONS,
+  FORTIFY,
   PHONE_CALL_TO_GOD,
   HASTEN,
   ADAPT,
