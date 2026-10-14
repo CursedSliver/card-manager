@@ -84,7 +84,7 @@ export const INCEPTION: RealCardType = defineCardType({
 export const MINDWORM: RealCardType = defineCardType({
   name: 'Mindworm',
   tag: CardTag.Instant,
-  rarity: Rarity.Common,
+  rarity: Rarity.Uncommon,
   topAbility: {
     text: 'A player of your choice lose two cards or two resources of their choice.',
   },
