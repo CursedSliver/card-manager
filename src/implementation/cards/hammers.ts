@@ -6,7 +6,6 @@ import { defineCardType } from '../../core/card';
 import type { RealCardType } from './types';
 import { CardTag } from '../tags';
 import { Rarity } from '../rarity';
-import { movementOverride } from '../generators';
 import { scaledHours } from '../time';
 
 const DISCARD_TWO_TEXT = 'Discard any two cards, then draw two cards and choose one to add to inventory.';
@@ -15,8 +14,7 @@ export const HAMMER: RealCardType = defineCardType({
   name: 'Hammer',
   tag: CardTag.Hammer,
   rarity: Rarity.Common,
-  topAbility: { text: DISCARD_TWO_TEXT },
-  bottomAbilityOverride: movementOverride,
+  topAbility: { text: DISCARD_TWO_TEXT }
 });
 
 export const BLUDGEON: RealCardType = defineCardType({
@@ -64,7 +62,7 @@ export const HAMMERSHARK: RealCardType = defineCardType({
   tag: CardTag.Hammer,
   rarity: Rarity.Rare,
   topAbility: {
-    text: 'Can use one 🌾 to substitute for up to one discarded card in the exchange.',
+    text: 'Expend 🌾🌾, draw three cards, and choose one to add to inventory.',
   },
   bottomAbility: { text: DISCARD_TWO_TEXT },
 });

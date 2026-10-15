@@ -76,7 +76,7 @@ export const CLEANSE: RealCardType = defineCardType({
   tag: CardTag.Instant,
   rarity: Rarity.Uncommon,
   topAbility: {
-    text: 'Destroy a pylon or sentry in 3x3 of yourself and gain 🧤. If it\'s a pylon and it does not belong to you, the owner of the pylon obtains this card; if not, you gain two more reosurces of choice.',
+    text: 'Destroy a pylon or sentry in 3x3 of yourself and gain 🧤. If it\'s a pylon: [if it does not belong to you, the owner of the pylon obtains this card; if not, you gain two more reosurces of choice].',
   },
   bottomAbility: {
     text: 'Convert a pylon or Greater pylon you own to a stake or Greater stake. A stake has all abilities of pylons but are not pylons.'
@@ -108,9 +108,11 @@ export const MINDWORM: RealCardType = defineCardType({
   tag: CardTag.Instant,
   rarity: Rarity.Uncommon,
   topAbility: {
-    text: 'A player of your choice lose two cards or two resources of their choice.',
+    text: 'A player of your choice lose two mortal cards of their choice.',
   },
-  bottomAbilityOverride: movementOverride,
+  bottomAbility: {
+    text: 'A player of your choice lose two resources of their choice.',
+  },
 });
 
 export const THE_PSYCHIC: RealCardType = defineCardType({

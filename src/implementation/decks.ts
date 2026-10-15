@@ -21,7 +21,7 @@ export type ProofDeck = Deck<CardTag, AbilityTag>;
 // All non-immortal cards, drawn through three nested sub-generators, one per
 // card tag. Within each sub-generator, each card is weighted by the draw
 // multiplier of its rarity.
-const HAMMER_SUBGENERATOR_WEIGHT = 0.08;
+const HAMMER_SUBGENERATOR_WEIGHT = 0.06;
 const INSTANT_SUBGENERATOR_WEIGHT = 1;
 const TIMED_SUBGENERATOR_WEIGHT = 0.6;
 

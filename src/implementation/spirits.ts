@@ -374,7 +374,7 @@ export const BOB_MCBOBBER_LEGENDARY_GOMLORD: Spirit = defineSpirit({
     },
     {
       name: 'Instant punishment',
-      text: 'Each time you construct a sentry or pylon, you have a 50% chance to get ⚰️.',
+      text: 'When you construct a sentry or pylon, you have a 50% chance to get ⚰️.',
     },
   ],
 });
