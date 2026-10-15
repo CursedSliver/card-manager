@@ -255,6 +255,7 @@ export const INSTANT_CARDS: readonly RealCardType[] = [
   RAINBOW_HARVEST,
   CLEANSE,
   INCEPTION,
+  DISMANTLE,
   MINDWORM,
   THE_PSYCHIC,
   INVADE,
