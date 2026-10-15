@@ -8,8 +8,8 @@
  * clicking one opens a side panel showing the card in full.
  */
 import Fuse from 'fuse.js';
-import type { CardInstance } from './core/card';
-import { el, renderCard } from './core/ui';
+import { createCardInstance, type CardInstance } from './core/card';
+import { copyText, el, flashButton, formatCardForSheet, renderCard } from './core/ui';
 import { CARD_TYPES, type RealCardType } from './implementation/cards';
 import { rarityColor, rarityRank, type Rarity } from './implementation/rarity';
 import {
@@ -212,7 +212,10 @@ function createSectionCard(
 
 /**
  * Builds the side panel: a dimmed backdrop plus a drawer on the right that
- * shows one card in full. Closes on backdrop click, the close button or Escape.
+ * shows one card in full. Below the card sits a "Generate a copy" button that
+ * rolls the type into a concrete instance and shows it underneath; a
+ * "Copy to sheet" button then copies that generated instance. Closes on
+ * backdrop click, the close button or Escape.
  */
 function createCardPanel(): CardPanel {
   const content = el('div', 'card-panel__content');
@@ -221,7 +224,28 @@ function createCardPanel(): CardPanel {
   closeButton.type = 'button';
   closeButton.setAttribute('aria-label', 'Close card details');
 
-  const drawer = el('aside', 'card-panel', closeButton, content);
+  const generateButton = el(
+    'button',
+    'button button--primary card-panel__generate',
+    'Generate a copy',
+  );
+  generateButton.type = 'button';
+
+  const generatedCardHost = el('div', 'card-panel__generated-card');
+
+  const copyButton = el('button', 'button button--ghost card-panel__copy', 'Copy to sheet');
+  copyButton.type = 'button';
+
+  const generatedSection = el(
+    'section',
+    'card-panel__generated',
+    el('p', 'card-panel__generated-label', 'Generated copy'),
+    generatedCardHost,
+    copyButton,
+  );
+  generatedSection.hidden = true;
+
+  const drawer = el('aside', 'card-panel', closeButton, content, generateButton, generatedSection);
   drawer.setAttribute('role', 'dialog');
   drawer.setAttribute('aria-label', 'Card details');
 
@@ -230,6 +254,8 @@ function createCardPanel(): CardPanel {
   layer.hidden = true;
 
   let lastFocused: HTMLElement | undefined;
+  let currentType: RealCardType | undefined;
+  let generated: CatalogueCard | undefined;
 
   function close(): void {
     if (layer.hidden) {
@@ -245,13 +271,35 @@ function createCardPanel(): CardPanel {
 
   function open(type: RealCardType, trigger: HTMLElement): void {
     lastFocused = trigger;
+    currentType = type;
+    generated = undefined;
     const instance: CatalogueCard = { type };
     content.replaceChildren(
       renderCard(instance, rarityColor, { overrideDescriptions: true, interactive: false }),
     );
+    generatedCardHost.replaceChildren();
+    generatedSection.hidden = true;
+    copyButton.disabled = true;
     layer.hidden = false;
     closeButton.focus();
   }
+
+  generateButton.addEventListener('click', () => {
+    if (!currentType) {
+      return;
+    }
+    generated = createCardInstance(currentType);
+    generatedCardHost.replaceChildren(renderCard(generated, rarityColor, { interactive: false }));
+    copyButton.disabled = false;
+    generatedSection.hidden = false;
+  });
+
+  copyButton.addEventListener('click', () => {
+    if (!generated) {
+      return;
+    }
+    void copyGeneratedCard(generated, copyButton);
+  });
 
   backdrop.addEventListener('click', close);
   closeButton.addEventListener('click', close);
@@ -263,4 +311,10 @@ function createCardPanel(): CardPanel {
   });
 
   return { element: layer, open, close };
+}
+
+/** Copies one generated card to the sheet, flashing the button on success. */
+async function copyGeneratedCard(card: CatalogueCard, button: HTMLButtonElement): Promise<void> {
+  await copyText(formatCardForSheet(card));
+  flashButton(button, 'Copied!');
 }

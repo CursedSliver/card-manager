@@ -64,10 +64,10 @@ export const FOGS_OF_WAR: RealCardType = defineCardType({
   tag: CardTag.Timed,
   rarity: Rarity.Uncommon,
   topAbility: {
-    text: `For the next ${scaledHours(6)} to ${hoursLabel(12)} (you specify), ALL cards directed at you lose their effects (including ones from yourself).`,
+    text: `For the next ${scaledHours(3)} to ${hoursLabel(12)} (you specify), ALL cards and spirit abilities directed at you lose their effects.`,
   },
   bottomAbility: {
-    text: `For the next ${scaledHours(6)} to ${hoursLabel(12)} (you specify), you become immune to movement.`,
+    text: `For the next ${scaledHours(3)} to ${hoursLabel(12)} (you specify), you become immune to movement.`,
   },
 });
 
@@ -133,7 +133,7 @@ export const SPRINT: RealCardType = defineCardType({
     text: 'Destroy any building that you own.',
   },
   bottomAbility: {
-    text: `After ${hoursLabel(1)}, expend 🌾 to move twice in different directions.`,
+    text: `After ${hoursLabel(1)}, expend 🌾 to move in any direction, twice.`,
   },
 });
 
@@ -204,7 +204,7 @@ export const INVERT: RealCardType = defineCardType({
   tag: CardTag.Timed,
   rarity: Rarity.Legendary,
   topAbility: {
-    text: `After ${hoursLabel(6)}, select any mortal card that belongs to a player. If it is a hammer, replace with "Hammer". If it is a normal card, replace it with a random "Adapt" card. If it is an ongoing action, replace it with "Strangle".`,
+    text: `After ${hoursLabel(1)}, select any mortal card that belongs to a player. If it is a hammer, replace with "Hammer". If it is a normal card, replace it with a random "Adapt" card. If it is an ongoing action, replace it with "Strangle".`,
   },
   bottomAbility: {
     text: `Select one non-mythical card in your inventory excluding Invert, and draw cards until you get a card with a higher rarity than the selected card. Discard the selected card and add the new card to inventory.`

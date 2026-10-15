@@ -5,10 +5,9 @@
 import { initCatalogue, type CatalogueView } from './catalogue';
 import { initSpirits } from './spirits';
 import type { CardInstance } from './core/card';
-import { resolveBottomAbility, resolveTopAbility } from './core/card';
 import type { Deck } from './core/deck';
 import { drawFromDeck } from './core/deck';
-import { copyText, el, flashButton, formatAbilityForSheet, renderCard } from './core/ui';
+import { copyText, el, flashButton, formatCardForSheet, renderCard } from './core/ui';
 import { DECKS } from './implementation/decks';
 import { cardTagRank } from './implementation/tags';
 import { rarityColor, rarityRank } from './implementation/rarity';
@@ -418,17 +417,7 @@ function selectAll(): void {
 }
 
 function toTsv(cards: readonly CardInstance[]): string {
-  return cards
-    .map((card) =>
-      [
-        card.type.name,
-        formatAbilityForSheet(resolveTopAbility(card)),
-        formatAbilityForSheet(resolveBottomAbility(card)),
-        card.type.tag,
-        card.type.rarity,
-      ].join('\t'),
-    )
-    .join('\n');
+  return cards.map(formatCardForSheet).join('\n');
 }
 
 async function copyCards(cards: readonly CardInstance[], button: HTMLButtonElement): Promise<void> {

@@ -83,8 +83,12 @@ Catalogue cards are fixed at 540 px tall and clip their text (`.catalogue-table 
 SCSS); clicking or pressing Enter/Space on one opens the side panel. The panel is a dimmed
 backdrop plus a right-hand drawer (`.card-panel-layer`) that re-renders the same card without
 clamping, so the full ability text is readable; it closes on the close button, Escape, a backdrop
-click, or a search keystroke, and returns focus to the triggering card. `initCatalogue()` returns
-a `CatalogueView` handle whose `closePanel()` the app wiring calls when leaving the view.
+click, or a search keystroke, and returns focus to the triggering card. Below the card the panel
+offers "Generate a copy", which rolls the type into a concrete instance (`createCardInstance`,
+resolving any overrides) and renders it under the main card, plus a "Copy to sheet" button
+(disabled until a copy exists) that copies that generated instance as a single 5-column TSV row.
+`initCatalogue()` returns a `CatalogueView` handle whose `closePanel()` the app wiring calls when
+leaving the view.
 
 ## UI Invariants
 
@@ -97,8 +101,9 @@ a `CatalogueView` handle whose `closePanel()` the app wiring calls when leaving 
 - After drawing, cards are **sorted by rarity by default** (rarest first). The deck footer offers two sort buttons: "Sort by tag" (Immortal → Instant → Timed → Hammer) and "Sort by rarity" (Heavenly → Mythical → Legendary → Rare → Uncommon → Common → Plentiful). Both sorts are stable.
 - Card texts are transcribed from the game design with only minimal grammar fixes; do not reword them.
 - The "Catalogue" view shows every card type (immortals included) and is read-only: its cards open
-  a detail side panel instead of being selected, and copy-to-sheets only ever applies to drawn
-  cards in the "Draw cards" view.
+  a detail side panel instead of being selected. Copying drawn cards lives in the "Draw cards"
+  view; the catalogue's only copying is the side panel's "Copy to sheet" button, which copies the
+  instance produced by that panel's own "Generate a copy" button.
 
 ### `src/spirits.ts` — spirits view
 

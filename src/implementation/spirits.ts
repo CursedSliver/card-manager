@@ -254,12 +254,12 @@ export const GLIFFY_D_HERMIT: Spirit = defineSpirit({
   classification: SpiritClassification.Toasted,
   abilities: [
     {
-      name: 'Natural energy',
-      text: 'If you have less than 3 mortal cards, you can use 🧤 to draw 1 card.',
+      name: 'Wealth in knowledge',
+      text: 'Up to once per refresh, if any player have the exact same amount of 🪙 as you do, and you have at least one 🪙, you can expend 🪙 and use one of their cards on their behalf.',
     },
     {
-      name: 'Wealth in knowledge',
-      text: 'If any player have the exact same amount of 🪙 as you do, and you have at least one 🪙, you can expend 🪙 and use one of their cards on their behalf.',
+      name: 'Natural energy',
+      text: 'If you have less than 2 non-hammer mortal cards, you can use 🧤 to draw 1 card, or discard 1 card and gain 🧤.',
     },
     {
       name: 'Creative genius',
@@ -331,17 +331,17 @@ export const I_LOVER_WARLORD: Spirit = defineSpirit({
   classification: SpiritClassification.Secret,
   abilities: [
     {
-      name: 'Flight of mind',
-      text: 'You can discard any two cards whose bottom ability is movement, and repeat the last movement.',
+      name: 'God king',
+      text: 'You can make a public prediction on who obtains non-wire resource(s) first after the prediction (excludes via player-player trading). If this prediction is correct, you get the resources instead. If this prediction is incorrect, you go to sleep for 2 hours.',
     },
     {
       name: 'Ideology',
       text: 'All conquered pylons permanently gain the Mark of Freedom. Pylons with this mark immediately convert to your allegiance if it is on a disputed tile whose disputers contain you.',
     },
     {
-      name: 'God king',
-      text: 'You can make a public prediction on who obtains non-wire resource(s) first after the prediction (excludes via player-player trading). If this prediction is correct, you get the resources. If this prediction is incorrect, you go to sleep for 2 hours.',
-    },
+      name: 'Flight of mind',
+      text: 'If a movement ability of a card allows you to move orthogonally, you can also move diagonally.',
+    }
   ],
 });
 

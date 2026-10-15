@@ -34,6 +34,20 @@ export function formatAbilityForSheet(ability: Ability | undefined): string {
   return ability.tag ? `[${ability.tag}] ${ability.text}` : ability.text;
 }
 
+/**
+ * Formats one card instance for TSV output: 5 tab-separated columns in the
+ * order name, top ability, bottom ability, card tag, rarity.
+ */
+export function formatCardForSheet(instance: CardInstance): string {
+  return [
+    instance.type.name,
+    formatAbilityForSheet(resolveTopAbility(instance)),
+    formatAbilityForSheet(resolveBottomAbility(instance)),
+    instance.type.tag,
+    instance.type.rarity,
+  ].join('\t');
+}
+
 /** Default duration of the feedback shown by {@link flashButton}. */
 const FLASH_FEEDBACK_MS = 1200;
 

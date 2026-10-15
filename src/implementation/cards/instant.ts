@@ -9,6 +9,18 @@ import { Rarity } from '../rarity';
 import { hastenTopOverride, movementOverride } from '../generators';
 import { hoursLabel } from '../time';
 
+export const REFRESH: RealCardType = defineCardType({
+  name: 'Refresh',
+  tag: CardTag.Instant,
+  rarity: Rarity.Heavenly,
+  topAbility: {
+    text: 'Draw cards equal to half of your max hand size, rounded up, then destroy all other copies of Refresh that you have. ',
+  },
+  bottomAbility: {
+    text: 'Using this card is considered as triggering Refresh for you. This card cannot be discarded, stolen, or transmuted.'
+  }
+});
+
 export const RED_HARVEST: RealCardType = defineCardType({
   name: 'Red harvest',
   tag: CardTag.Instant,
@@ -81,6 +93,16 @@ export const INCEPTION: RealCardType = defineCardType({
   bottomAbilityOverride: movementOverride,
 });
 
+export const DISMANTLE: RealCardType = defineCardType({
+  name: 'Dismantle',
+  tag: CardTag.Instant,
+  rarity: Rarity.Common,
+  topAbility: {
+    text: 'Destroy a wire within a build range of 1 and have a 50% chance to gain 🪙.',
+  },
+  bottomAbilityOverride: movementOverride,
+});
+
 export const MINDWORM: RealCardType = defineCardType({
   name: 'Mindworm',
   tag: CardTag.Instant,
@@ -116,7 +138,7 @@ export const DILATED_CAPSULE: RealCardType = defineCardType({
   tag: CardTag.Instant,
   rarity: Rarity.Uncommon,
   topAbility: {
-    text: 'Send a player any 2 cards that you have. Must send exactly 2 cards.',
+    text: 'Send a player any 1 or 2 cards that you have.',
   },
   bottomAbility: {
     text: 'Send this card to a player, or move 1 in any direction.',
@@ -223,6 +245,7 @@ export const COOK: RealCardType = defineCardType({
 });
 
 export const INSTANT_CARDS: readonly RealCardType[] = [
+  REFRESH,
   RED_HARVEST,
   YELLOW_HARVEST,
   GREEN_HARVEST,

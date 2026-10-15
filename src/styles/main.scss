@@ -604,6 +604,38 @@ body {
     justify-content: center;
   }
 
+  // Sits at the bottom of the card view; a generated copy appears below it.
+  &__generate {
+    flex: none;
+    width: 100%;
+  }
+
+  &__generated {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  &__generated-label {
+    margin: 0;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+  }
+
+  &__generated-card {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__copy {
+    flex: none;
+    width: 100%;
+  }
+
   // The panel has room for the whole card, so nothing is clamped here.
   .card {
     width: 100%;
