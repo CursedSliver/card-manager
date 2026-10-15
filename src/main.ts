@@ -36,13 +36,6 @@ type ViewTab = (typeof VIEW_TABS)[number]['tab'];
 /** Tab shown when the URL parameter is absent or names an unknown tab. */
 const DEFAULT_VIEW_TAB: ViewTab = 'roll';
 
-declare global {
-  interface Window {
-    /** Secret developer-console command that unlocks the Spirits tab. */
-    ENABLE_SPIRITS?: () => string;
-  }
-}
-
 interface ViewTabControls {
   readonly tab: ViewTab;
   readonly button: HTMLButtonElement;
@@ -63,12 +56,6 @@ interface DeckState {
 
 const deckStates: DeckState[] = [];
 
-/** Whether the (initially disabled) Spirits tab has been unlocked yet. */
-let spiritsEnabled = false;
-
-/** Activates a view tab, once {@link wireViewTabs} has run. */
-let activateViewTab: ((tab: ViewTab, syncUrl: boolean) => void) | undefined;
-
 function init(): void {
   const decksView = document.querySelector<HTMLElement>('#decks-view');
   if (!decksView) {
@@ -80,7 +67,6 @@ function init(): void {
     deckStates.push(createDeckState(decksView, deck));
   }
   wireViewTabs(catalogue);
-  wireSpiritsCommand();
   wireCopyActions();
   wireTimePanel();
   syncTopBarHeight();
@@ -151,40 +137,15 @@ function wireViewTabs(catalogue: CatalogueView): void {
   }
   window.addEventListener('popstate', () => activate(readTabParam(), false));
   activate(readTabParam(), false);
-  activateViewTab = activate;
 }
 
 /**
  * Reads the `tab` URL parameter, falling back to {@link DEFAULT_VIEW_TAB}.
- * The spirits tab is only reachable while it is enabled.
  */
 function readTabParam(): ViewTab {
   const raw = new URLSearchParams(window.location.search).get(TAB_PARAM);
   const match = VIEW_TABS.find((entry) => entry.tab === raw);
-  if (!match || (match.tab === 'spirits' && !spiritsEnabled)) {
-    return DEFAULT_VIEW_TAB;
-  }
-  return match.tab;
-}
-
-/**
- * Registers the secret `ENABLE_SPIRITS()` developer-console command that
- * unlocks and opens the initially disabled Spirits tab.
- */
-function wireSpiritsCommand(): void {
-  window.ENABLE_SPIRITS = (): string => {
-    if (spiritsEnabled) {
-      return 'The Spirits tab is already enabled.';
-    }
-    spiritsEnabled = true;
-    const button = document.querySelector<HTMLButtonElement>('#tab-spirits');
-    if (button) {
-      button.disabled = false;
-    }
-    activateViewTab?.('spirits', true);
-    window.scrollTo({ top: 0 });
-    return 'Spirits tab enabled.';
-  };
+  return match ? match.tab : DEFAULT_VIEW_TAB;
 }
 
 /**

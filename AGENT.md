@@ -46,12 +46,10 @@ Code is strictly split into two layers:
 ### `src/main.ts` — app wiring
 
 Owns the three top-level view tabs ("Spirits" / "Catalogue" / "Draw cards"), which toggle the
-`hidden` attribute of `#spirits-view`, `#catalogue-view` and `#draw-view` (the bottom action bar
-is shown only on "Draw cards"). The Spirits tab is disabled until the secret `ENABLE_SPIRITS()`
-developer-console command runs (session-only, not persisted), which unlocks the tab and opens it.
-The active tab is driven by the `tab` URL query parameter — `?tab=roll` is the "Draw cards" tab,
-`?tab=catalogue` the catalogue and `?tab=spirits` the spirits view (ignored while locked); a
-missing or unknown value falls back to `roll`. The `VIEW_TABS` list maps each parameter value to
+`hidden` attribute of `#spirits-view`, `#catalogue-view` and `#draw-view` (the draw view's bottom
+action bar is shown only on "Draw cards"; the spirits view has its own). The active tab is driven
+by the `tab` URL query parameter — `?tab=roll` is the "Draw cards" tab, `?tab=catalogue` the
+catalogue and `?tab=spirits` the spirits view; a missing or unknown value falls back to `roll`. The `VIEW_TABS` list maps each parameter value to
 its tab button and view ids; clicking a tab mirrors it into the parameter with
 `history.pushState` (keeping other parameters like `timeMultiplier`), and a `popstate` listener
 reapplies the parameter so back/forward move between tabs. It also measures the top bar into the
@@ -114,8 +112,8 @@ spirit's name with its title (the text after the first comma) as a smaller non-b
 then one divider, each ability as a bold subtitle plus text separated by dividers, and a final
 divider separating the abilities from the classification. The spirit selector at the bottom rolls
 a pairwise distinct set of spirits (input capped at the number of spirits) and shows the results
-in the same card form. The view is hidden until `ENABLE_SPIRITS()` enables its tab; cards in the
-grid stretch to their row height so adjacent cards share one height. At most one spirit is
+in the same card form. Cards in the grid stretch to their row height so adjacent cards share one
+height. At most one spirit is
 selected at a time (clicking it again deselects; rolling clears the selection), and the spirits
 view's own bottom action bar offers "Copy to sheets" for the selected spirit.
 - Catalogue cards have a **fixed 360 px height** and truncate overflowing text with an ellipsis;

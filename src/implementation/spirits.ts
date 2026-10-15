@@ -396,7 +396,7 @@ export const SIGMA_TUSINE_COMBINED_MIND: Spirit = defineSpirit({
   abilities: [
     {
       name: 'Master alchemist',
-      text: 'You can convert 2 of the same resource to 1 of another resource, then sleep for 6 hours.',
+      text: 'You can convert 2 of the same resource to 1 of another resource with a 12-hours cooldown.',
     },
     {
       name: 'Tachyonic spirit',

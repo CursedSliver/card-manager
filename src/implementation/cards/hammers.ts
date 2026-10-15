@@ -62,7 +62,7 @@ export const HAMMERSHARK: RealCardType = defineCardType({
   tag: CardTag.Hammer,
   rarity: Rarity.Rare,
   topAbility: {
-    text: 'Expend 🌾🌾, draw three cards, and choose one to add to inventory.',
+    text: 'Expend 🌾🌾 and discard one card, then draw three cards and choose one to add to inventory.',
   },
   bottomAbility: { text: DISCARD_TWO_TEXT },
 });
