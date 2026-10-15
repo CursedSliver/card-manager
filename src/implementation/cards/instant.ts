@@ -96,9 +96,9 @@ export const INCEPTION: RealCardType = defineCardType({
 export const DISMANTLE: RealCardType = defineCardType({
   name: 'Dismantle',
   tag: CardTag.Instant,
-  rarity: Rarity.Common,
+  rarity: Rarity.Uncommon,
   topAbility: {
-    text: 'Destroy a wire within a build range of 1 and have a 50% chance to gain 🪙.',
+    text: 'Destroy a wire within your build range and have a 50% chance to gain 🪙.',
   },
   bottomAbilityOverride: movementOverride,
 });
