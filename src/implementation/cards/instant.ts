@@ -185,16 +185,6 @@ export const FORTIFY: RealCardType = defineCardType({
   bottomAbilityOverride: movementOverride,
 });
 
-export const PHONE_CALL_TO_GOD: RealCardType = defineCardType({
-  name: 'Phone call to God',
-  tag: CardTag.Instant,
-  rarity: Rarity.Common,
-  topAbility: {
-    text: 'Roll D20, then gain that many prestige points and heavenly chips.',
-  },
-  bottomAbilityOverride: movementOverride,
-});
-
 export const ADAPT: RealCardType = defineCardType({
   name: 'Adapt',
   tag: CardTag.Instant,
@@ -246,7 +236,6 @@ export const INSTANT_CARDS: readonly RealCardType[] = [
   BLUE_HARVEST,
   RAINBOW_HARVEST,
   TRANSMUTE,
-  PHONE_CALL_TO_GOD,
   CLEANSE,
   INCEPTION,
   DISMANTLE,
