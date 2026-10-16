@@ -86,9 +86,7 @@ export const COSMOGENESIS: RealCardType = defineCardType({
   topAbility: {
     text: `After ${hoursLabel(12)}, gain one resource of choice.`,
   },
-  bottomAbility: {
-    text: `After ${hoursLabel(6)}, for each resource you have 25% chance to gain one (except for wires).`,
-  },
+  bottomAbilityOverride: movementOverride
 });
 
 export const DISMANTLE: RealCardType = defineCardType({
