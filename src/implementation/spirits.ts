@@ -71,7 +71,7 @@ export const SAM_R_EMPATHIC: Spirit = defineSpirit({
   abilities: [
     {
       name: 'Fluid blade',
-      text: 'Your movement is not blocked by other peoples’ pylons’ fields. While inside a foreign field, you cannot use any cards.',
+      text: 'Your movement is not blocked by other peoples’ pylons’ fields. While inside a foreign field, you cannot use any non-movement mortal cards.',
     },
     {
       name: 'Focus',
@@ -79,7 +79,7 @@ export const SAM_R_EMPATHIC: Spirit = defineSpirit({
     },
     {
       name: 'Indirection',
-      text: '+1 action slot.',
+      text: '-2 base max hand size.',
     },
   ],
 });
@@ -94,7 +94,7 @@ export const IGNOR_ENTHUSIASTIC_EXPLORER: Spirit = defineSpirit({
     },
     {
       name: 'In bliss',
-      text: 'For up to twice per refresh, you can convert 🌾 into ⚰️ or 🪙.',
+      text: 'For up to three times per refresh, you can convert 🌾 into ⚰️, 🪙, or one drawn card.',
     },
   ],
 });
@@ -104,12 +104,12 @@ export const LAGGING_E_WORLD_CREATOR: Spirit = defineSpirit({
   classification: SpiritClassification.Cookie,
   abilities: [
     {
-      name: 'Gift of creation',
-      text: 'You can use “Cosmogenesis” or “Neurogenesis” for other players.',
-    },
-    {
       name: 'Curse of lag',
       text: 'Whenever you transfer a card to another player, it is marked with “Curse of Lag”. If any player has any cards in action slots marked with a “Curse of Lag”, all inventory slots corresponding to empty inventory slots in your inventory are disabled.',
+    },
+    {
+      name: 'Gift of creation',
+      text: 'You can use “Cosmogenesis” or “Neurogenesis” for other players.',
     },
   ],
 });
@@ -119,13 +119,13 @@ export const AH_SIREN: Spirit = defineSpirit({
   classification: SpiritClassification.Cookie,
   abilities: [
     {
-      name: 'Infinite energy',
-      text: 'You gain 🧤 for each ⚰️ destroyed (not traded).',
+      name: 'Walk and talk',
+      text: 'For up to once per game, generate and use timed card “Call of the siren”. Effect: after 24 hours, you force a player with less 🧤than you to comply with a single legal request lasting until the next refresh, then set your🧤amount to 0.',
     },
     {
-      name: 'Walk and talk',
-      text: 'For up to once per game, generate and use timed card “Call of the siren”. Effect: after 24 hours, you force a player with less 🧤than you to comply with a single legal request lasting until the next refresh, then set your🧤amount to 5.',
-    },
+      name: 'Infinite energy',
+      text: 'You gain 🧤 for each ⚰️ destroyed (not traded).',
+    }
   ],
 });
 
@@ -159,6 +159,21 @@ export const LINAL_POT_BEAVER: Spirit = defineSpirit({
   ],
 });
 
+export const RA_IMPOSTER: Spirit = defineSpirit({
+  name: 'Ra, Imposter',
+  classification: SpiritClassification.Heavenly,
+  abilities: [
+    {
+      name: 'Usurper',
+      text: 'You can use all uncommon timed cards as an Invade or Inception against a player once the timer ends, given that you have less or equal resources than your target for at least 2 resource types when the effect resolves.'
+    },
+    {
+      name: 'Larpmaster',
+      text: 'When you get a resource but it is negated due to the resource cap, you can expend one of that resource to gain any other resource of your choice.',
+    }
+  ],
+});
+
 // --- Heavenly ---------------------------------------------------------------------
 
 export const KASE_LU_PROPHET: Spirit = defineSpirit({
@@ -186,7 +201,7 @@ export const AXE_F_GREAT_CLIMBER: Spirit = defineSpirit({
     },
     {
       name: 'One with the mountain',
-      text: 'Up to once per refresh, you can discard ALL mortal cards in non-hammer slots (including active actions) and gain 35 heavenly chips.',
+      text: 'Up to once per refresh, you can discard ALL mortal cards in non-hammer slots (including active actions) and gain 50 heavenly chips (no prestige points).',
     },
   ],
 });
@@ -201,7 +216,7 @@ export const C_CLICK_CLOUDBORNE_COMET: Spirit = defineSpirit({
     },
     {
       name: 'Maximum empire',
-      text: 'You can build pylons past the cap, but once past the cap, building pylons have a 50% chance to fail.',
+      text: 'Pylons cap +5.',
     },
   ],
 });
@@ -212,7 +227,7 @@ export const LINE_USAIN_ASSASSIN: Spirit = defineSpirit({
   abilities: [
     {
       name: 'Multitasking',
-      text: '+3 action slots and max hand size.',
+      text: '+4 action slots and max hand size.',
     },
   ],
 });
@@ -289,8 +304,12 @@ export const PI_CLONE_PRINCIPLE_BOUNCER: Spirit = defineSpirit({
   abilities: [
     {
       name: 'Examinations',
-      text: 'You can disable X inventory slots on each player other than yourself, where X equals to the amount of disabled inventory slots you have. You can re-enable inventory slots you’ve disabled with this ability with a cooldown of 2 hours.',
+      text: 'You can disable X inventory slots on each player other than yourself, where X equals to the amount of disabled inventory slots you have. You can change which slot is disabled for each player up to once per refresh.',
     },
+    {
+      name: 'Self-assessment',
+      text: '12 hours after activation, if you still have no resources, no normal cards, and no cards in action slots, you can permanently disable inventory slot 5. You can disable up to once slot.'
+    }
   ],
 });
 
@@ -300,7 +319,7 @@ export const CURSEDIUM_MORPHMAN: Spirit = defineSpirit({
   abilities: [
     {
       name: 'Amorphous',
-      text: 'Randomly fetch 3 spirits. For up to once per refresh, you can expend ⚰️ to activate one spirit and deactivate all other spirits fetched. You take on the first ability of the active spirit. Cooldowns (e.g. “For up to once per game”) are shared between all spirits.',
+      text: 'Randomly fetch 3 spirits. For up to once per refresh, you can expend ⚰️ to activate one spirit and deactivate all other spirits fetched. You take on the first ability of the active spirit. Neutral effects are active permanently. Cooldowns (e.g. “For up to once per game”) are shared between all spirits.',
     },
     {
       name: 'Split',
@@ -320,6 +339,21 @@ export const TRIPLE_F_ORANGE_CAT: Spirit = defineSpirit({
     {
       name: 'World of Compassion',
       text: 'If Peak allure is not on cooldown, you can discard a card in slot 7 and remove a player’s Mark of Love, and that player must comply with any legal request until the next refresh.',
+    },
+  ],
+});
+
+export const A_JUNE_FAIRY: Spirit = defineSpirit({
+  name: 'A. June, Water fairy',
+  classification: SpiritClassification.Toasted,
+  abilities: [
+    {
+      name: 'Florish of summer',
+      text: '[Neutral ability] Your base pylon build cap is set to 1, but your sentries function as and are considered pylons, without being considered for the build cap.',
+    },
+    {
+      name: 'Codes of life',
+      text: 'You can use any legendary card and X 🧤 as a Fortify, where X is twice the amount of Greater sentries you have.',
     },
   ],
 });
@@ -351,11 +385,11 @@ export const LITHIUM_MESSI_THE_LOST: Spirit = defineSpirit({
   abilities: [
     {
       name: 'Fogs of memory',
-      text: 'Base max hand size -4.',
+      text: 'Base max hand size -8, but Greater pylons do not reduce your max hand size.',
     },
     {
       name: 'Artifact of remembrance',
-      text: 'Whenever you build a pylon, sentry, or upgraded pylon, draw 3 cards and gain ⚰️.',
+      text: 'Whenever you build a pylon, sentry, or upgraded pylon, draw 5 cards and gain ⚰️.',
     },
   ],
 });
@@ -424,6 +458,7 @@ export const SV_JAMES_IMMORTAL_TORTOISE: Spirit = defineSpirit({
 export const SPIRITS: readonly Spirit[] = [
   SAM_R_EMPATHIC,
   IGNOR_ENTHUSIASTIC_EXPLORER,
+  RA_IMPOSTER,
   LAGGING_E_WORLD_CREATOR,
   KASE_LU_PROPHET,
   AXE_F_GREAT_CLIMBER,
@@ -436,6 +471,7 @@ export const SPIRITS: readonly Spirit[] = [
   PI_CLONE_PRINCIPLE_BOUNCER,
   CURSEDIUM_MORPHMAN,
   TRIPLE_F_ORANGE_CAT,
+  A_JUNE_FAIRY,
   I_LOVER_WARLORD,
   LITHIUM_MESSI_THE_LOST,
   RICE_RICE,

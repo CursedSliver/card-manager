@@ -7,7 +7,7 @@ import type { RealCardType } from './types';
 import { CardTag } from '../tags';
 import { Rarity } from '../rarity';
 import { movementOverride } from '../generators';
-import { hoursLabel, scaledHours } from '../time';
+import { hoursLabel } from '../time';
 
 export const RED_CULTURE: RealCardType = defineCardType({
   name: 'Red culture',
@@ -59,16 +59,14 @@ export const RAINBOW_CULTURE: RealCardType = defineCardType({
   bottomAbilityOverride: movementOverride,
 });
 
-export const FOGS_OF_WAR: RealCardType = defineCardType({
-  name: 'Fogs of war',
+export const DISTANT_EXCHANGE: RealCardType = defineCardType({
+  name: 'Distant exchange',
   tag: CardTag.Timed,
-  rarity: Rarity.Uncommon,
+  rarity: Rarity.Common,
   topAbility: {
-    text: `For the next ${scaledHours(3)} to ${hoursLabel(12)} (you specify), ALL cards and spirit abilities directed at you lose their effects.`,
+    text: `After ${hoursLabel(6)}, convert 3 of the same resource into a resource of choice.`,
   },
-  bottomAbility: {
-    text: `For the next ${scaledHours(3)} to ${hoursLabel(12)} (you specify), you become immune to movement.`,
-  },
+  bottomAbilityOverride: movementOverride,
 });
 
 export const NEUROGENESIS: RealCardType = defineCardType({
@@ -115,16 +113,6 @@ export const CHARGE: RealCardType = defineCardType({
   bottomAbilityOverride: movementOverride,
 });
 
-export const MAGICAL_CONDUITS: RealCardType = defineCardType({
-  name: 'Magical conduits',
-  tag: CardTag.Timed,
-  rarity: Rarity.Common,
-  topAbility: {
-    text: `After ${hoursLabel(3)}, expend ⚰️🧤 or ⚰️🪙 and make 3 wires.`,
-  },
-  bottomAbilityOverride: movementOverride,
-});
-
 export const SPRINT: RealCardType = defineCardType({
   name: 'Sprint',
   tag: CardTag.Timed,
@@ -147,44 +135,12 @@ export const PHANTOM_TRAPS: RealCardType = defineCardType({
   bottomAbilityOverride: movementOverride,
 });
 
-export const RAIDS_FROM_HELL: RealCardType = defineCardType({
-  name: 'Raids from hell',
-  tag: CardTag.Timed,
-  rarity: Rarity.Rare,
-  topAbility: {
-    text: `After ${hoursLabel(6)}, the player(s) with the most amount of resources discard half of their resources (rounded up). In case of a tie, all players in the tie do the same.`,
-  },
-  bottomAbilityOverride: movementOverride,
-});
-
 export const LOCK_OF_ETHER: RealCardType = defineCardType({
   name: 'Lock of ether',
   tag: CardTag.Timed,
   rarity: Rarity.Rare,
   topAbility: {
     text: `Forcibly add this card to their action slots, then choose one normal inventory slot. For ${hoursLabel(6)}, +1 action slot capacity, and that inventory slot becomes locked.`,
-  },
-  bottomAbilityOverride: movementOverride,
-});
-
-export const BINDING_VOW: RealCardType = defineCardType({
-  name: 'Binding vow',
-  tag: CardTag.Timed,
-  rarity: Rarity.Rare,
-  topAbility: {
-    text: 'Place a copy of this card in the action slots of a willing player and your action slots, expiring in 7 days. +1 action slots, and you create joint tiles with allied buildings instead of disputed tiles, randomly sharing resources.',
-  },
-  bottomAbility: {
-    text: 'Remove active Binding vows from yourself and a player that you are allied with.'
-  },
-});
-
-export const EXTENDED_DRAW: RealCardType = defineCardType({
-  name: 'Extended draw',
-  tag: CardTag.Timed,
-  rarity: Rarity.Legendary,
-  topAbility: {
-    text: `For the next ${hoursLabel(6)}, each time a pylon or sentry is destroyed, you draw one card.`,
   },
   bottomAbilityOverride: movementOverride,
 });
@@ -227,17 +183,12 @@ export const TIMED_CARDS: readonly RealCardType[] = [
   GREEN_CULTURE,
   BLUE_CULTURE,
   RAINBOW_CULTURE,
-  FOGS_OF_WAR,
   NEUROGENESIS,
   COSMOGENESIS,
   STRANGLE,
   CHARGE,
-  MAGICAL_CONDUITS,
   SPRINT,
   PHANTOM_TRAPS,
-  RAIDS_FROM_HELL,
-  BINDING_VOW,
-  EXTENDED_DRAW,
   SHIFT_IN_PERSPECTIVE,
   INVERT,
   BALL_LIGHTNING

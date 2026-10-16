@@ -6,7 +6,7 @@ import { defineCardType } from '../../core/card';
 import type { RealCardType } from './types';
 import { CardTag } from '../tags';
 import { Rarity } from '../rarity';
-import { hastenTopOverride, movementOverride } from '../generators';
+import { movementOverride, movementOverrideTwo } from '../generators';
 import { hoursLabel } from '../time';
 
 export const REFRESH: RealCardType = defineCardType({
@@ -71,6 +71,16 @@ export const RAINBOW_HARVEST: RealCardType = defineCardType({
   bottomAbilityOverride: movementOverride,
 });
 
+export const TRANSMUTE: RealCardType = defineCardType({
+  name: 'Transmute',
+  tag: CardTag.Instant,
+  rarity: Rarity.Common,
+  topAbility: {
+    text: `Convert 3 of the same resource into a resource of choice.`,
+  },
+  bottomAbilityOverride: movementOverride,
+});
+
 export const CLEANSE: RealCardType = defineCardType({
   name: 'Cleanse',
   tag: CardTag.Instant,
@@ -115,16 +125,6 @@ export const MINDWORM: RealCardType = defineCardType({
   },
 });
 
-export const THE_PSYCHIC: RealCardType = defineCardType({
-  name: 'The Psychic',
-  tag: CardTag.Instant,
-  rarity: Rarity.Uncommon,
-  topAbility: {
-    text: 'The player(s) with the most amount of resources lose one of each resource that they have at least one of. If there is a tie, all players in the tie do the same.',
-  },
-  bottomAbilityOverride: movementOverride,
-});
-
 export const INVADE: RealCardType = defineCardType({
   name: 'Invade',
   tag: CardTag.Instant,
@@ -157,26 +157,6 @@ export const SEED_OF_MYTHS: RealCardType = defineCardType({
   bottomAbilityOverride: movementOverride,
 });
 
-export const SPELL_OF_RETURN: RealCardType = defineCardType({
-  name: 'Spell of return',
-  tag: CardTag.Instant,
-  rarity: Rarity.Rare,
-  topAbility: {
-    text: 'Teleport to a tile inside one of your pylons’ force fields.',
-  },
-  bottomAbilityOverride: movementOverride,
-});
-
-export const BOUNDLESS_BOONS: RealCardType = defineCardType({
-  name: 'Boundless boons',
-  tag: CardTag.Instant,
-  rarity: Rarity.Rare,
-  topAbility: {
-    text: 'Draw cards equal to the number of players. Specifying an order for players to take cards, each player chooses one card to take out of the drawn cards.',
-  },
-  bottomAbilityOverride: movementOverride,
-});
-
 export const FORTIFY: RealCardType = defineCardType({
   name: 'Fortify',
   tag: CardTag.Instant,
@@ -199,19 +179,12 @@ export const PHONE_CALL_TO_GOD: RealCardType = defineCardType({
   },
 });
 
-export const HASTEN: RealCardType = defineCardType({
-  name: 'Hasten',
-  tag: CardTag.Instant,
-  rarity: Rarity.Uncommon,
-  topAbilityOverride: hastenTopOverride,
-  bottomAbilityOverride: movementOverride,
-});
-
 export const ADAPT: RealCardType = defineCardType({
   name: 'Adapt',
   tag: CardTag.Instant,
   rarity: Rarity.Plentiful,
-  topAbilityOverride: movementOverride
+  topAbilityOverride: movementOverrideTwo,
+  bottomAbilityOverride: movementOverride
 });
 
 export const FREE_MOVE: RealCardType = defineCardType({
@@ -248,25 +221,21 @@ export const COOK: RealCardType = defineCardType({
 
 export const INSTANT_CARDS: readonly RealCardType[] = [
   REFRESH,
+  ADAPT,
   RED_HARVEST,
   YELLOW_HARVEST,
   GREEN_HARVEST,
   BLUE_HARVEST,
   RAINBOW_HARVEST,
+  PHONE_CALL_TO_GOD,
   CLEANSE,
   INCEPTION,
   DISMANTLE,
   MINDWORM,
-  THE_PSYCHIC,
   INVADE,
   DILATED_CAPSULE,
   SEED_OF_MYTHS,
-  SPELL_OF_RETURN,
-  BOUNDLESS_BOONS,
   FORTIFY,
-  PHONE_CALL_TO_GOD,
-  HASTEN,
-  ADAPT,
   FREE_MOVE,
   PLAY_GOM,
   COOK
