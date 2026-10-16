@@ -131,18 +131,6 @@ export const DISMANTLE: RealCardType = defineCardType({
   bottomAbilityOverride: movementOverride,
 });
 
-export const MINDWORM: RealCardType = defineCardType({
-  name: 'Mindworm',
-  tag: CardTag.Instant,
-  rarity: Rarity.Uncommon,
-  topAbility: {
-    text: 'A player of your choice lose two mortal cards of their choice.',
-  },
-  bottomAbility: {
-    text: 'A player of your choice lose two resources of their choice.',
-  },
-});
-
 export const INVADE: RealCardType = defineCardType({
   name: 'Invade',
   tag: CardTag.Instant,
@@ -205,6 +193,16 @@ export const FREE_MOVE: RealCardType = defineCardType({
   },
 });
 
+export const TELEPATH: RealCardType = defineCardType({
+  name: 'Telepath',
+  tag: CardTag.Instant,
+  rarity: Rarity.Rare,
+  topAbility: {
+    text: `Make up to 2 purchases from the mountain without needing to be inside the mountain.`,
+  },
+  bottomAbilityOverride: movementOverride,
+});
+
 export const PLAY_GOM: RealCardType = defineCardType({
   name: 'Zedong\'s emblem',
   tag: CardTag.Instant,
@@ -239,12 +237,12 @@ export const INSTANT_CARDS: readonly RealCardType[] = [
   CLEANSE,
   INCEPTION,
   DISMANTLE,
-  MINDWORM,
   INVADE,
   DILATED_CAPSULE,
   SEED_OF_MYTHS,
   FORTIFY,
   FREE_MOVE,
+  TELEPATH,
   PLAY_GOM,
   COOK
 ];

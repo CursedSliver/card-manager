@@ -96,11 +96,8 @@ export const STRANGLE: RealCardType = defineCardType({
   tag: CardTag.Timed,
   rarity: Rarity.Rare,
   topAbility: {
-    text: `Add this card to the action slots of any player for ${hoursLabel(8)}.`,
-  },
-  bottomAbility: {
-    text: `Clear one action slot of a willing player, including yourself.`,
-  },
+    text: `After ${hoursLabel(4)}, clear one action slot of a player, including yourself.`,
+  }
 });
 
 export const CHARGE: RealCardType = defineCardType({
@@ -116,12 +113,24 @@ export const CHARGE: RealCardType = defineCardType({
 export const SPRINT: RealCardType = defineCardType({
   name: 'Sprint',
   tag: CardTag.Timed,
-  rarity: Rarity.Common,
+  rarity: Rarity.Uncommon,
   topAbility: {
     text: 'Destroy any building that you own.',
   },
   bottomAbility: {
     text: `After ${hoursLabel(1)}, expend 🌾 to move in any direction, twice.`,
+  },
+});
+
+export const MINDWORM: RealCardType = defineCardType({
+  name: 'Mindworm',
+  tag: CardTag.Instant,
+  rarity: Rarity.Uncommon,
+  topAbility: {
+    text: `After ${hoursLabel(4)}, player of your choice lose one mortal card of their choice.`,
+  },
+  bottomAbility: {
+    text: `After ${hoursLabel(4)}, player of your choice lose two resources of their choice.`,
   },
 });
 
@@ -131,16 +140,6 @@ export const PHANTOM_TRAPS: RealCardType = defineCardType({
   rarity: Rarity.Rare,
   topAbility: {
     text: `Choose another player and forcibly add this card to their action slots. +1 action slot capacity while active. After ${hoursLabel(6)}, force that player to teleport to a pylon not in 5x5 near you.`,
-  },
-  bottomAbilityOverride: movementOverride,
-});
-
-export const LOCK_OF_ETHER: RealCardType = defineCardType({
-  name: 'Lock of ether',
-  tag: CardTag.Timed,
-  rarity: Rarity.Rare,
-  topAbility: {
-    text: `Forcibly add this card to their action slots, then choose one normal inventory slot. For ${hoursLabel(6)}, +1 action slot capacity, and that inventory slot becomes locked.`,
   },
   bottomAbilityOverride: movementOverride,
 });
@@ -160,7 +159,7 @@ export const INVERT: RealCardType = defineCardType({
   tag: CardTag.Timed,
   rarity: Rarity.Legendary,
   topAbility: {
-    text: `After ${hoursLabel(1)}, select any mortal card that belongs to a player. If it is a hammer, replace with "Hammer". If it is a normal card, replace it with a random "Adapt" card. If it is an ongoing action, replace it with "Strangle".`,
+    text: `After ${hoursLabel(1)}, select any mortal card that belongs to a player. If it is a hammer, replace with "Hammer". If it is a normal card, replace it with a random "Transmute" card. If it is an ongoing action, replace it with "Distant exchange".`,
   },
   bottomAbility: {
     text: `Select one non-mythical card in your inventory excluding Invert, and draw cards until you get a card with a higher rarity than the selected card. Discard the selected card and add the new card to inventory.`
@@ -186,6 +185,7 @@ export const TIMED_CARDS: readonly RealCardType[] = [
   DISTANT_EXCHANGE,
   NEUROGENESIS,
   COSMOGENESIS,
+  MINDWORM,
   STRANGLE,
   CHARGE,
   SPRINT,
