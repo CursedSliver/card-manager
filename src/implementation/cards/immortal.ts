@@ -55,35 +55,9 @@ export const BRIGHTSTORM: RealCardType = defineCardType({
   },
 });
 
-export const HEAVENLY_SACRIFICE: RealCardType = defineCardType({
-  name: 'Heavenly sacrifice',
-  tag: CardTag.Immortal,
-  rarity: Rarity.Heavenly,
-  topAbility: {
-    text: 'Expend ⚰️, 🪙, 🧤, or 🌾 to gain 20 prestige points and heavenly chips. Each activation doubles the resource use to trigger this ability next time for the resource used, stackable. Other resources are unaffected.',
-  },
-  bottomAbility: {
-    text: 'Whenever you would gain a resource, you can spend 50 heavenly chips and instead gain another resource of your choice.',
-  },
-});
-
-export const PILLARS_OF_WORSHIP: RealCardType = defineCardType({
-  name: 'Pillars of worship',
-  tag: CardTag.Immortal,
-  rarity: Rarity.Heavenly,
-  topAbility: {
-    text: 'All Greater pylons grant 12 prestige points and heavenly chips per refresh.',
-  },
-  bottomAbility: {
-    text: 'You can expend 100 heavenly chips to upgrade one Greater pylon to a Master Pylon, which grants +2 hand size instead of -2 hand size, and allows for drawing of 2 additional cards per refresh. Only one Master Pylon can exist at one time on the board. There must not be any pylons or sentries from you within the force field of the Master Pylon.',
-  },
-});
-
 export const IMMORTAL_CARDS: readonly RealCardType[] = [
   INSTANT_CONSTRUCTION,
   SYNAPTIC_TRADE,
   NEUROPLASTICITY,
-  BRIGHTSTORM,
-  HEAVENLY_SACRIFICE,
-  PILLARS_OF_WORSHIP,
+  BRIGHTSTORM
 ];

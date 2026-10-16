@@ -21,6 +21,24 @@ export const REFRESH: RealCardType = defineCardType({
   }
 });
 
+export const PROOF_OF_DIVINITY: RealCardType = defineCardType({
+  name: 'Proof of divinity',
+  tag: CardTag.Instant,
+  rarity: Rarity.Heavenly,
+  topAbility: {
+    text: 'Upgrade a pylon in 3x3 of yourself to a Greater pylon. A Greater pylon generates 12 prestige points and heavenly chips per refresh and has a 5x5 force field instead of 3x3, but -2 max hand size.',
+  }
+});
+
+export const DECLARATION_OF_HERESY: RealCardType = defineCardType({
+  name: 'Declaration of heresy',
+  tag: CardTag.Instant,
+  rarity: Rarity.Heavenly,
+  topAbility: {
+    text: 'Downgrade a Greater pylon to a regular pylon in 5x5 of yourself, then draw 1 card.',
+  }
+});
+
 export const RED_HARVEST: RealCardType = defineCardType({
   name: 'Red harvest',
   tag: CardTag.Instant,
@@ -172,11 +190,9 @@ export const PHONE_CALL_TO_GOD: RealCardType = defineCardType({
   tag: CardTag.Instant,
   rarity: Rarity.Common,
   topAbility: {
-    text: 'Once per game, if you own at least 3 pylons, expend ⚰️🪙🧤🌾 and gain “Heavenly sacrifice” and “Pillars of worship”, and increase hand size by 2 permanently.',
-  },
-  bottomAbility: {
     text: 'Roll D20, then gain that many prestige points and heavenly chips.',
   },
+  bottomAbilityOverride: movementOverride,
 });
 
 export const ADAPT: RealCardType = defineCardType({
@@ -221,12 +237,15 @@ export const COOK: RealCardType = defineCardType({
 
 export const INSTANT_CARDS: readonly RealCardType[] = [
   REFRESH,
+  PROOF_OF_DIVINITY,
+  DECLARATION_OF_HERESY,
   ADAPT,
   RED_HARVEST,
   YELLOW_HARVEST,
   GREEN_HARVEST,
   BLUE_HARVEST,
   RAINBOW_HARVEST,
+  TRANSMUTE,
   PHONE_CALL_TO_GOD,
   CLEANSE,
   INCEPTION,
