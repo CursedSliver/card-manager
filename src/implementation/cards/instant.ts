@@ -193,6 +193,24 @@ export const TELEPATH: RealCardType = defineCardType({
   bottomAbilityOverride: movementOverride,
 });
 
+export const MATERIALIZE: RealCardType = defineCardType({
+  name: 'Materialize',
+  tag: CardTag.Instant,
+  rarity: Rarity.Legendary,
+  topAbility: {
+    text: `Create an unmoving clone of yourself. You can use cards on the clone's behalf; the clone is destroyed if it is pushed or if you use another Materialize.`,
+  }
+});
+
+export const TRANSCEND: RealCardType = defineCardType({
+  name: 'Transcend',
+  tag: CardTag.Instant,
+  rarity: Rarity.Legendary,
+  topAbility: {
+    text: `A resource type of your choice gains +3 capacity permanently.`,
+  }
+});
+
 export const PLAY_GOM: RealCardType = defineCardType({
   name: 'Zedong\'s emblem',
   tag: CardTag.Instant,
@@ -232,6 +250,8 @@ export const INSTANT_CARDS: readonly RealCardType[] = [
   FORTIFY,
   FREE_MOVE,
   TELEPATH,
+  MATERIALIZE,
+  TRANSCEND,
   PLAY_GOM,
   COOK
 ];

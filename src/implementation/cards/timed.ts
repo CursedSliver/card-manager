@@ -174,6 +174,15 @@ export const INVERT: RealCardType = defineCardType({
   },
 });
 
+export const DEMATERIALIZE: RealCardType = defineCardType({
+  name: 'Dematerialize',
+  tag: CardTag.Timed,
+  rarity: Rarity.Legendary,
+  topAbility: {
+    text: `Select any neutral or disputed tile on the map, and after ${hoursLabel(6)}, you teleport to it.`,
+  }
+});
+
 export const BALL_LIGHTNING: RealCardType = defineCardType({
   name: 'Ball lightning',
   tag: CardTag.Timed,
@@ -201,5 +210,6 @@ export const TIMED_CARDS: readonly RealCardType[] = [
   PHANTOM_TRAPS,
   SHIFT_IN_PERSPECTIVE,
   INVERT,
+  DEMATERIALIZE,
   BALL_LIGHTNING
 ];
