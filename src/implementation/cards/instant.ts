@@ -166,7 +166,7 @@ export const FORTIFY: RealCardType = defineCardType({
 export const ADAPT: RealCardType = defineCardType({
   name: 'Adapt',
   tag: CardTag.Instant,
-  rarity: Rarity.Plentiful,
+  rarity: Rarity.Common,
   topAbilityOverride: movementOverrideTwo,
   bottomAbilityOverride: movementOverride
 });
@@ -199,7 +199,8 @@ export const MATERIALIZE: RealCardType = defineCardType({
   rarity: Rarity.Legendary,
   topAbility: {
     text: `Create an unmoving clone of yourself. You can use cards on the clone's behalf; the clone is destroyed if it is pushed or if you use another Materialize.`,
-  }
+  },
+  bottomAbilityOverride: movementOverride
 });
 
 export const TRANSCEND: RealCardType = defineCardType({
@@ -208,7 +209,8 @@ export const TRANSCEND: RealCardType = defineCardType({
   rarity: Rarity.Legendary,
   topAbility: {
     text: `A resource type of your choice gains +3 capacity permanently.`,
-  }
+  },
+  bottomAbilityOverride: movementOverride
 });
 
 export const PLAY_GOM: RealCardType = defineCardType({

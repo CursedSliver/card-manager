@@ -113,7 +113,7 @@ export const CHARGE: RealCardType = defineCardType({
   tag: CardTag.Timed,
   rarity: Rarity.Rare,
   topAbility: {
-    text: `After ${hoursLabel(6)}, move 5 steps in any cardinal direction.`,
+    text: `After ${hoursLabel(6)}, move 5 steps in any cardinal direction, skipping over all obstacles in the way.`,
   },
   bottomAbilityOverride: movementOverride,
 });
@@ -180,7 +180,8 @@ export const DEMATERIALIZE: RealCardType = defineCardType({
   rarity: Rarity.Legendary,
   topAbility: {
     text: `Select any neutral or disputed tile on the map, and after ${hoursLabel(6)}, you teleport to it.`,
-  }
+  },
+  bottomAbilityOverride: movementOverride
 });
 
 export const BALL_LIGHTNING: RealCardType = defineCardType({

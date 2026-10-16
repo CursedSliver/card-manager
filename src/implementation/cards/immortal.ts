@@ -5,29 +5,16 @@ import { defineCardType } from '../../core/card';
 import type { RealCardType } from './types';
 import { CardTag } from '../tags';
 import { Rarity } from '../rarity';
-import { hoursLabel } from '../time';
 
 export const INSTANT_CONSTRUCTION: RealCardType = defineCardType({
   name: 'Instant construction',
   tag: CardTag.Immortal,
   rarity: Rarity.Common,
   topAbility: {
-    text: 'Can construct a pylon on neighboring neutral tiles using ⚰️⚰️🧤. Pylons are charged when you are in 3x3 near it. While charged, it provides a force field in 3x3 around it that prevents anyone other than yourself from entry. Moving into a pylon allows you to teleport to any tile neighboring another pylon that belongs to you.',
+    text: 'Can construct a pylon on neighboring tiles using ⚰️⚰️🧤. Cannot build within 3x3 of another one of your pylons, or on foreign or disputed tiles.',
   },
   bottomAbility: {
-    text: `Can construct a sentry on neighboring neutral or disputed tiles using 🌾🪙. Sentries produce a force field like pylons do but do not do anything else that a pylon does. Force field of sentries and pylons will conquer any uncharged pylons and sentries that do not belong to you after ${hoursLabel(12)}, which grants you ownership over them. Force fields create disputed tiles on tiles where fields of two different allegiances meet.`,
-  },
-});
-
-export const SYNAPTIC_TRADE: RealCardType = defineCardType({
-  name: 'Synaptic trade',
-  tag: CardTag.Immortal,
-  rarity: Rarity.Common,
-  topAbility: {
-    text: 'Can form trade agreements with other players to exchange agreed-upon quantities of resources (not cards).',
-  },
-  bottomAbility: {
-    text: 'If the bottom effect of a card is movement, can apply that effect onto any willing players, or as a part of a trade agreement.',
+    text: `Can construct a sentry on neighboring non-foreign tiles using 🌾🪙.`,
   },
 });
 
@@ -36,10 +23,10 @@ export const NEUROPLASTICITY: RealCardType = defineCardType({
   tag: CardTag.Immortal,
   rarity: Rarity.Common,
   topAbility: {
-    text: 'Can discard 4 of the same resources and get: any other resource of your choice; or, draw two cards and choose one to add to inventory.',
+    text: 'Can discard 4 of the same resources and get another resource of your choice.',
   },
   bottomAbility: {
-    text: 'Can upgrade a pylon to a Greater pylon for 🌾🌾⚰️🧤🧤, increasing its range of effect to 5x5 at the exchange for -2 hand size. A Greater pylon cannot be within the field of another greater pylon that you own.',
+    text: 'Can form trade agreements with other players to exchange agreed-upon quantities of resources (not cards).',
   },
 });
 
@@ -48,16 +35,15 @@ export const BRIGHTSTORM: RealCardType = defineCardType({
   tag: CardTag.Immortal,
   rarity: Rarity.Common,
   topAbility: {
-    text: 'Can construct 2 wires for 🪙. Wires propagate electricity and can be used to charge another pylon.',
+    text: 'Gain 2 wires for 🪙, or place down wires you already have onto a vertex of the tile you are at. Wires propagate electricity and can be used to charge another pylon.',
   },
   bottomAbility: {
-    text: `Can destroy all adjacent wires and have a 1 / 3 chance to recover 🪙 per wire destroyed. If this ability is used more than once per ${hoursLabel(6)}, you cannot use this ability again for the next ${hoursLabel(12)} and need to sleep for ${hoursLabel(2)}.`,
+    text: `If you move orthogonally and across a wire, successful or not, you can choose to trample it and can move orthogonally another time.`,
   },
 });
 
 export const IMMORTAL_CARDS: readonly RealCardType[] = [
   INSTANT_CONSTRUCTION,
-  SYNAPTIC_TRADE,
   NEUROPLASTICITY,
   BRIGHTSTORM
 ];
