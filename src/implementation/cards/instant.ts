@@ -121,16 +121,6 @@ export const INCEPTION: RealCardType = defineCardType({
   bottomAbilityOverride: movementOverride,
 });
 
-export const DISMANTLE: RealCardType = defineCardType({
-  name: 'Dismantle',
-  tag: CardTag.Instant,
-  rarity: Rarity.Uncommon,
-  topAbility: {
-    text: 'Destroy a wire within your build range and have a 50% chance to gain 🪙.',
-  },
-  bottomAbilityOverride: movementOverride,
-});
-
 export const INVADE: RealCardType = defineCardType({
   name: 'Invade',
   tag: CardTag.Instant,
@@ -236,7 +226,6 @@ export const INSTANT_CARDS: readonly RealCardType[] = [
   TRANSMUTE,
   CLEANSE,
   INCEPTION,
-  DISMANTLE,
   INVADE,
   DILATED_CAPSULE,
   SEED_OF_MYTHS,

@@ -91,6 +91,16 @@ export const COSMOGENESIS: RealCardType = defineCardType({
   },
 });
 
+export const DISMANTLE: RealCardType = defineCardType({
+  name: 'Dismantle',
+  tag: CardTag.Timed,
+  rarity: Rarity.Uncommon,
+  topAbility: {
+    text: `After ${hoursLabel(3)}, destroy a wire within your build range and have a 50% chance to gain 🪙.`,
+  },
+  bottomAbilityOverride: movementOverride,
+});
+
 export const STRANGLE: RealCardType = defineCardType({
   name: 'Strangle',
   tag: CardTag.Timed,
@@ -185,6 +195,7 @@ export const TIMED_CARDS: readonly RealCardType[] = [
   DISTANT_EXCHANGE,
   NEUROGENESIS,
   COSMOGENESIS,
+  DISMANTLE,
   MINDWORM,
   STRANGLE,
   CHARGE,
