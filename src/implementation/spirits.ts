@@ -259,7 +259,7 @@ export const P_PRISMA_TIMELORD: Spirit = defineSpirit({
   abilities: [
     {
       name: 'Ascend',
-      text: 'Up to once per game, if you have at least 12 cards in normal slots, you can enter the mountain to lose all mortal cards in normal slots and gain prestige points equal to your current amount of prestige points.',
+      text: 'Up to once per game, if you have at least 12 cards in normal slots, you can enter the mountain to gain prestige points equal to half your current amount of prestige points.',
     },
   ],
 });
@@ -288,12 +288,12 @@ export const SEVERUS_VOID_KEYMASTER: Spirit = defineSpirit({
   classification: SpiritClassification.Toasted,
   abilities: [
     {
-      name: 'Keys to prestige',
-      text: 'Gaining prestige points does not grant any heavenly chips. Upon entering the mountain for the first time, gain 365 heavenly chips.',
+      name: 'Reality crevices',
+      text: 'Once per game, you can discard a card and extinct all future cards of its type. Extinct cards are marked. If someone uses an extinct card, you get all of their resources.',
     },
     {
-      name: 'Reality crevices',
-      text: 'Once per game, you can choose one mortal card type to extinct. Extinct cards are marked. If someone uses an extinct card, you get all of their resources.',
+      name: 'Keys to prestige',
+      text: 'You do not have to enter the mountain to access mountain-related services.',
     },
   ],
 });
@@ -308,7 +308,7 @@ export const PI_CLONE_PRINCIPLE_BOUNCER: Spirit = defineSpirit({
     },
     {
       name: 'Self-assessment',
-      text: '12 hours after activation, if you still have no resources, no normal cards, and no cards in action slots, you can permanently disable inventory slot 5. You can disable up to once slot.'
+      text: '12 hours after activation, if you still have no resources, no normal cards, and no cards in action slots, you can permanently disable inventory slot 4. You can disable up to once slot.'
     }
   ],
 });
@@ -349,11 +349,49 @@ export const A_JUNE_FAIRY: Spirit = defineSpirit({
   abilities: [
     {
       name: 'Florish of summer',
-      text: '[Neutral ability] Your base pylon build cap is set to 1, but your sentries function as and are considered pylons, without being considered for the build cap.',
+      text: '[Neutral ability] Your base pylon build cap is set to 1, but all of your sentries are considered as pylons by other cards, without being considered for the build cap. A Greater sentry is also considered a Greater pylon with all of its effects.',
     },
     {
       name: 'Codes of life',
-      text: 'You can use any legendary card and X 🧤 as a Fortify, where X is twice the amount of Greater sentries you have.',
+      text: 'You can use any legendary card and X 🧤 as a Fortify, where X is twice the amount of Greater sentries you have. In addition, sentries take 4 movements instead of 2 movements to be destroyed.',
+    },
+    {
+      name: 'Blasphemic theology',
+      text: '"Proof of divinity" cards do not work on normal sentries.',
+    },
+  ],
+});
+
+export const AXES_OF_AXES_GEOMETRIST: Spirit = defineSpirit({
+  name: 'Axes of Axes, Geometrist',
+  classification: SpiritClassification.Toasted,
+  abilities: [
+    {
+      name: 'Hyper parallax',
+      text: 'Whenever you place a wire, you can put down an additional wire connected to the placed wire at no cost, ignoring build range.',
+    },
+    {
+      name: 'Mechanic\'s wrench',
+      text: 'build range +1.',
+    },
+  ],
+});
+
+export const FLOURIDE_B_MONKSHOOD: Spirit = defineSpirit({
+  name: 'Flouride B., Monkshood',
+  classification: SpiritClassification.Toasted,
+  abilities: [
+    {
+      name: 'Totipotent',
+      text: '+1 action slot.',
+    },
+    {
+      name: 'Endure',
+      text: 'Whenever an active timed card whose name ends with "culture" expires, draw 2 cards.',
+    },
+    {
+      name: 'Toxic focus',
+      text: 'You cannot use cards whose name ends with "harvest".',
     },
   ],
 });
@@ -400,7 +438,7 @@ export const BOB_MCBOBBER_LEGENDARY_GOMLORD: Spirit = defineSpirit({
   abilities: [
     {
       name: 'Ultrarecognition',
-      text: 'Up to once per refresh, you can make a player with less cards than you give you a mortal card whose name contains a letter of your choice. Cannot name letters that none of their cards have.',
+      text: 'Up to once per refresh, you can make a player with less cards than you give you a mortal card whose name has less non-whitespace characters than a number you name, if possible.',
     },
     {
       name: 'Call of gom',
@@ -430,7 +468,7 @@ export const SIGMA_TUSINE_COMBINED_MIND: Spirit = defineSpirit({
   abilities: [
     {
       name: 'Master alchemist',
-      text: 'You can convert 2 of the same resource to 1 of another resource with a 12-hours cooldown.',
+      text: 'You can convert 2 of the same resource to 1 of another resource with a 6-hours cooldown.',
     },
     {
       name: 'Tachyonic spirit',
@@ -472,6 +510,8 @@ export const SPIRITS: readonly Spirit[] = [
   CURSEDIUM_MORPHMAN,
   TRIPLE_F_ORANGE_CAT,
   A_JUNE_FAIRY,
+  AXES_OF_AXES_GEOMETRIST,
+  FLOURIDE_B_MONKSHOOD,
   I_LOVER_WARLORD,
   LITHIUM_MESSI_THE_LOST,
   RICE_RICE,

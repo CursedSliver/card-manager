@@ -17,7 +17,7 @@ export const REFRESH: RealCardType = defineCardType({
     text: 'Draw cards equal to half of your max hand size, rounded up, then destroy all other copies of Refresh that you have. ',
   },
   bottomAbility: {
-    text: 'Using this card is considered as triggering Refresh for you. This card cannot be discarded, stolen, or transmuted.'
+    text: 'This card cannot be discarded, stolen, or transmuted. The slot this card is on cannot be disabled.'
   }
 });
 
@@ -26,7 +26,7 @@ export const PROOF_OF_DIVINITY: RealCardType = defineCardType({
   tag: CardTag.Instant,
   rarity: Rarity.Heavenly,
   topAbility: {
-    text: 'Upgrade a pylon in 3x3 of yourself to a Greater pylon. A Greater pylon generates 12 prestige points and heavenly chips per refresh and has a 5x5 force field instead of 3x3, but -2 max hand size.',
+    text: 'Upgrade a pylon in 3x3 of yourself to a Greater pylon. A Greater pylon generates 16 prestige points and heavenly chips per refresh and has a 5x5 force field instead of 3x3, but -2 max hand size.',
   }
 });
 
