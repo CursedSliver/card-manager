@@ -118,7 +118,7 @@ export const SPRINT: RealCardType = defineCardType({
     text: 'Destroy any building that you own.',
   },
   bottomAbility: {
-    text: `After ${hoursLabel(1)}, expend 🌾 to move in any direction, twice.`,
+    text: `After ${hoursLabel(1)}, expend 🌾 to move in any direction. Can repeat this up to twice.`,
   },
 });
 
