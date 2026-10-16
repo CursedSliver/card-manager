@@ -468,7 +468,7 @@ export const SIGMA_TUSINE_COMBINED_MIND: Spirit = defineSpirit({
   abilities: [
     {
       name: 'Master alchemist',
-      text: 'You can convert 2 of the same resource to 1 of another resource with a 6-hours cooldown.',
+      text: 'You can convert 2 of the same resource to 1 of another resource.',
     },
     {
       name: 'Tachyonic spirit',
@@ -484,6 +484,25 @@ export const SV_JAMES_IMMORTAL_TORTOISE: Spirit = defineSpirit({
     {
       name: 'Immortal',
       text: 'For up to once per game, you can upgrade one mortal card (with rarity less than legendary) to become immortal, and gain ⚰️. The top ability of such a card cannot be used more than once per refresh.',
+    },
+  ],
+});
+
+export const ORION_W_MOONKEEPER: Spirit = defineSpirit({
+  name: 'Orion W., Moonkeeper',
+  classification: SpiritClassification.Secret,
+  abilities: [
+    {
+      name: 'Ancient powers',
+      text: 'You unlock all immortal card abilities immediately from the start.',
+    },
+    {
+      name: 'Purifying forces',
+      text: 'You can use any uncommon instant card as a "Cleanse", and any rare timed card as a "Charge".',
+    },
+    {
+      name: 'Tidal wars',
+      text: 'You can destroy one of your sentries at any time and recover 🪙.',
     },
   ],
 });
@@ -521,6 +540,7 @@ export const SPIRITS: readonly Spirit[] = [
   SECRET_BROTHER_SOUTHWEST_DRAGONFLIGHT,
   SIGMA_TUSINE_COMBINED_MIND,
   SV_JAMES_IMMORTAL_TORTOISE,
+  ORION_W_MOONKEEPER
 ].sort((a, b) => SPIRIT_CLASSIFICATION_SORT_ORDER.indexOf(a.classification) - SPIRIT_CLASSIFICATION_SORT_ORDER.indexOf(b.classification));
 
 /**
