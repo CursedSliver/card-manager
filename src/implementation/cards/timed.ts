@@ -64,7 +64,7 @@ export const DISTANT_EXCHANGE: RealCardType = defineCardType({
   tag: CardTag.Timed,
   rarity: Rarity.Common,
   topAbility: {
-    text: `After ${hoursLabel(6)}, convert 3 of the same resource into a resource of choice.`,
+    text: `After ${hoursLabel(3)}, convert 3 of the same resource into a resource of choice.`,
   },
   bottomAbilityOverride: movementOverride,
 });

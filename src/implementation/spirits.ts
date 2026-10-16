@@ -507,6 +507,8 @@ export const ORION_W_MOONKEEPER: Spirit = defineSpirit({
   ],
 });
 
+// add more or change more spirit to be able to upgrsde ccard rarities for getting specific cards
+
 /**
  * All spirits, fixed after initialization. Ordered by classification
  * (Cookie -> Heavenly -> Toasted -> Secret), matching

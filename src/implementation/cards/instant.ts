@@ -94,7 +94,7 @@ export const TRANSMUTE: RealCardType = defineCardType({
   tag: CardTag.Instant,
   rarity: Rarity.Common,
   topAbility: {
-    text: `Convert 3 of the same resource into a resource of choice.`,
+    text: `Destroy one of your sentries and gain 🪙🌾.`,
   },
   bottomAbilityOverride: movementOverride,
 });
