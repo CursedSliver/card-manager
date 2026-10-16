@@ -124,7 +124,7 @@ export const SPRINT: RealCardType = defineCardType({
 
 export const MINDWORM: RealCardType = defineCardType({
   name: 'Mindworm',
-  tag: CardTag.Instant,
+  tag: CardTag.Timed,
   rarity: Rarity.Uncommon,
   topAbility: {
     text: `After ${hoursLabel(4)}, player of your choice lose one mortal card of their choice.`,
