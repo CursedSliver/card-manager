@@ -17,7 +17,7 @@ export const REFRESH: RealCardType = defineCardType({
     text: 'Draw cards equal to half of your max hand size, rounded up, then destroy all other copies of Refresh that you have. ',
   },
   bottomAbility: {
-    text: 'This card cannot be discarded, stolen, or transmuted. The slot this card is on cannot be disabled.'
+    text: 'This card cannot be discarded, stolen, destroyed, or transmuted. The slot this card is on cannot be disabled.'
   }
 });
 

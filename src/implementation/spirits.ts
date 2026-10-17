@@ -487,7 +487,7 @@ export const SV_JAMES_IMMORTAL_TORTOISE: Spirit = defineSpirit({
   abilities: [
     {
       name: 'Immortal',
-      text: 'For up to once per game, you can upgrade one mortal card (with rarity less than legendary) to become immortal, and gain ⚰️. The top ability of such a card cannot be used more than once per refresh.',
+      text: 'For up to once per game, you can upgrade one mortal card (with rarity less than legendary) to become immortal, and gain ⚰️. The top and bottom ability of such a card each cannot be used more than once per refresh.',
     },
   ],
 });

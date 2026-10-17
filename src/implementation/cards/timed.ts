@@ -74,7 +74,7 @@ export const SUSPEND: RealCardType = defineCardType({
   tag: CardTag.Timed,
   rarity: Rarity.Uncommon,
   topAbility: {
-    text: 'Put down a Charge station in 3x3 of yourself and add this card to your action slots for 48 hours. +1 action slot while active. On expiry, the Charge station is destroyed.',
+    text: 'Put down a Charge station in 3x3 of yourself and add this card to your action slots for 24, 48, or 72 hours. On expiry, the Charge station is destroyed.',
   },
   bottomAbilityOverride: movementOverride,
 });
@@ -115,7 +115,8 @@ export const STRANGLE: RealCardType = defineCardType({
   rarity: Rarity.Rare,
   topAbility: {
     text: `After ${hoursLabel(4)}, clear one action slot of a player, which can be yourself.`,
-  }
+  },
+  bottomAbilityOverride: movementOverride,
 });
 
 export const CHARGE: RealCardType = defineCardType({
