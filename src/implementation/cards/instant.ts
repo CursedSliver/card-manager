@@ -26,7 +26,7 @@ export const PROOF_OF_DIVINITY: RealCardType = defineCardType({
   tag: CardTag.Instant,
   rarity: Rarity.Heavenly,
   topAbility: {
-    text: 'Upgrade a pylon in 3x3 of yourself to a Greater pylon. A Greater pylon generates 16 prestige points and heavenly chips per refresh and has a 5x5 force field instead of 3x3, but -2 max hand size.',
+    text: 'Upgrade a pylon in 3x3 of yourself to a Greater pylon. A Greater pylon generates 20 prestige points and heavenly chips per refresh and has a 5x5 force field instead of 3x3, but -2 max hand size.',
   }
 });
 
@@ -94,7 +94,7 @@ export const TRANSMUTE: RealCardType = defineCardType({
   tag: CardTag.Instant,
   rarity: Rarity.Common,
   topAbility: {
-    text: `Destroy one of your sentries in 3x3 of yourself and gain 🪙🌾.`,
+    text: `Destroy one of your sentries in 3x3 of yourself.`,
   },
   bottomAbilityOverride: movementOverride,
 });

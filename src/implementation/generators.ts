@@ -7,10 +7,6 @@ import type { AbilityOverride } from '../core/card';
 import { Generator } from '../core/generator';
 import { AbilityTag } from './tags';
 
-/**
- * Movement override: eight equally weighted abilities, one per compass
- * direction, e.g. `Move ↖️ or ↖️↖️.`
- */
 export const movementOverride: AbilityOverride<AbilityTag> = {
   description: 'Move one tile orthogonally or diagonally.',
   generator: new Generator(
