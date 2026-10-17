@@ -517,7 +517,7 @@ export const BB_SINGULARITY_MISSIONARY: Spirit = defineSpirit({
     },
     {
       name: 'Quantum supersymmetry',
-      text: 'For up to once per game, whenever you use a card that has random components, you can force the random components to be any result with probability greater than 0.',
+      text: 'For up to once per game, whenever you use a card that has random component(s), you can force the random components to be any result with probability greater than 0.',
     }
   ],
 });

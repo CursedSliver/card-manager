@@ -26,7 +26,7 @@ export const PROOF_OF_DIVINITY: RealCardType = defineCardType({
   tag: CardTag.Instant,
   rarity: Rarity.Heavenly,
   topAbility: {
-    text: 'Upgrade a pylon in 3x3 of yourself to a Greater pylon. A Greater pylon generates 20 prestige points and heavenly chips per refresh and has a 5x5 force field instead of 3x3, but -2 max hand size.',
+    text: 'Upgrade a pylon in 3x3 of yourself to a Greater pylon. A Greater pylon generates 25 prestige points and heavenly chips per refresh and has a 5x5 force field instead of 3x3, but -2 max hand size.',
   }
 });
 
@@ -104,7 +104,7 @@ export const CLEANSE: RealCardType = defineCardType({
   tag: CardTag.Instant,
   rarity: Rarity.Uncommon,
   topAbility: {
-    text: 'Destroy a pylon or sentry in 3x3 of yourself and gain 🧤. If it\'s a pylon: [if it does not belong to you, the owner of the pylon obtains this card; if not, you gain two more reosurces of choice].',
+    text: 'Destroy a pylon, sentry, or stake in 3x3 of yourself and gain 🧤. If it\'s a pylon: [if it does not belong to you, the owner of the pylon obtains this card; if not, you gain two more reosurces of choice].',
   },
   bottomAbility: {
     text: 'Convert a pylon or Greater pylon you own to a stake or Greater stake. A stake has all abilities of pylons but are not pylons.'
@@ -116,6 +116,7 @@ export const INCEPTION: RealCardType = defineCardType({
   tag: CardTag.Instant,
   rarity: Rarity.Uncommon,
   topAbility: {
+    // for round-based: force someone to use a card?
     text: 'Steal one random non-hammer mortal card from a player and give them one resource of your choice.',
   },
   bottomAbilityOverride: movementOverride,
