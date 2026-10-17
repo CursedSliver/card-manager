@@ -147,7 +147,7 @@ export const PHANTOM_TRAPS: RealCardType = defineCardType({
   tag: CardTag.Timed,
   rarity: Rarity.Rare,
   topAbility: {
-    text: `Choose another player and forcibly add this card to their action slots. +1 action slot capacity while active. After ${hoursLabel(6)}, force that player to teleport to a pylon not in 5x5 near you.`,
+    text: `Choose a player and forcibly add this card to their action slots. +1 action slot capacity while active. After ${hoursLabel(6)}, force that player to teleport to a pylon not in 5x5 near you.`,
   },
   bottomAbilityOverride: movementOverride,
 });
