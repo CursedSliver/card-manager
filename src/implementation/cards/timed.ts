@@ -104,7 +104,7 @@ export const STRANGLE: RealCardType = defineCardType({
   tag: CardTag.Timed,
   rarity: Rarity.Rare,
   topAbility: {
-    text: `After ${hoursLabel(4)}, clear one action slot of a player, including yourself.`,
+    text: `After ${hoursLabel(4)}, clear one action slot of a player, which can be yourself.`,
   }
 });
 
@@ -157,7 +157,7 @@ export const SHIFT_IN_PERSPECTIVE: RealCardType = defineCardType({
   tag: CardTag.Timed,
   rarity: Rarity.Legendary,
   topAbility: {
-    text: `Specify a direction and expend 🧤🧤🧤, and after ${hoursLabel(12)}, all neighboring pylons will move one step in that direction, if possible.`,
+    text: `Specify a direction and expend 🧤🧤🧤, and after ${hoursLabel(24)}, all neighboring pylons will move one step in that direction, if possible.`,
   },
   bottomAbilityOverride: movementOverride,
 });
@@ -170,7 +170,7 @@ export const INVERT: RealCardType = defineCardType({
     text: `After ${hoursLabel(1)}, select any mortal card that belongs to a player. If it is a hammer, replace with "Hammer". If it is a normal card, replace it with a random "Transmute" card. If it is an ongoing action, replace it with "Distant exchange".`,
   },
   bottomAbility: {
-    text: `Select one non-mythical card in your inventory excluding Invert, and draw cards until you get a card with a higher rarity than the selected card. Discard the selected card and add the new card to inventory.`
+    text: `Select one card that is less or as rare as this card in your inventory, excluding this card, and draw cards until you get a card with a higher rarity than the selected card. Discard the selected card and add the new card to inventory.`
   },
 });
 

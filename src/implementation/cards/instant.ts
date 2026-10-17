@@ -94,7 +94,7 @@ export const TRANSMUTE: RealCardType = defineCardType({
   tag: CardTag.Instant,
   rarity: Rarity.Common,
   topAbility: {
-    text: `Destroy one of your sentries and gain 🪙🌾.`,
+    text: `Destroy one of your sentries in 3x3 of yourself and gain 🪙🌾.`,
   },
   bottomAbilityOverride: movementOverride,
 });
@@ -114,7 +114,7 @@ export const CLEANSE: RealCardType = defineCardType({
 export const INCEPTION: RealCardType = defineCardType({
   name: 'Inception',
   tag: CardTag.Instant,
-  rarity: Rarity.Common,
+  rarity: Rarity.Uncommon,
   topAbility: {
     text: 'Steal one random non-hammer mortal card from a player and give them one resource of your choice.',
   },
@@ -134,7 +134,7 @@ export const INVADE: RealCardType = defineCardType({
 export const DILATED_CAPSULE: RealCardType = defineCardType({
   name: 'Dilated capsule',
   tag: CardTag.Instant,
-  rarity: Rarity.Uncommon,
+  rarity: Rarity.Common,
   topAbility: {
     text: 'Send a player any 1 or 2 cards that you have.',
   },
@@ -171,15 +171,15 @@ export const ADAPT: RealCardType = defineCardType({
   bottomAbilityOverride: movementOverride
 });
 
-export const FREE_MOVE: RealCardType = defineCardType({
-  name: 'Free move',
+export const PRIMORDIAL: RealCardType = defineCardType({
+  name: 'Primordial conglomeration',
   tag: CardTag.Instant,
   rarity: Rarity.Rare,
   topAbility: {
-    text: 'Move one in any cardinal direction.',
+    text: 'Create a copy of any non-immmortal card you have in your inventory that is less rare than this card.',
   },
   bottomAbility: {
-    text: 'Double the distance of the next move.',
+    text: 'Arbitrarily increase the distance of the next move.',
   },
 });
 
@@ -200,7 +200,9 @@ export const MATERIALIZE: RealCardType = defineCardType({
   topAbility: {
     text: `Create an unmoving clone of yourself. You can use cards on the clone's behalf; the clone is destroyed if it is pushed or if you use another Materialize.`,
   },
-  bottomAbilityOverride: movementOverride
+  bottomAbility: {
+    text: `Create a Greater sentry in 3x3 of yourself for no cost.`
+  }
 });
 
 export const TRANSCEND: RealCardType = defineCardType({
@@ -250,7 +252,7 @@ export const INSTANT_CARDS: readonly RealCardType[] = [
   DILATED_CAPSULE,
   SEED_OF_MYTHS,
   FORTIFY,
-  FREE_MOVE,
+  PRIMORDIAL,
   TELEPATH,
   MATERIALIZE,
   TRANSCEND,

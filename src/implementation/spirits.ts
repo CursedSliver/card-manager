@@ -169,7 +169,7 @@ export const RA_IMPOSTER: Spirit = defineSpirit({
     },
     {
       name: 'Larpmaster',
-      text: 'When you get a resource but it is negated due to the resource cap, you can expend one of that resource to gain any other resource of your choice.',
+      text: 'When you get a resource but it is negated due to the resource cap, you can expend one more of that resource to gain any other resource of your choice.',
     }
   ],
 });
@@ -182,11 +182,11 @@ export const KASE_LU_PROPHET: Spirit = defineSpirit({
   abilities: [
     {
       name: 'Golden throne',
-      text: 'Up to once per refresh, you can choose one player, and after 12 hours, and they must give you cards until they no longer have more cards than you, giving up to 2 cards.',
+      text: 'You gain +1 hand size for each Greater pylon you own.',
     },
     {
       name: 'Legendary legacy',
-      text: 'If you have at least 12 cards in inventory, you draw 3 more cards on refresh.',
+      text: 'Whenever you use a Rare card, you can draw up to 16 cards and keep the first card that is exactly legendary.',
     }
   ],
 });
@@ -348,16 +348,16 @@ export const A_JUNE_FAIRY: Spirit = defineSpirit({
   classification: SpiritClassification.Toasted,
   abilities: [
     {
-      name: 'Florish of summer',
-      text: '[Neutral ability] Your base pylon build cap is set to 1, but all of your sentries are considered as pylons by other cards, without being considered for the build cap. A Greater sentry is also considered a Greater pylon with all of its effects.',
+      name: 'Codes of life',
+      text: 'You can use any legendary card as a Fortify. In addition, sentries take 3 movements instead of 2 movements to be destroyed. A Greater sentry is also considered a Greater pylon with all of its effects.',
     },
     {
-      name: 'Codes of life',
-      text: 'You can use any legendary card and X 🧤 as a Fortify, where X is twice the amount of Greater sentries you have. In addition, sentries take 4 movements instead of 2 movements to be destroyed.',
+      name: 'Florish of summer',
+      text: 'Your base pylon build cap is set to 1, but all of your sentries are considered as pylons by other cards, without being considered for the build cap. You cannot build a sentry in 3x3 to another sentry of yours.',
     },
     {
       name: 'Blasphemic theology',
-      text: '"Proof of divinity" cards do not work on normal sentries.',
+      text: '"Proof of divinity" cards do not work on normal sentries, while "Declaration of heresy" cards do not work on Greater pylons.',
     },
   ],
 });
@@ -371,9 +371,13 @@ export const AXES_OF_AXES_GEOMETRIST: Spirit = defineSpirit({
       text: 'Whenever you place a wire, you can put down an additional wire connected to the placed wire at no cost, ignoring build range.',
     },
     {
+      name: 'Tachyonic spirit',
+      text: 'You can use a "Dismantle" as any uncommon instant card.',
+    },
+    {
       name: 'Mechanic\'s wrench',
       text: 'build range +1.',
-    },
+    }
   ],
 });
 
@@ -404,11 +408,11 @@ export const I_LOVER_WARLORD: Spirit = defineSpirit({
   abilities: [
     {
       name: 'God king',
-      text: 'You can make a public prediction on who obtains non-wire resource(s) first after the prediction (excludes via player-player trading). If this prediction is correct, you get the resources instead. If this prediction is incorrect, you go to sleep for 2 hours.',
+      text: 'You can make a public prediction on who gains non-wire resource(s) first after the prediction (excludes via player-player trading). If this prediction is correct, you get the resources instead. If this prediction is incorrect, you go to sleep for 2 hours.',
     },
     {
       name: 'Ideology',
-      text: 'All conquered pylons permanently gain the Mark of Freedom. Pylons with this mark immediately convert to your allegiance if it is on a disputed tile whose disputers contain you.',
+      text: 'For up to once per refresh, whenever you enter the mountain, any player with less or equal stored wires than you must discard a card.',
     },
     {
       name: 'Flight of mind',
@@ -468,11 +472,11 @@ export const SIGMA_TUSINE_COMBINED_MIND: Spirit = defineSpirit({
   abilities: [
     {
       name: 'Master alchemist',
-      text: 'You can convert 2 of the same resource to 1 of another resource.',
+      text: 'You can convert 🪙🪙🪙 into a random legendary card. Each time this ability is used, it costs an additional 🪙, stackable.',
     },
     {
-      name: 'Tachyonic spirit',
-      text: 'For up to once per refresh, you can use any common card as a Dilated Capsule.',
+      name: 'Vesicle swarm',
+      text: 'You can convert ⚰️⚰️ into a random rare card. Each time this ability is used, it costs an additional ⚰️, stackable.',
     },
   ],
 });
@@ -493,17 +497,43 @@ export const ORION_W_MOONKEEPER: Spirit = defineSpirit({
   classification: SpiritClassification.Secret,
   abilities: [
     {
-      name: 'Ancient powers',
-      text: 'You unlock all immortal card abilities immediately from the start.',
+      name: 'Tidal wars',
+      text: 'For up to once per refresh, you can discard one card and destroy one of your sentries in 3x3 near you, recovering 🪙.',
     },
     {
       name: 'Purifying forces',
       text: 'You can use any uncommon instant card as a "Cleanse", and any rare timed card as a "Charge".',
+    }
+  ],
+});
+
+export const BB_SINGULARITY_MISSIONARY: Spirit = defineSpirit({
+  name: 'BB. Singularity, Missionary of exponentiality',
+  classification: SpiritClassification.Secret,
+  abilities: [
+    {
+      name: 'All as one',
+      text: 'For up to once per refresh, you can discard one card and draw cards until you obtain a card with a rarity equal to or greater than the discarded card, then add that card to your inventory.',
     },
     {
-      name: 'Tidal wars',
-      text: 'You can destroy one of your sentries at any time and recover 🪙.',
+      name: 'Quantum supersymmetry',
+      text: 'For up to once per game, whenever you use a card that has random components, you can force the random components to be any result with probability greater than 0.',
+    }
+  ],
+});
+
+export const Y_DRAGON_AGED_COLLECTOR: Spirit = defineSpirit({
+  name: 'Y. Etus, Aged dragon',
+  classification: SpiritClassification.Secret,
+  abilities: [
+    {
+      name: 'Breath of chronos',
+      text: 'For up to twice per refresh, select a card in your inventory, and expend one resource of choice to upgrade its rarity to the next tier, up to Mythical.',
     },
+    {
+      name: 'Immense potential',
+      text: 'On refresh, you draw one additional card per Mythical card in your inventory.',
+    }
   ],
 });
 
@@ -542,7 +572,9 @@ export const SPIRITS: readonly Spirit[] = [
   SECRET_BROTHER_SOUTHWEST_DRAGONFLIGHT,
   SIGMA_TUSINE_COMBINED_MIND,
   SV_JAMES_IMMORTAL_TORTOISE,
-  ORION_W_MOONKEEPER
+  ORION_W_MOONKEEPER,
+  BB_SINGULARITY_MISSIONARY,
+  Y_DRAGON_AGED_COLLECTOR
 ].sort((a, b) => SPIRIT_CLASSIFICATION_SORT_ORDER.indexOf(a.classification) - SPIRIT_CLASSIFICATION_SORT_ORDER.indexOf(b.classification));
 
 /**
