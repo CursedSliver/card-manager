@@ -172,6 +172,18 @@ export const ADAPT: RealCardType = defineCardType({
   bottomAbilityOverride: movementOverride
 });
 
+export const SPRINT: RealCardType = defineCardType({
+  name: 'Sprint',
+  tag: CardTag.Instant,
+  rarity: Rarity.Uncommon,
+  topAbility: {
+    text: 'Destroy any building that you own.',
+  },
+  bottomAbility: {
+    text: `Expend 🌾 to move in any direction. Can repeat this up to twice.`,
+  },
+});
+
 export const PRIMORDIAL: RealCardType = defineCardType({
   name: 'Primordial conglomeration',
   tag: CardTag.Instant,
@@ -252,6 +264,7 @@ export const INSTANT_CARDS: readonly RealCardType[] = [
   INVADE,
   DILATED_CAPSULE,
   SEED_OF_MYTHS,
+  SPRINT,
   FORTIFY,
   PRIMORDIAL,
   TELEPATH,

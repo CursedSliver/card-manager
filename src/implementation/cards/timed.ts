@@ -69,6 +69,16 @@ export const DISTANT_EXCHANGE: RealCardType = defineCardType({
   bottomAbilityOverride: movementOverride,
 });
 
+export const SUSPEND: RealCardType = defineCardType({
+  name: 'Suspend',
+  tag: CardTag.Timed,
+  rarity: Rarity.Uncommon,
+  topAbility: {
+    text: 'Put down a Charge station in 3x3 of yourself and add this card to your action slots for 48 hours. +1 action slot while active. On expiry, the Charge station is destroyed.',
+  },
+  bottomAbilityOverride: movementOverride,
+});
+
 export const NEUROGENESIS: RealCardType = defineCardType({
   name: 'Neurogenesis',
   tag: CardTag.Timed,
@@ -116,18 +126,6 @@ export const CHARGE: RealCardType = defineCardType({
     text: `After ${hoursLabel(6)}, move 5 steps in any cardinal direction, skipping over all obstacles in the way.`,
   },
   bottomAbilityOverride: movementOverride,
-});
-
-export const SPRINT: RealCardType = defineCardType({
-  name: 'Sprint',
-  tag: CardTag.Timed,
-  rarity: Rarity.Uncommon,
-  topAbility: {
-    text: 'Destroy any building that you own.',
-  },
-  bottomAbility: {
-    text: `After ${hoursLabel(1)}, expend 🌾 to move in any direction. Can repeat this up to twice.`,
-  },
 });
 
 export const MINDWORM: RealCardType = defineCardType({
@@ -200,6 +198,7 @@ export const TIMED_CARDS: readonly RealCardType[] = [
   GREEN_CULTURE,
   BLUE_CULTURE,
   RAINBOW_CULTURE,
+  SUSPEND,
   DISTANT_EXCHANGE,
   NEUROGENESIS,
   COSMOGENESIS,
@@ -207,7 +206,6 @@ export const TIMED_CARDS: readonly RealCardType[] = [
   MINDWORM,
   STRANGLE,
   CHARGE,
-  SPRINT,
   PHANTOM_TRAPS,
   SHIFT_IN_PERSPECTIVE,
   INVERT,
