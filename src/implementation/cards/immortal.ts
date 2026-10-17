@@ -23,10 +23,10 @@ export const NEUROPLASTICITY: RealCardType = defineCardType({
   tag: CardTag.Immortal,
   rarity: Rarity.Common,
   topAbility: {
-    text: 'Can discard 4 of the same resources and get another resource of your choice.',
+    text: 'Can form trade agreements with other players to exchange agreed-upon quantities of resources (not cards).',
   },
   bottomAbility: {
-    text: 'Can form trade agreements with other players to exchange agreed-upon quantities of resources (not cards).',
+    text: 'Can discard 4 of the same resources and get another resource of your choice.',
   },
 });
 
@@ -35,7 +35,7 @@ export const BRIGHTSTORM: RealCardType = defineCardType({
   tag: CardTag.Immortal,
   rarity: Rarity.Common,
   topAbility: {
-    text: 'Gain 2 wires for 🪙, or place down wires you already have onto a vertex of the tile you are at. Wires propagate electricity and can be used to charge another pylon.',
+    text: 'Gain 2 wires for 🪙, or place down wires you already have onto unoccupied tile edges, touching a vertex of the tile you are at. Cannot place if it connects to another player.',
   },
   bottomAbility: {
     text: `If you move orthogonally and across a wire, successful or not, you can choose to trample it and can move orthogonally another time.`,

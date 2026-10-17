@@ -172,6 +172,16 @@ export const ADAPT: RealCardType = defineCardType({
   bottomAbilityOverride: movementOverride
 });
 
+export const PHONE_CALL_TO_GOD: RealCardType = defineCardType({
+  name: 'Phone call to god',
+  tag: CardTag.Instant,
+  rarity: Rarity.Common,
+  topAbility: {
+    text: 'Complain to god and gain 4 prestige points and heavenly chips per Greater pylon that does not belong to you.'
+  },
+  bottomAbilityOverride: movementOverride
+});
+
 export const SPRINT: RealCardType = defineCardType({
   name: 'Sprint',
   tag: CardTag.Instant,
@@ -257,6 +267,7 @@ export const INSTANT_CARDS: readonly RealCardType[] = [
   YELLOW_HARVEST,
   GREEN_HARVEST,
   BLUE_HARVEST,
+  PHONE_CALL_TO_GOD,
   RAINBOW_HARVEST,
   TRANSMUTE,
   CLEANSE,

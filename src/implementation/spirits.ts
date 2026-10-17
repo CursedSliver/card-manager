@@ -212,7 +212,7 @@ export const C_CLICK_CLOUDBORNE_COMET: Spirit = defineSpirit({
   abilities: [
     {
       name: 'Procrastination',
-      text: 'Whenever you would gain 🧤, you have a 50% chance to gain ⚰️ instead.',
+      text: 'Whenever you would gain 🧤, you have a 50% chance to gain ⚰️🪙 instead.',
     },
     {
       name: 'Maximum empire',
@@ -270,7 +270,7 @@ export const GLIFFY_D_HERMIT: Spirit = defineSpirit({
   abilities: [
     {
       name: 'Wealth in knowledge',
-      text: 'Up to once per refresh, if any player have the exact same amount of 🪙 as you do, and you have at least one 🪙, you can expend 🪙 and use one of their cards on their behalf.',
+      text: 'Up to once per refresh, if any player have the exact same amount of stored wires as you do, after 12 hours you can remove all of your stored wires and use one of their cards on their behalf.',
     },
     {
       name: 'Natural energy',
@@ -357,7 +357,7 @@ export const A_JUNE_FAIRY: Spirit = defineSpirit({
     },
     {
       name: 'Blasphemic theology',
-      text: '"Proof of divinity" cards do not work on normal sentries, while "Declaration of heresy" cards do not work on Greater pylons.',
+      text: '"Proof of divinity" cards do not work on normal sentries, while "Declaration of heresy" cards do not work on Greater sentries.',
     },
   ],
 });
@@ -396,6 +396,21 @@ export const FLOURIDE_B_MONKSHOOD: Spirit = defineSpirit({
     {
       name: 'Toxic focus',
       text: 'You cannot use cards whose name ends with "harvest".',
+    },
+  ],
+});
+
+export const Q_FIN_THE_ENFORCER: Spirit = defineSpirit({
+  name: 'Q. Fin, The Enforcer',
+  classification: SpiritClassification.Secret,
+  abilities: [
+    {
+      name: 'Lawful strikes',
+      text: 'Base pylon build cap is set to 4. For up to once per refresh, you can expend units of 🌾 equal to half of your build cap (rounded up) to increase the cap by 1 permanently.',
+    },
+    {
+      name: 'Agent of order',
+      text: 'You can expend ⚰️⚰️🧤🧤 to place a pylon in 3x3 of yourself. (Ignores 3x3 build limit)',
     },
   ],
 });
@@ -563,6 +578,7 @@ export const SPIRITS: readonly Spirit[] = [
   A_JUNE_FAIRY,
   AXES_OF_AXES_GEOMETRIST,
   FLOURIDE_B_MONKSHOOD,
+  Q_FIN_THE_ENFORCER,
   I_LOVER_WARLORD,
   LITHIUM_MESSI_THE_LOST,
   RICE_RICE,
