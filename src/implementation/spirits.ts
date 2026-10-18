@@ -71,11 +71,11 @@ export const SAM_R_EMPATHIC: Spirit = defineSpirit({
   abilities: [
     {
       name: 'Fluid blade',
-      text: 'Your movement is not blocked by other peoples’ pylons’ fields. While inside a foreign field, you cannot use any non-movement mortal cards.',
+      text: 'Your movement is not blocked by other peoples’ pylons’ fields. While inside a foreign field, you cannot use any non-movement card abilities on mortal cards.',
     },
     {
       name: 'Focus',
-      text: 'All Rare and Legendary timed cards can be used as a Neurogenesis or Cosmogenesis.',
+      text: 'All Rare and Legendary cards can be used as a Neurogenesis or Cosmogenesis.',
     },
     {
       name: 'Indirection',
@@ -105,11 +105,11 @@ export const LAGGING_E_WORLD_CREATOR: Spirit = defineSpirit({
   abilities: [
     {
       name: 'Curse of lag',
-      text: 'Whenever you transfer a card to another player, it is marked with “Curse of Lag”. If any player has any cards in action slots marked with a “Curse of Lag”, all inventory slots corresponding to empty inventory slots in your inventory are disabled.',
+      text: 'For up to once per refresh, whenever you use the bottom ability of a mortal card, you can trigger it again after 6 hours.',
     },
     {
       name: 'Gift of creation',
-      text: 'You can use “Cosmogenesis” or “Neurogenesis” for other players.',
+      text: 'You can use any card (rarer than Common) with no movement abilities as a “Cosmogenesis” or “Neurogenesis” for another player.',
     },
   ],
 });
@@ -154,7 +154,7 @@ export const LINAL_POT_BEAVER: Spirit = defineSpirit({
   abilities: [
     {
       name: 'Ultimate builder',
-      text: 'You can substitute at most one resource in a build for any other non-wire resource. If you don\'t do this, draw two cards.',
+      text: 'You can substitute at most one resource in a build for any other resource. If you don\'t do this, draw a card.',
     }
   ],
 });
@@ -303,12 +303,12 @@ export const PI_CLONE_PRINCIPLE_BOUNCER: Spirit = defineSpirit({
   classification: SpiritClassification.Toasted,
   abilities: [
     {
-      name: 'Examinations',
-      text: 'You can disable X inventory slots on each player other than yourself, where X equals to the amount of disabled inventory slots you have. You can change which slot is disabled for each player up to once per refresh.',
+      name: 'Self-assessment',
+      text: 'Whenever you use the bottom ability of a mortal card, you may also trigger its top ability at the cost of one unit of resource of your choice.'
     },
     {
-      name: 'Self-assessment',
-      text: '12 hours after activation, if you still have no resources, no normal cards, and no cards in action slots, you can permanently disable inventory slot 4. You can disable up to once slot.'
+      name: 'Examinations',
+      text: 'Whenever you use a non-movement bottom ability, you can gain one resource of choice.',
     }
   ],
 });
@@ -319,11 +319,11 @@ export const CURSEDIUM_MORPHMAN: Spirit = defineSpirit({
   abilities: [
     {
       name: 'Amorphous',
-      text: 'Randomly fetch 3 spirits. For up to once per refresh, you can expend ⚰️ to activate one spirit and deactivate all other spirits fetched. You take on the first ability of the active spirit. Neutral effects are active permanently. Cooldowns (e.g. “For up to once per game”) are shared between all spirits.',
+      text: 'Randomly fetch 3 spirits. For up to once per refresh, you can expend ⚰️ to activate one spirit and deactivate all other spirits fetched. You take on the first ability of the active spirit. Cooldowns (e.g. “For up to once per game”) are shared between all spirits.',
     },
     {
       name: 'Split',
-      text: 'Permanently lose 1 capacity of 4 random distinct resources including wires, and fetch 1 more spirit.',
+      text: 'Permanently lose 1 capacity of each resource, and fetch 1 more spirit.',
     },
   ],
 });
@@ -406,7 +406,7 @@ export const Q_FIN_THE_ENFORCER: Spirit = defineSpirit({
   abilities: [
     {
       name: 'Lawful strikes',
-      text: 'Base pylon build cap is set to 4. For up to once per refresh, you can expend units of 🌾 equal to half of your build cap (rounded up) to increase the cap by 1 permanently.',
+      text: 'Base pylon build cap is set to 1. For up to once per refresh, you can expend units of 🌾 equal to half of your build cap (rounded up) to increase the cap by 1 permanently.',
     },
     {
       name: 'Agent of order',
@@ -427,7 +427,7 @@ export const I_LOVER_WARLORD: Spirit = defineSpirit({
     },
     {
       name: 'Ideology',
-      text: 'For up to once per refresh, whenever you enter the mountain, any player with less or equal stored wires than you must discard a card.',
+      text: 'For up to once per refresh, whenever you enter the mountain, any player with less or equal stored wires than you must discard a card of their choice.',
     },
     {
       name: 'Flight of mind',
@@ -487,7 +487,7 @@ export const SIGMA_TUSINE_COMBINED_MIND: Spirit = defineSpirit({
   abilities: [
     {
       name: 'Master alchemist',
-      text: 'You can convert 🪙🪙🪙 into a random legendary card. Each time this ability is used, it costs an additional 🪙, stackable.',
+      text: 'You can convert 🪙🪙🪙 into a random legendary card. Each time this ability is used, it costs an additional 🪙🪙, stackable.',
     },
     {
       name: 'Vesicle swarm',
@@ -517,7 +517,7 @@ export const ORION_W_MOONKEEPER: Spirit = defineSpirit({
     },
     {
       name: 'Purifying forces',
-      text: 'You can use any uncommon instant card as a "Cleanse", and any rare timed card as a "Charge".',
+      text: 'For up to once per refresh, you can use any uncommon instant card as a "Cleanse", or any rare timed card as a "Charge".',
     }
   ],
 });
@@ -543,7 +543,7 @@ export const Y_DRAGON_AGED_COLLECTOR: Spirit = defineSpirit({
   abilities: [
     {
       name: 'Breath of chronos',
-      text: 'For up to twice per refresh, select a card in your inventory, and expend one resource of choice to upgrade its rarity to the next tier, up to Mythical.',
+      text: 'For up to twice per refresh, select a card in your inventory, and expend one resource of choice to upgrade its rarity to the next tier, up to Mythical. Card stays the same.',
     },
     {
       name: 'Immense potential',

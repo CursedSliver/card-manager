@@ -79,55 +79,12 @@ export const BLUE_HARVEST: RealCardType = defineCardType({
   bottomAbilityOverride: movementOverride,
 });
 
-export const RAINBOW_HARVEST: RealCardType = defineCardType({
-  name: 'Rainbow harvest',
-  tag: CardTag.Instant,
-  rarity: Rarity.Uncommon,
-  topAbility: {
-    text: 'Each charged pylon in 3x3 of player generates resources for each resource within its field.',
-  },
-  bottomAbilityOverride: movementOverride,
-});
-
 export const TRANSMUTE: RealCardType = defineCardType({
   name: 'Transmute',
   tag: CardTag.Instant,
   rarity: Rarity.Common,
   topAbility: {
     text: `Destroy one of your sentries in 3x3 of yourself.`,
-  },
-  bottomAbilityOverride: movementOverride,
-});
-
-export const CLEANSE: RealCardType = defineCardType({
-  name: 'Cleanse',
-  tag: CardTag.Instant,
-  rarity: Rarity.Uncommon,
-  topAbility: {
-    text: 'Destroy a pylon, sentry, or stake in 3x3 of yourself and gain 🧤. If it\'s a pylon: [if it does not belong to you, the owner of the pylon obtains this card; if not, you gain two more reosurces of choice].',
-  },
-  bottomAbility: {
-    text: 'Convert a pylon or Greater pylon you own to a stake or Greater stake. A stake has all abilities of pylons but are not pylons.'
-  },
-});
-
-export const INCEPTION: RealCardType = defineCardType({
-  name: 'Inception',
-  tag: CardTag.Instant,
-  rarity: Rarity.Uncommon,
-  topAbility: {
-    // for round-based: force someone to use a card?
-    text: 'Steal one random non-hammer mortal card from a player and give them one resource of your choice.',
-  },
-  bottomAbilityOverride: movementOverride,
-});
-
-export const INVADE: RealCardType = defineCardType({
-  name: 'Invade',
-  tag: CardTag.Instant,
-  rarity: Rarity.Uncommon,
-  topAbility: {
-    text: 'Give a player 1 card and take 1 resource of choice from them.',
   },
   bottomAbilityOverride: movementOverride,
 });
@@ -144,26 +101,6 @@ export const DILATED_CAPSULE: RealCardType = defineCardType({
   },
 });
 
-export const SEED_OF_MYTHS: RealCardType = defineCardType({
-  name: 'Seed of myths',
-  tag: CardTag.Instant,
-  rarity: Rarity.Uncommon,
-  topAbility: {
-    text: `Give this card alongside any other card to another player’s inventory. If this card is used twice in ${hoursLabel(12)}, or if its current holder teleports using their pylon network, this card is destroyed.`,
-  },
-  bottomAbilityOverride: movementOverride,
-});
-
-export const FORTIFY: RealCardType = defineCardType({
-  name: 'Fortify',
-  tag: CardTag.Instant,
-  rarity: Rarity.Rare,
-  topAbility: {
-    text: 'Upgrade a sentry that you own in 3x3 of yourself to a Greater sentry using 🪙🧤⚰️ or 🌾🌾🌾🌾, then give this card to a person with least amount of PP. A Greater sentry produces a force field in 5x5 instead of 3x3.',
-  },
-  bottomAbilityOverride: movementOverride,
-});
-
 export const ADAPT: RealCardType = defineCardType({
   name: 'Adapt',
   tag: CardTag.Instant,
@@ -172,14 +109,58 @@ export const ADAPT: RealCardType = defineCardType({
   bottomAbilityOverride: movementOverride
 });
 
-export const PHONE_CALL_TO_GOD: RealCardType = defineCardType({
-  name: 'Phone call to god',
+export const RAINBOW_HARVEST: RealCardType = defineCardType({
+  name: 'Rainbow harvest',
   tag: CardTag.Instant,
-  rarity: Rarity.Common,
+  rarity: Rarity.Uncommon,
   topAbility: {
-    text: 'Complain to god and gain 4 prestige points and heavenly chips per Greater pylon that does not belong to you.'
+    text: 'Each charged pylon in 3x3 of player generates resources for each resource within its field.',
   },
-  bottomAbilityOverride: movementOverride
+  bottomAbilityOverride: movementOverride,
+});
+
+export const CLEANSE: RealCardType = defineCardType({
+  name: 'Cleanse',
+  tag: CardTag.Instant,
+  rarity: Rarity.Uncommon,
+  topAbility: {
+    text: 'Destroy a pylon, sentry, or stake in 3x3 of yourself and gain 🧤. If it\'s a pylon and it does not belong to you, the owner of the pylon obtains this card.',
+  },
+  bottomAbility: {
+    text: 'Convert a pylon or Greater pylon you own to a stake or Greater stake. A stake has all abilities of pylons but are not pylons.'
+  },
+});
+
+export const INCEPTION: RealCardType = defineCardType({
+  name: 'Inception',
+  tag: CardTag.Instant,
+  rarity: Rarity.Uncommon,
+  topAbility: {
+    // for round-based: force someone to use a card? For hidden cards: NO, pick card manually as you can see card back for rarity, specify a rarity cap on this card, speci fy that if there is no rarity like that then you can take any rarity
+    text: 'Steal one random non-hammer mortal card from a player and give them one resource of your choice.',
+  },
+  bottomAbilityOverride: movementOverride,
+});
+
+export const INVADE: RealCardType = defineCardType({
+  name: 'Invade',
+  tag: CardTag.Instant,
+  rarity: Rarity.Uncommon,
+  topAbility: {
+    text: 'Give a player 1 card and take 1 resource of choice from them.',
+  },
+  bottomAbilityOverride: movementOverride,
+});
+
+export const SEED_OF_MYTHS: RealCardType = defineCardType({
+  name: 'Seed of myths',
+  tag: CardTag.Instant,
+  rarity: Rarity.Uncommon,
+  topAbility: {
+    text: `Give this card alongside any other card to another player’s inventory. If this card is used twice in ${hoursLabel(12)}, or if its current holder teleports using their pylon network, this card is destroyed.`,
+  },
+  // Rework to be select and reveal card?
+  bottomAbilityOverride: movementOverride,
 });
 
 export const SPRINT: RealCardType = defineCardType({
@@ -194,16 +175,24 @@ export const SPRINT: RealCardType = defineCardType({
   },
 });
 
-export const PRIMORDIAL: RealCardType = defineCardType({
-  name: 'Primordial conglomeration',
+export const PHONE_CALL_TO_GOD: RealCardType = defineCardType({
+  name: 'Phone call to god',
   tag: CardTag.Instant,
   rarity: Rarity.Rare,
   topAbility: {
-    text: 'Create a copy of any non-immmortal card you have in your inventory that is less rare than this card.',
+    text: 'Complain to god and gain 10 prestige points and heavenly chips per Greater pylon that does not belong to you.'
   },
-  bottomAbility: {
-    text: 'Arbitrarily increase the distance of the next move.',
+  bottomAbilityOverride: movementOverride
+});
+
+export const FORTIFY: RealCardType = defineCardType({
+  name: 'Fortify',
+  tag: CardTag.Instant,
+  rarity: Rarity.Rare,
+  topAbility: {
+    text: 'Upgrade a sentry that you own in 3x3 of yourself to a Greater sentry using 🪙🧤⚰️⚰️⚰️ or 🌾🌾🌾🌾🌾. A Greater sentry produces a force field in 5x5 instead of 3x3.',
   },
+  bottomAbilityOverride: movementOverride,
 });
 
 export const TELEPATH: RealCardType = defineCardType({
@@ -221,7 +210,7 @@ export const MATERIALIZE: RealCardType = defineCardType({
   tag: CardTag.Instant,
   rarity: Rarity.Legendary,
   topAbility: {
-    text: `Create an unmoving clone of yourself. You can use cards on the clone's behalf; the clone is destroyed if it is pushed or if you use another Materialize.`,
+    text: `Create an unmoving clone of yourself, which also provides charge. You can use non-movement card abilities on the clone's behalf; the clone is destroyed if it is pushed or if you use another Materialize.`,
   },
   bottomAbility: {
     text: `Create a Greater sentry in 3x3 of yourself for no cost.`
@@ -238,12 +227,24 @@ export const TRANSCEND: RealCardType = defineCardType({
   bottomAbilityOverride: movementOverride
 });
 
+export const PRIMORDIAL: RealCardType = defineCardType({
+  name: 'Primordial conglomeration',
+  tag: CardTag.Instant,
+  rarity: Rarity.Legendary,
+  topAbility: {
+    text: 'Create a copy of any non-immmortal card you have in your inventory that is less rare than this card.',
+  },
+  bottomAbility: {
+    text: 'Arbitrarily increase the distance of the next move.',
+  },
+});
+
 export const PLAY_GOM: RealCardType = defineCardType({
   name: 'Zedong\'s emblem',
   tag: CardTag.Instant,
   rarity: Rarity.Mythical,
   topAbility: {
-    text: 'Solve a 10-lives Game of Mao to gain a non-immortal, non-mythical card of your choice.',
+    text: 'Solve a 10-lives Game of Mao to gain a non-immortal, non-mythical, non-heavenly card of your choice.',
   },
   bottomAbilityOverride: movementOverride,
 });
@@ -253,7 +254,7 @@ export const COOK: RealCardType = defineCardType({
   tag: CardTag.Instant,
   rarity: Rarity.Mythical,
   topAbility: {
-    text: 'Cook up a successful virtual dish to gain a non-immortal, non-mythical card of your choice.',
+    text: 'Cook up a successful virtual dish to gain a non-immortal, non-mythical, non-heavenly card of your choice.',
   },
   bottomAbilityOverride: movementOverride,
 });

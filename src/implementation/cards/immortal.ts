@@ -35,10 +35,10 @@ export const BRIGHTSTORM: RealCardType = defineCardType({
   tag: CardTag.Immortal,
   rarity: Rarity.Common,
   topAbility: {
-    text: 'Gain 2 wires for 🪙, or place down wires you already have onto unoccupied tile edges, touching a vertex of the tile you are at. Cannot place if it connects to another player.',
+    text: `If you move orthogonally and across a wire, successful or not, you can choose to trample it and can move orthogonally another time; if you do so, trampling more wires will not allow you to move another time.`,
   },
   bottomAbility: {
-    text: `If you move orthogonally and across a wire, successful or not, you can choose to trample it and can move orthogonally another time.`,
+    text: 'Gain 2 wires for 🪙, or place down wires you already have onto unoccupied tile edges, touching a vertex of the tile you are at. Cannot place if it connects to another player.',
   },
 });
 

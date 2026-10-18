@@ -94,7 +94,7 @@ export const COSMOGENESIS: RealCardType = defineCardType({
   tag: CardTag.Timed,
   rarity: Rarity.Uncommon,
   topAbility: {
-    text: `After ${hoursLabel(12)}, gain one resource of choice.`,
+    text: `After ${hoursLabel(6)}, gain one resource of choice.`,
   },
   bottomAbilityOverride: movementOverride
 });
@@ -104,7 +104,7 @@ export const DISMANTLE: RealCardType = defineCardType({
   tag: CardTag.Timed,
   rarity: Rarity.Uncommon,
   topAbility: {
-    text: `After ${hoursLabel(3)}, destroy a wire within your build range and have a 50% chance to gain 🪙.`,
+    text: `After ${hoursLabel(3)}, destroy a wire that is within wire placing range of yourself and gain 🪙.`,
   },
   bottomAbilityOverride: movementOverride,
 });
@@ -134,21 +134,11 @@ export const MINDWORM: RealCardType = defineCardType({
   tag: CardTag.Timed,
   rarity: Rarity.Uncommon,
   topAbility: {
-    text: `After ${hoursLabel(4)}, player of your choice lose one mortal card of their choice.`,
+    text: `After ${hoursLabel(6)}, player of your choice select one resource type that they have more of than you do, and discard 3 of that resource.`,
   },
   bottomAbility: {
-    text: `After ${hoursLabel(4)}, player of your choice lose two resources of their choice.`,
+    text: `After ${hoursLabel(6)}, player of your choice lose one mortal card of their choice.`,
   },
-});
-
-export const PHANTOM_TRAPS: RealCardType = defineCardType({
-  name: 'Phantom traps',
-  tag: CardTag.Timed,
-  rarity: Rarity.Rare,
-  topAbility: {
-    text: `Choose a player and forcibly add this card to their action slots. +1 action slot capacity while active. After ${hoursLabel(6)}, force that player to teleport to a pylon not in 5x5 near you.`,
-  },
-  bottomAbilityOverride: movementOverride,
 });
 
 export const SHIFT_IN_PERSPECTIVE: RealCardType = defineCardType({
@@ -178,7 +168,7 @@ export const DEMATERIALIZE: RealCardType = defineCardType({
   tag: CardTag.Timed,
   rarity: Rarity.Legendary,
   topAbility: {
-    text: `Select any neutral or disputed tile on the map, and after ${hoursLabel(6)}, you teleport to it.`,
+    text: `Select any tile on the map, and after ${hoursLabel(12)}, you teleport to it. The tile can be foreign or disputed.`,
   },
   bottomAbilityOverride: movementOverride
 });
@@ -188,7 +178,7 @@ export const BALL_LIGHTNING: RealCardType = defineCardType({
   tag: CardTag.Timed,
   rarity: Rarity.Mythical,
   topAbility: {
-    text: `After ${hoursLabel(24)}, unleash ball lightning, which moves 2 tiles in a random direction every ${hoursLabel(6)}. It destroys all adjacent wires and will destroy any pylon it lands on.`,
+    text: `After ${hoursLabel(24)}, unleash ball lightning. On refresh, the player with the most amount of cards can move the ball lightning, randomly deciding in a tie. It can move 2 tiles in an orthogonal or diagonal direction. It destroys all adjacent wires and will destroy any pylon it lands on.`,
   },
   bottomAbilityOverride: movementOverride,
 });
@@ -199,7 +189,7 @@ export const TIMED_CARDS: readonly RealCardType[] = [
   GREEN_CULTURE,
   BLUE_CULTURE,
   RAINBOW_CULTURE,
-  SUSPEND,
+  //SUSPEND,
   DISTANT_EXCHANGE,
   NEUROGENESIS,
   COSMOGENESIS,
@@ -207,7 +197,6 @@ export const TIMED_CARDS: readonly RealCardType[] = [
   MINDWORM,
   STRANGLE,
   CHARGE,
-  PHANTOM_TRAPS,
   SHIFT_IN_PERSPECTIVE,
   INVERT,
   DEMATERIALIZE,
