@@ -84,7 +84,7 @@ export const TRANSMUTE: RealCardType = defineCardType({
   tag: CardTag.Instant,
   rarity: Rarity.Common,
   topAbility: {
-    text: `Destroy one of your sentries in 3x3 of yourself.`,
+    text: `Destroy a sentry in 3x3 of yourself.`,
   },
   bottomAbilityOverride: movementOverride,
 });
