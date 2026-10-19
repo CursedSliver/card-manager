@@ -24,19 +24,13 @@ export const RARITY_COLORS: Record<Rarity, string> = {
   [Rarity.Heavenly]: '#4fd8e8',
 };
 
-/**
- * Draw weight multiplier per rarity inside a deck sub-generator
- * (e.g. `[uncommon x0.5]`). Heavenly cards are immortal-only and never
- * appear in the Standard Deck, and no card uses Mythical yet, so their
- * multipliers are currently unused.
- */
 export const RARITY_DRAW_WEIGHT_MULTIPLIER: Record<Rarity, number> = {
-  [Rarity.Plentiful]: 2.5,
+  [Rarity.Plentiful]: 2,
   [Rarity.Common]: 1,
-  [Rarity.Uncommon]: 0.5,
-  [Rarity.Rare]: 0.2,
-  [Rarity.Legendary]: 0.05,
-  [Rarity.Mythical]: 0.02,
+  [Rarity.Uncommon]: 0.4,
+  [Rarity.Rare]: 0.25,
+  [Rarity.Legendary]: 0.12,
+  [Rarity.Mythical]: 0.03,
   [Rarity.Heavenly]: 0,
 };
 

@@ -69,6 +69,7 @@ export const DISTANT_EXCHANGE: RealCardType = defineCardType({
   bottomAbilityOverride: movementOverride,
 });
 
+// Note: not added to deck
 export const SUSPEND: RealCardType = defineCardType({
   name: 'Suspend',
   tag: CardTag.Timed,

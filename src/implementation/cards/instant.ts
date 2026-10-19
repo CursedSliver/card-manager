@@ -92,7 +92,7 @@ export const TRANSMUTE: RealCardType = defineCardType({
 export const DILATED_CAPSULE: RealCardType = defineCardType({
   name: 'Dilated capsule',
   tag: CardTag.Instant,
-  rarity: Rarity.Common,
+  rarity: Rarity.Uncommon,
   topAbility: {
     text: 'Send a player any 1 or 2 cards that you have.',
   },

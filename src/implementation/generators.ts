@@ -12,19 +12,12 @@ export const movementOverride: AbilityOverride<AbilityTag> = {
   generator: new Generator(
     [
       {
-        weight: 5,
+        weight: 1,
         reward: {
-          text: `Move 1 tile in an orthogonal direction of choice.`,
+          text: `Move 1 tile in an 8-point compass direction of choice.`,
           tag: AbilityTag.Movement,
         },
-      },
-      {
-        weight: 2,
-        reward: {
-          text: `Move 1 tile in a diagonal direction of choice.`,
-          tag: AbilityTag.Movement,
-        },
-      },
+      }
     ]
   ),
 };
@@ -34,16 +27,9 @@ export const movementOverrideTwo: AbilityOverride<AbilityTag> = {
   generator: new Generator(
     [
       {
-        weight: 5,
+        weight: 1,
         reward: {
-          text: `Move 2 tiles in an orthogonal direction of choice, if moving 1 tile in that direction does not encounter an obstacle.`,
-          tag: AbilityTag.Movement,
-        },
-      },
-      {
-        weight: 2,
-        reward: {
-          text: `Move 2 tiles in an diagonal direction of choice, if moving 1 tile in that direction does not encounter an obstacle.`,
+          text: `Move 2 tiles in an 8-point compass of choice, if moving 1 tile in that direction does not encounter an obstacle.`,
           tag: AbilityTag.Movement,
         },
       },
