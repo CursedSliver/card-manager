@@ -91,7 +91,7 @@ leaving the view.
 ## UI Invariants
 
 - Dark theme via CSS custom properties in `src/styles/main.scss`; follow the BEM-ish naming already in use.
-- Card layout, top to bottom: bold title → thin inset divider → top ability (tag bolded and prefixed) → large "OR" → bottom ability → divider → **rarity** (colored by rarity) → card tag (small-caps, muted). The bottom divider carries `margin-top: auto`, so whenever a card is taller than its text (stretched within a draw row, or the fixed height in the Catalogue) the divider, rarity and tag sit on the card's bottom edge instead of trailing the text.
+- Card layout, top to bottom: bold title → thin inset divider → top ability (tag bolded and prefixed) → large "OR" (omitted when either half has no ability at all, i.e. neither a defined ability nor an override) → bottom ability → divider → **rarity** (colored by rarity) → card tag (small-caps, muted). The bottom divider carries `margin-top: auto`, so whenever a card is taller than its text (stretched within a draw row, or the fixed height in the Catalogue) the divider, rarity and tag sit on the card's bottom edge instead of trailing the text.
 - Copy-to-sheets TSV has 5 columns per row: name, top ability, bottom ability, card tag, rarity (rarity is the rightmost column).
 - A spirit copies to sheets as a 3-column by 4-row TSV table: row 1 is name, title, classification;
   rows 2-4 are one per ability (name, text, `OK` when the ability exists). Missing abilities leave

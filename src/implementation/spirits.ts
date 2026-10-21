@@ -161,7 +161,7 @@ export const LINAL_POT_BEAVER: Spirit = defineSpirit({
 
 export const RA_IMPOSTER: Spirit = defineSpirit({
   name: 'Ra, Imposter',
-  classification: SpiritClassification.Heavenly,
+  classification: SpiritClassification.Cookie,
   abilities: [
     {
       name: 'Usurper',
@@ -170,6 +170,21 @@ export const RA_IMPOSTER: Spirit = defineSpirit({
     {
       name: 'Larpmaster',
       text: 'When you get a resource but it is negated due to the resource cap, you can expend one more of that resource to gain any other resource of your choice.',
+    }
+  ],
+});
+
+export const L_MYTH_MAGICIAN: Spirit = defineSpirit({
+  name: 'L. Myth, Magician',
+  classification: SpiritClassification.Cookie,
+  abilities: [
+    {
+      name: 'Illusions',
+      text: 'Up to once per refresh, expend 🧤 and give someone a copy of a card you have. Privately designate one of them to be an illusion. Illusion cards can be played normally. When either card is played, anyone can assert that the card is an illusion. If they are correct, they gain 🧤 and the card is void. If not, they must give you their rarest card less or as rare as the card or lose all resources.',
+    },
+    {
+      name: 'Sleight of hand',
+      text: 'Whenever one of your buildings are destroyed, you gain all resources consumed in the construction of the building.'
     }
   ],
 });
@@ -563,6 +578,7 @@ export const SPIRITS: readonly Spirit[] = [
   SAM_R_EMPATHIC,
   IGNOR_ENTHUSIASTIC_EXPLORER,
   RA_IMPOSTER,
+  L_MYTH_MAGICIAN,
   LAGGING_E_WORLD_CREATOR,
   KASE_LU_PROPHET,
   AXE_F_GREAT_CLIMBER,

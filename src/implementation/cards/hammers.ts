@@ -14,7 +14,7 @@ export const HAMMER: RealCardType = defineCardType({
   name: 'Hammer',
   tag: CardTag.Hammer,
   rarity: Rarity.Common,
-  topAbility: { text: DISCARD_TWO_TEXT }
+  bottomAbility: { text: DISCARD_TWO_TEXT }
 });
 
 export const BLUDGEON: RealCardType = defineCardType({

@@ -118,9 +118,13 @@ export function renderCard<
 
   card.append(el('h3', 'card__title', instance.type.name));
   card.append(el('hr', 'card__divider'));
-  appendAbility(card, resolveDisplayAbility(instance, 'top', options));
-  card.append(el('p', 'card__or', 'OR'));
-  appendAbility(card, resolveDisplayAbility(instance, 'bottom', options));
+  const top = resolveDisplayAbility(instance, 'top', options);
+  const bottom = resolveDisplayAbility(instance, 'bottom', options);
+  appendAbility(card, top);
+  if (top.ability && bottom.ability) {
+    card.append(el('p', 'card__or', 'OR'));
+  }
+  appendAbility(card, bottom);
   card.append(el('hr', 'card__divider'));
   const rarity = el('span', 'card__rarity', instance.type.rarity);
   const color = rarityColor?.(instance.type.rarity);
